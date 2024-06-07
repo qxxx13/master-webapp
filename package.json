@@ -11,9 +11,13 @@
         "type-check": "tsc"
     },
     "dependencies": {
+        "@emotion/react": "^11.11.4",
+        "@emotion/styled": "^11.11.5",
+        "@fontsource/roboto": "^5.0.13",
+        "@mui/icons-material": "^5.15.19",
+        "@mui/material": "^5.15.19",
         "@types/telegram-web-app": "^7.2.1",
         "@vkruglikov/react-telegram-web-app": "^2.1.9",
-        "antd": "^5.18.0",
         "axios": "^1.7.2",
         "effector": "^23.2.2",
         "react": "18.3.1",

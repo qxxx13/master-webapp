@@ -1,5 +1,7 @@
-import { theme, ThemeConfig } from 'antd';
+import { createTheme } from '@mui/material';
 
-export const themeConfig: ThemeConfig = {
-    algorithm: theme.darkAlgorithm,
-};
+export const theme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
+});
