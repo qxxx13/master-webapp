@@ -24,6 +24,8 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
         setStatus(event.target.value as MasterOrderStatusEnum);
     };
 
+    console.log(currentUser);
+
     return (
         <Stack gap={2} sx={{ p: 2 }}>
             <Typography variant="h4" sx={{ textAlign: 'center' }}>

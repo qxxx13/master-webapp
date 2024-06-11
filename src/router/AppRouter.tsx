@@ -14,6 +14,8 @@ export const AppRouter = () => {
         setCurrentUser(JSON.parse(localStorage.getItem('user') || '{}'));
     }, []);
 
+    console.log(currentUser);
+
     return (
         <Routes>
             <Route path="/login" element={<LoginPage />} />

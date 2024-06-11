@@ -20,6 +20,8 @@ export const OrdersList: React.FC<{ currentUser: UserType; page: number; status:
         fetchOrdersFx({ page: page, perPage: 10, userId: String(currentUser.Id), status: status });
     }, [page, status]);
 
+    console.log(currentUser);
+
     return (
         <Stack alignItems="center">
             <Stack gap={1} sx={{ width: '100%' }}>
