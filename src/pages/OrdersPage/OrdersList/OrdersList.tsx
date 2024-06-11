@@ -17,10 +17,11 @@ export const OrdersList: React.FC<{ currentUser: UserType; page: number; status:
     const orderList = data.data.map((order, index) => <OrderCard order={order} key={index} />);
 
     useEffect(() => {
+        console.log('useEffect userID: ', currentUser.Id);
         fetchOrdersFx({ page: page, perPage: 10, userId: String(currentUser.Id), status: status });
     }, [page, status]);
 
-    console.log(currentUser);
+    console.log('userId: ', currentUser.Id);
 
     return (
         <Stack alignItems="center">

@@ -12,7 +12,7 @@ export const fetchOrdersFx = createEffect<
 
 fetchOrdersFx.use((params) => fetchOrdersByMasterId(params.page, params.perPage, '', params.userId, params.status));
 
-$ordersStore.on(fetchOrdersFx.doneData, (_, newOrders) => newOrders);
+$ordersStore.on(fetchOrdersFx.doneData, (_, orders) => orders);
 
 export const $fetchError = restore<Error>(fetchOrdersFx.failData, null);
 
