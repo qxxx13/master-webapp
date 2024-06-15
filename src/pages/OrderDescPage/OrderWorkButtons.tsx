@@ -114,6 +114,9 @@ export const OrderWorksButton: React.FC<{
                 </Button>
             );
         case 'awaitingPayment':
+            return <Button>Soon</Button>;
+        default: {
             return <></>;
+        }
     }
 };
