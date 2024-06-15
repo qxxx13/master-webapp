@@ -1,7 +1,8 @@
 import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { translate } from '../../common/translate/translate';
 import { MasterOrderStatusEnum } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { OrdersList } from './OrdersList/OrdersList';
@@ -16,7 +17,7 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
 
     const MenuItems = Object.values(MasterOrderStatusEnum).map((status, index) => (
         <MenuItem key={index} value={status}>
-            {status}
+            {translate(status)}
         </MenuItem>
     ));
 
@@ -24,7 +25,9 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
         setStatus(event.target.value as MasterOrderStatusEnum);
     };
 
-    console.log(currentUser);
+    useEffect(() => {
+        Telegram.WebApp.ready();
+    }, []);
 
     return (
         <Stack gap={2} sx={{ p: 2 }}>
@@ -38,9 +41,9 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
                 </Select>
             </FormControl>
 
-            <Button variant="outlined" onClick={() => navigate('/login')}>
+            {/* <Button variant="outlined" onClick={() => navigate('/login')}>
                 Go to login
-            </Button>
+            </Button> */}
             <OrdersList page={1} currentUser={currentUser} status={status} />
         </Stack>
     );

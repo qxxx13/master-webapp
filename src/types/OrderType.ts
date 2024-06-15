@@ -19,6 +19,7 @@ export enum MasterOrderStatusEnum {
     takeToSD = 'takeToSD',
     active = 'active',
     atWork = 'atWork',
+    masterWentForSparePart = 'masterWentForSparePart',
 }
 
 export enum IsWorkingOrderEnum {
@@ -98,4 +99,14 @@ export type GetOrdersType = {
         next: number;
     };
     data: OrderType[];
+};
+
+export type CloseOrderType = {
+    MasterSalary: string;
+    TotalPrice: string;
+    Expenses: string;
+    CompanyShare: string;
+    Price: string;
+    Comments?: string;
+    Debt?: string;
 };

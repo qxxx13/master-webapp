@@ -2,13 +2,13 @@ import { Card, CardActionArea, CardContent, Stack, Typography } from '@mui/mater
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 
-import { StatusChip } from '../../../../components/StatusChip/StatusChip';
-import { OrderType } from '../../../../types/OrderType';
+import { OrderType } from '../../types/OrderType';
+import { StatusChip } from '../StatusChip/StatusChip';
 
 export const OrderCard: React.FC<{ order: OrderType }> = ({ order }) => {
     const navigate = useNavigate();
 
-    const goToOrderDescPage = () => navigate(`/orders/${order.Id}`);
+    const goToOrderDescPage = () => navigate(`/${order.Id}`);
 
     return (
         <Card sx={{ width: '100%', borderRadius: 2 }}>
