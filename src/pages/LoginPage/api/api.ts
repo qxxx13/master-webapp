@@ -6,7 +6,7 @@ export const login = async (telegramId: number, password: string) => {
         .post('auth/login', { telegramId: telegramId, username: '', password: password })
         .then((res) => res.data)
         .catch((error) => {
-            return error;
+            console.log(error);
         });
 
     localStorage.setItem('token', user.accessToken);
