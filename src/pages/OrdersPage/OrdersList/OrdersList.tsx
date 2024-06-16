@@ -21,7 +21,7 @@ export const OrdersList: React.FC<{ currentUser: UserType; page: number; status:
     }, [page, status, currentUser]);
 
     return (
-        <Stack alignItems="center">
+        <Stack alignItems="center" sx={{ mt: '145px', height: 'calc(100vh - 190px)', overflowY: 'scroll', p: 2 }}>
             <Stack gap={1} sx={{ width: '100%' }}>
                 {!loading ? orderList : <CircularProgress />}
             </Stack>

@@ -1,6 +1,5 @@
-import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { translate } from '../../common/translate/translate';
 import { MasterOrderStatusEnum } from '../../types/OrderType';
@@ -12,8 +11,9 @@ type OrdersPageProps = {
 };
 
 export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
-    const [status, setStatus] = useState(MasterOrderStatusEnum.active);
-    const navigate = useNavigate();
+    const [status, setStatus] = useState<MasterOrderStatusEnum>(
+        localStorage.getItem('currentStatusSelect') as MasterOrderStatusEnum,
+    );
 
     const MenuItems = Object.values(MasterOrderStatusEnum).map((status, index) => (
         <MenuItem key={index} value={status}>
@@ -23,6 +23,7 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
 
     const handleChangeStatus = (event: SelectChangeEvent) => {
         setStatus(event.target.value as MasterOrderStatusEnum);
+        localStorage.setItem('currentStatusSelect', event.target.value);
     };
 
     useEffect(() => {
@@ -30,21 +31,19 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
     }, []);
 
     return (
-        <Stack gap={2} sx={{ p: 2 }}>
-            <Typography variant="h4" sx={{ textAlign: 'center' }}>
-                Заявки
-            </Typography>
-            <FormControl fullWidth>
-                <InputLabel id="status-select"></InputLabel>
-                <Select labelId="status-select" value={status} onChange={handleChangeStatus}>
-                    {MenuItems}
-                </Select>
-            </FormControl>
-
-            {/* <Button variant="outlined" onClick={() => navigate('/login')}>
-                Go to login
-            </Button> */}
+        <>
+            <Stack gap={2} sx={{ p: 2, position: 'absolute', top: 0, width: '100%' }}>
+                <Typography variant="h4" sx={{ textAlign: 'center' }}>
+                    Заявки
+                </Typography>
+                <FormControl fullWidth>
+                    <InputLabel id="status-select"></InputLabel>
+                    <Select labelId="status-select" value={status} onChange={handleChangeStatus}>
+                        {MenuItems}
+                    </Select>
+                </FormControl>
+            </Stack>
             <OrdersList page={1} currentUser={currentUser} status={status} />
-        </Stack>
+        </>
     );
 };

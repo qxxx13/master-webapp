@@ -1,10 +1,10 @@
-import { CircularProgress, Divider, Link, Stack, Typography } from '@mui/material';
+import { Divider, Link, Stack, Typography } from '@mui/material';
 import moment from 'moment';
 
 import { StatusChip } from '../../components/StatusChip/StatusChip';
 import { OrderType } from '../../types/OrderType';
 
-export const OrderDesc: React.FC<{ order: OrderType; isLoading: boolean }> = ({ order, isLoading }) => {
+export const OrderDesc: React.FC<{ order: OrderType }> = ({ order }) => {
     return (
         <Stack sx={{ mt: 4, p: 2 }}>
             <Typography sx={{ mt: 1, mb: 1 }} variant="h5">

@@ -1,6 +1,6 @@
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import SendIcon from '@mui/icons-material/Send';
-import { Button, CircularProgress, IconButton } from '@mui/material';
+import { Button, CircularProgress, IconButton, Link } from '@mui/material';
 import { useUnit } from 'effector-react';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -38,10 +38,12 @@ export const OrderDescPage = () => {
                         variant="outlined"
                         sx={{ position: 'absolute', top: 10, right: 10 }}
                     >
-                        Связать с диспом
+                        <Link href="https://t.me/dirrnd" sx={{ textDecoration: 'none' }}>
+                            Связать с диспом
+                        </Link>
                     </Button>
 
-                    <OrderDesc order={order as OrderType} isLoading={loading} />
+                    <OrderDesc order={order as OrderType} />
                     <OrderWorksButton
                         chatId={String(user.TelegramChatId)}
                         messageId={String(order.MessageId)}

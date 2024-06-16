@@ -4,16 +4,19 @@ import { useNavigate } from 'react-router-dom';
 
 import { OrderType } from '../../types/OrderType';
 import { StatusChip } from '../StatusChip/StatusChip';
+import { bgHandler } from './bgHandler';
 
 export const OrderCard: React.FC<{ order: OrderType }> = ({ order }) => {
     const navigate = useNavigate();
 
     const goToOrderDescPage = () => navigate(`/${order.Id}`);
 
+    const bgColor = bgHandler(order.Status);
+
     return (
         <Card sx={{ width: '100%', borderRadius: 2 }}>
             <CardActionArea onClick={goToOrderDescPage}>
-                <CardContent sx={{ backgroundColor: '#8774e1' }}>
+                <CardContent sx={{ backgroundColor: bgColor }}>
                     <Stack flexDirection="row" alignItems="center" justifyContent="space-between">
                         <Typography variant="body1">Заявка №{order.Id}</Typography>
                         <StatusChip status={order.Status} />
