@@ -33,7 +33,9 @@ export const OrderDesc: React.FC<{ order: OrderType }> = ({ order }) => {
             <Typography variant="h6">Озвучка: {order.AnnouncedPrice}</Typography>
             <Divider />
             <Typography variant="h6">Описание:</Typography>
-            <Typography variant="h6">{order.Description}</Typography>
+            <Typography variant="h6" sx={{ wordWrap: 'break-word' }}>
+                {order.Description}
+            </Typography>
 
             {order.CompanyShare !== 0 && (
                 <Typography variant="h5" sx={{ textAlign: 'center' }}>

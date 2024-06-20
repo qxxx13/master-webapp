@@ -7,9 +7,12 @@ export const fetchOrdersByMasterId = async (
     phoneNumber: string | '',
     userId: string,
     status: MasterOrderStatusEnum,
+    startDate: Date,
 ): Promise<GetOrdersType> => {
     const orders = await instance
-        .get(`orders/?page=${page}&perPage=${perPage}&searchValue=${phoneNumber}&masterId=${userId}&status=${status}`)
+        .get(
+            `orders/?page=${page}&perPage=${perPage}&searchValue=${phoneNumber}&masterId=${userId}&status=${status}&startDate=${startDate}`,
+        )
         .then((res) => res.data);
 
     return orders;

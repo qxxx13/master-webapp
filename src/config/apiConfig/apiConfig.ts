@@ -7,6 +7,6 @@ export const instance = axios.create({
     },
 });
 
-/* http://77.91.84.85:5555/api/ */
+/* https://initcrm.ru/ */
 
 /* http://localhost:5555/api/ */

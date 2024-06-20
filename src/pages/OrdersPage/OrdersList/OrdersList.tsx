@@ -6,6 +6,7 @@ import { OrderCard } from '../../../components/OrderCard/OrderCard';
 import { MasterOrderStatusEnum } from '../../../types/OrderType';
 import { UserType } from '../../../types/UserType';
 import { $ordersGetStatus, fetchOrdersFx } from '../model/OrdersStore';
+import moment from 'moment';
 
 export const OrdersList: React.FC<{ currentUser: UserType; page: number; status: MasterOrderStatusEnum }> = ({
     currentUser,
@@ -16,8 +17,16 @@ export const OrdersList: React.FC<{ currentUser: UserType; page: number; status:
 
     const orderList = data.data.map((order, index) => <OrderCard order={order} key={index} />);
 
+    const currentDay = moment(Date.now()).format('YYYY-MM-DD');
+
     useEffect(() => {
-        fetchOrdersFx({ page: page, perPage: 10, userId: String(currentUser.Id), status: status });
+        fetchOrdersFx({
+            page: page,
+            perPage: 10,
+            userId: String(currentUser.Id),
+            status: status,
+            startDate: currentDay as unknown as Date,
+        });
     }, [page, status, currentUser]);
 
     return (

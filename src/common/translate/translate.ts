@@ -7,6 +7,7 @@ const dictionary: Record<string, string> = {
     active: 'Принята',
     masterWentForSparePart: 'Отъехал за ЗЧ',
     takeToSD: 'Забрал на СД',
+    all: 'Все',
 
     primary: 'Первичный',
     repeated: 'Повторный',

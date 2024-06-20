@@ -14,12 +14,8 @@ export enum OrderStatusEnum {
 }
 
 export enum MasterOrderStatusEnum {
-    pending = 'pending',
-    fulfilled = 'fulfilled',
+    all = 'all',
     takeToSD = 'takeToSD',
-    active = 'active',
-    atWork = 'atWork',
-    masterWentForSparePart = 'masterWentForSparePart',
 }
 
 export enum IsWorkingOrderEnum {
