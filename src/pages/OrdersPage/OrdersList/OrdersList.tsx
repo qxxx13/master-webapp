@@ -1,12 +1,12 @@
 import { CircularProgress, Stack } from '@mui/material';
 import { useUnit } from 'effector-react';
+import moment from 'moment';
 import { useEffect } from 'react';
 
 import { OrderCard } from '../../../components/OrderCard/OrderCard';
 import { MasterOrderStatusEnum } from '../../../types/OrderType';
 import { UserType } from '../../../types/UserType';
 import { $ordersGetStatus, fetchOrdersFx } from '../model/OrdersStore';
-import moment from 'moment';
 
 export const OrdersList: React.FC<{ currentUser: UserType; page: number; status: MasterOrderStatusEnum }> = ({
     currentUser,
