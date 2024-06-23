@@ -15,7 +15,9 @@ export const OrdersList: React.FC<{ currentUser: UserType; page: number; status:
 }) => {
     const { data, error, loading } = useUnit($ordersGetStatus);
 
-    const orderList = data.data.map((order, index) => <OrderCard order={order} key={index} />);
+    const orderList = data.data.map((order, index) => {
+        if (order.Status !== 'awaitingPayment') return <OrderCard order={order} key={index} />;
+    });
 
     const today = new Date();
     const yesterday = new Date(today);
