@@ -17,7 +17,15 @@ export const OrdersList: React.FC<{ currentUser: UserType; page: number; status:
 
     const orderList = data.data.map((order, index) => <OrderCard order={order} key={index} />);
 
-    const currentDay = moment(Date.now() - 1).format('YYYY-MM-DD');
+    const today = new Date();
+    const yesterday = new Date(today);
+
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    today.toDateString();
+    yesterday.toDateString();
+
+    const currentDay = moment(yesterday).format('YYYY-MM-DD');
 
     useEffect(() => {
         fetchOrdersFx({
