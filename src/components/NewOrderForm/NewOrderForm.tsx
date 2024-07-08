@@ -1,14 +1,15 @@
 import { Button, Stack, TextField } from '@mui/material';
-import { DatePickerForForm } from './DatePickerForForm/DatePickerForForm';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { NewOrderType, OrderStatusEnum } from '../../types/OrderType';
-import { initialValues } from './model/initialValues';
-import InputMask from 'react-input-mask';
-import { translate } from '../../common/translate/translate';
-import { MasterSelectField, OrderTypeSelectField, TextFields, VisitSelectField } from './FieldsForForm';
-import { addNewOrderFx } from './model/newOrderFormStore';
 import React from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import InputMask from 'react-input-mask';
+
+import { translate } from '../../common/translate/translate';
+import { NewOrderType, OrderStatusEnum } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
+import { DatePickerForForm } from './DatePickerForForm/DatePickerForForm';
+import { MasterSelectField, OrderTypeSelectField, TextFields, VisitSelectField } from './FieldsForForm';
+import { initialValues } from './model/initialValues';
+import { addNewOrderFx } from './model/newOrderFormStore';
 
 export const NewOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
     const { handleSubmit, reset, control } = useForm<NewOrderType>({

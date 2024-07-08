@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import { AdminOrdersPage } from '../pages/AdminOrdersPage/AdminOrdersPage';
 import { CloseOrderPage } from '../pages/CloseOrderPage/CloseOrderPage';
+import { CreateNewOrderPage } from '../pages/CreateNewOrderPage/CreateNewOrderPage';
+import { EditOrderPage } from '../pages/EditOrderPage/EditOrderPage';
 import { LoginPage } from '../pages/LoginPage/LoginPage';
 import { OrderDescPage } from '../pages/OrderDescPage/OrderDescPage';
 import { OrdersPage } from '../pages/OrdersPage/OrdersPage';
@@ -9,9 +12,6 @@ import { PaymentOrderPage } from '../pages/PaymentOrderPage/PaymentOrderPage';
 import { ProfilePage } from '../pages/ProfilePage/ProfilePage';
 import { UserType } from '../types/UserType';
 import { ProtectedRoute } from './ProtectedRoute';
-import { AdminOrdersPage } from '../pages/AdminOrdersPage/AdminOrdersPage';
-import { CreateNewOrderPage } from '../pages/CreateNewOrderPage/CreateNewOrderPage';
-import { EditOrderPage } from '../pages/EditOrderPage/EditOrderPage';
 
 export const AppRouter = () => {
     const [currentUser, setCurrentUser] = useState<UserType | Record<string, unknown>>({});

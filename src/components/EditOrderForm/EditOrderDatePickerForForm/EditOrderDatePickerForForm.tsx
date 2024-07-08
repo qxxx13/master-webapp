@@ -1,10 +1,11 @@
-import { Control, Controller } from 'react-hook-form';
-import { NewOrderType, OrderType } from '../../../types/OrderType';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { translate } from '../../../common/translate/translate';
 import dayjs from 'dayjs';
+import { Control, Controller } from 'react-hook-form';
+
+import { translate } from '../../../common/translate/translate';
+import { NewOrderType, OrderType } from '../../../types/OrderType';
 
 export const EditOrderDatePickerForForm: React.FC<{ control: Control<OrderType, unknown> }> = ({ control }) => {
     return (

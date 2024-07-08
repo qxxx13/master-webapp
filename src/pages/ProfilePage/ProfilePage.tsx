@@ -1,13 +1,13 @@
-import { Avatar, Button, CircularProgress, Stack, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
-
-import { UserType } from '../../types/UserType';
+import { Avatar, Button, CircularProgress, Stack, Typography } from '@mui/material';
+import { useUnit } from 'effector-react';
 import moment from 'moment';
 import { useEffect } from 'react';
-import { $ordersPerMonthGetStatus, fetchOrdersPerMonthFx } from './model/orderPerMonthStore';
-import { useUnit } from 'effector-react';
+import { useNavigate } from 'react-router-dom';
+
 import { SalaryCharts } from '../../components/SalaryCharts/SalaryCharts';
+import { UserType } from '../../types/UserType';
+import { $ordersPerMonthGetStatus, fetchOrdersPerMonthFx } from './model/orderPerMonthStore';
 
 export const ProfilePage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

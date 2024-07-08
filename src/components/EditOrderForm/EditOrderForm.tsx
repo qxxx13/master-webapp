@@ -1,15 +1,16 @@
+import { Button, Stack, TextField } from '@mui/material';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import InputMask from 'react-input-mask';
+
+import { translate } from '../../common/translate/translate';
 import { OrderStatusEnum, OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
-import { initialValues } from './model/initialValues';
-import { editOrderFx } from './model/editOrderFormStore';
 import { sendToMaster, transferOrder } from './api/editOrderFormApi';
-import { MasterSelectField, OrderTypeSelectField, TextFields, VisitSelectField } from './FieldsForForm';
-import { Button, Stack, TextField } from '@mui/material';
-import InputMask from 'react-input-mask';
-import { translate } from '../../common/translate/translate';
-import { setUpdate } from './model/setUpdateOrderStore';
 import { EditOrderDatePickerForForm } from './EditOrderDatePickerForForm/EditOrderDatePickerForForm';
+import { MasterSelectField, OrderTypeSelectField, TextFields, VisitSelectField } from './FieldsForForm';
+import { editOrderFx } from './model/editOrderFormStore';
+import { initialValues } from './model/initialValues';
+import { setUpdate } from './model/setUpdateOrderStore';
 
 export const EditOrderForm: React.FC<{ users: UserType[]; order: OrderType }> = ({ order, users }) => {
     const { handleSubmit, control } = useForm<OrderType>({

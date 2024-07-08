@@ -1,11 +1,12 @@
-import { Button, CircularProgress, IconButton, Stack, Typography } from '@mui/material';
-import { UserType } from '../../types/UserType';
-import { useNavigate } from 'react-router-dom';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { NewOrderForm } from '../../components/NewOrderForm/NewOrderForm';
-import { useEffect } from 'react';
-import { $usersGetStatus, fetchAllUsersFx } from './model/usersStore';
+import { Button, CircularProgress, IconButton, Stack, Typography } from '@mui/material';
 import { useUnit } from 'effector-react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { NewOrderForm } from '../../components/NewOrderForm/NewOrderForm';
+import { UserType } from '../../types/UserType';
+import { $usersGetStatus, fetchAllUsersFx } from './model/usersStore';
 
 export const CreateNewOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

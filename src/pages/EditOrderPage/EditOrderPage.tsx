@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
-import { UserType } from '../../types/UserType';
-import { useNavigate, useParams } from 'react-router-dom';
-import { $editOrderStoreGetStatus, fetchOrderFx } from './model/editOrderStore';
-import { $editOrderUsersStoreGetStatus, fetchUsersFx } from './model/editOrderUsersStore';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { CircularProgress, IconButton, Stack, Typography } from '@mui/material';
 import { useUnit } from 'effector-react';
+import React, { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import { EditOrderForm } from '../../components/EditOrderForm/EditOrderForm';
 import { OrderType } from '../../types/OrderType';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { UserType } from '../../types/UserType';
 import { $updateOrderStore } from '../OrderDescPage/model/setUpdateOrderStore';
+import { $editOrderStoreGetStatus, fetchOrderFx } from './model/editOrderStore';
+import { $editOrderUsersStoreGetStatus, fetchUsersFx } from './model/editOrderUsersStore';
 
 export const EditOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

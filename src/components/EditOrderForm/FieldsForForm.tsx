@@ -1,10 +1,11 @@
-import { Control } from 'react-hook-form';
-import { OrderType, OrderTypeEnum, OrderVisitEnum } from '../../types/OrderType';
-import { TextFieldForForm } from '../TextFieldForForm/TextFieldForForm';
 import { MenuItem } from '@mui/material';
+import { Control } from 'react-hook-form';
+
 import { translate } from '../../common/translate/translate';
+import { OrderType, OrderTypeEnum, OrderVisitEnum } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { SelectFieldForForm } from '../SelectFieldForForm/SelectFieldForForm';
+import { TextFieldForForm } from '../TextFieldForForm/TextFieldForForm';
 
 export const TextFields = (control: Control<OrderType, unknown>, initialValues: OrderType) => {
     const {

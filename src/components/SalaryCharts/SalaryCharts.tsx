@@ -1,8 +1,9 @@
 import { Stack, Typography } from '@mui/material';
-import { OrderType } from '../../types/OrderType';
 import { LineChart } from '@mui/x-charts';
 import moment from 'moment';
+
 import { useSalaryCharts } from '../../hooks/useSalaryCharts';
+import { OrderType } from '../../types/OrderType';
 
 type SalaryChartsProps = {
     orders: OrderType[];

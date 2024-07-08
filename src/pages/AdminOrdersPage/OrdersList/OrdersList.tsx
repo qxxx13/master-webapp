@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
-import { $allOrdersGetStatus, fetchAllOrdersFx } from '../model/ordersStore';
-import { useUnit } from 'effector-react';
-import { OrderCard } from '../../../components/OrderCard/OrderCard';
 import { CircularProgress, Stack } from '@mui/material';
+import { useUnit } from 'effector-react';
+import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+
+import { OrderCard } from '../../../components/OrderCard/OrderCard';
+import { $allOrdersGetStatus, fetchAllOrdersFx } from '../model/ordersStore';
 
 export const OrdersList: React.FC<{ currentPage: number }> = ({ currentPage }) => {
     const [hasMore, setHasMore] = useState(true);

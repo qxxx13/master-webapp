@@ -1,4 +1,5 @@
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SendIcon from '@mui/icons-material/Send';
 import {
     Accordion,
@@ -16,14 +17,13 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { OrderStatusEnum, OrderType } from '../../types/OrderType';
+import { UserType } from '../../types/UserType';
+import { AdminButtons } from './AdminButtons';
 import { $ordersGetStatus, fetchOrderByIdFx } from './model/orderDescStore';
 import { $updateOrderStore } from './model/setUpdateOrderStore';
 import { $userGetStatus } from './model/userStore';
 import { OrderDesc } from './OrderDesc';
 import { OrderWorksButton } from './OrderWorkButtons';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { UserType } from '../../types/UserType';
-import { AdminButtons } from './AdminButtons';
 
 export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
