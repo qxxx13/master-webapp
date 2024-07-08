@@ -17,10 +17,10 @@ export const useSalaryCharts = (orders: OrderType[], lastDay: number) => {
         let salary = 0;
         let expenses = 0;
 
-        temp.map((order) => {
+        /* temp.map((order) => {
             salary += order.MasterSalary;
             expenses += order.Expenses;
-        });
+        }); */
 
         pData.push(salary);
         uData.push(expenses);
