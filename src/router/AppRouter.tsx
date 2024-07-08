@@ -9,6 +9,9 @@ import { PaymentOrderPage } from '../pages/PaymentOrderPage/PaymentOrderPage';
 import { ProfilePage } from '../pages/ProfilePage/ProfilePage';
 import { UserType } from '../types/UserType';
 import { ProtectedRoute } from './ProtectedRoute';
+import { AdminOrdersPage } from '../pages/AdminOrdersPage/AdminOrdersPage';
+import { CreateNewOrderPage } from '../pages/CreateNewOrderPage/CreateNewOrderPage';
+import { EditOrderPage } from '../pages/EditOrderPage/EditOrderPage';
 
 export const AppRouter = () => {
     const [currentUser, setCurrentUser] = useState<UserType | Record<string, unknown>>({});
@@ -24,7 +27,19 @@ export const AppRouter = () => {
                 path="/"
                 element={
                     <ProtectedRoute>
-                        <OrdersPage currentUser={currentUser as UserType} />
+                        {currentUser.Role === 'admin' ? (
+                            <AdminOrdersPage currentUser={currentUser as UserType} />
+                        ) : (
+                            <OrdersPage currentUser={currentUser as UserType} />
+                        )}
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/createNewOrder"
+                element={
+                    <ProtectedRoute>
+                        <CreateNewOrderPage currentUser={currentUser as UserType} />
                     </ProtectedRoute>
                 }
             />
@@ -32,7 +47,7 @@ export const AppRouter = () => {
                 path="/:id"
                 element={
                     <ProtectedRoute>
-                        <OrderDescPage />
+                        <OrderDescPage currentUser={currentUser as UserType} />
                     </ProtectedRoute>
                 }
             />
@@ -57,6 +72,14 @@ export const AppRouter = () => {
                 element={
                     <ProtectedRoute>
                         <PaymentOrderPage currentUser={currentUser as UserType} />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/editOrder/:id"
+                element={
+                    <ProtectedRoute>
+                        <EditOrderPage currentUser={currentUser as UserType} />
                     </ProtectedRoute>
                 }
             />

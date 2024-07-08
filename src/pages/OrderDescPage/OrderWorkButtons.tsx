@@ -51,7 +51,7 @@ export const OrderWorksButton: React.FC<{
     switch (status) {
         case 'pending':
             return (
-                <Stack sx={{ position: 'absolute', width: '100%', bottom: 65 }} gap={1}>
+                <Stack sx={{ position: 'absolute', width: '100%', bottom: 65, p: 2 }} gap={1}>
                     <Button onClick={handleTake} variant="outlined">
                         Принять
                     </Button>
@@ -62,7 +62,7 @@ export const OrderWorksButton: React.FC<{
             );
         case 'atWork':
             return (
-                <Stack sx={{ position: 'absolute', width: '100%', bottom: 65 }} gap={1}>
+                <Stack sx={{ position: 'absolute', width: '100%', bottom: 65, p: 2 }} gap={1}>
                     <Button onClick={handleWent} color="warning" variant="outlined">
                         Отъехал за ЗЧ
                     </Button>
@@ -76,7 +76,7 @@ export const OrderWorksButton: React.FC<{
             );
         case 'active':
             return (
-                <Stack sx={{ position: 'absolute', width: '100%', bottom: 65 }} gap={1}>
+                <Stack sx={{ position: 'absolute', width: '100%', bottom: 65, p: 2 }} gap={1}>
                     <Button onClick={handleAtWork} variant="outlined">
                         В работе
                     </Button>
@@ -93,7 +93,7 @@ export const OrderWorksButton: React.FC<{
             );
         case 'masterWentForSparePart':
             return (
-                <Stack sx={{ position: 'absolute', width: '100%', bottom: 65 }} gap={1}>
+                <Stack sx={{ position: 'absolute', width: '100%', bottom: 65, p: 2 }} gap={1}>
                     <Button onClick={handleReturn} variant="outlined">
                         Вернулся
                     </Button>
@@ -101,7 +101,7 @@ export const OrderWorksButton: React.FC<{
             );
         case 'takeToSD':
             return (
-                <Stack sx={{ position: 'absolute', width: '100%', bottom: 65 }} gap={1}>
+                <Stack sx={{ position: 'absolute', width: '100%', bottom: 65, p: 2 }} gap={1}>
                     <Button onClick={handleReturn} variant="outlined">
                         Вернулся
                     </Button>
@@ -114,7 +114,9 @@ export const OrderWorksButton: React.FC<{
                 </Button>
             );
         case 'awaitingPayment':
-            return <Button>Soon</Button>;
+            return <></>;
+        case 'distribution':
+            return <></>;
         default: {
             return <></>;
         }

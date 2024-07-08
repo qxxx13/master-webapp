@@ -26,7 +26,7 @@ export enum IsWorkingOrderEnum {
 export enum OrderTypeEnum {
     specialized = 'specialized',
     notSpecialized = 'notSpecialized',
-    airConditioner = 'airConditioner,',
+    airConditioner = 'airConditioner',
 }
 
 export enum UserStatusEnum {
@@ -74,14 +74,14 @@ export type OrderType = {
     Debt: number;
     MasterName?: string;
     Comments?: string;
-    MessageId: string;
-    AllOrdersMessageId: string;
-    ActiveOrderMessageId: string;
-    DistributionOrderMessageId: string;
-    MasterSalary: number;
-    CompanyShare: number;
+    MessageId?: string;
+    AllOrdersMessageId?: string;
+    ActiveOrderMessageId?: string;
+    DistributionOrderMessageId?: string;
+    MasterSalary?: number;
+    CompanyShare?: number;
     ClosingOrderId?: number;
-    IsWorking: IsWorkingOrderEnum;
+    IsWorking?: IsWorkingOrderEnum;
     Type: OrderTypeEnum;
 };
 
@@ -106,3 +106,19 @@ export type CloseOrderType = {
     Comments?: string;
     Debt?: string;
 };
+
+export enum OrderVisitEnum {
+    primary = 'primary',
+    repeated = 'repeated',
+    guarantee = 'guarantee',
+}
+
+type OmitType = {
+    Id: string;
+    Price: number;
+    Total: number;
+    Expenses: number;
+    BotMessageArr: string[];
+};
+
+export type NewOrderType = Omit<OrderType, keyof OmitType>;

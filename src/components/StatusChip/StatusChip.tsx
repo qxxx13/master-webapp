@@ -4,8 +4,12 @@ import BuildIcon from '@mui/icons-material/Build';
 import DoneIcon from '@mui/icons-material/Done';
 import ElectricCarIcon from '@mui/icons-material/ElectricCar';
 import EngineeringIcon from '@mui/icons-material/Engineering';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import PaidIcon from '@mui/icons-material/Paid';
+import CloseIcon from '@mui/icons-material/Close';
 import { Chip } from '@mui/material';
+import TransferWithinAStationIcon from '@mui/icons-material/TransferWithinAStation';
 
 import { OrderStatusEnum } from '../../types/OrderType';
 
@@ -34,6 +38,21 @@ export const StatusChip: React.FC<{ status: OrderStatusEnum }> = ({ status }) =>
                     }
                     case 'awaitingPayment': {
                         return <Chip icon={<PaidIcon />} label="Ожидает сдачи" />;
+                    }
+                    case 'distribution': {
+                        return <Chip icon={<HelpOutlineIcon />} label="На распределении" />;
+                    }
+                    case 'rejectedByMaster': {
+                        return <Chip icon={<CloseIcon />} label="Отклонена мастером" />;
+                    }
+                    case 'rejectedByClient': {
+                        return <Chip icon={<CloseIcon />} label="Отклонена клиентом" />;
+                    }
+                    case 'debt': {
+                        return <Chip icon={<CurrencyExchangeIcon />} label="Долг" />;
+                    }
+                    case 'transfer': {
+                        return <Chip icon={<TransferWithinAStationIcon />} label="Перенос" />;
                     }
                 }
             })()}

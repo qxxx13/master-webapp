@@ -38,9 +38,11 @@ export const OrderDesc: React.FC<{ order: OrderType }> = ({ order }) => {
             </Typography>
 
             {order.CompanyShare !== 0 && (
-                <Typography variant="h5" sx={{ textAlign: 'center' }}>
-                    К сдаче: {order.CompanyShare}₽
-                </Typography>
+                <>
+                    <Typography variant="h5" sx={{ textAlign: 'center' }}>
+                        К сдаче: {order.CompanyShare}₽
+                    </Typography>
+                </>
             )}
         </Stack>
     );

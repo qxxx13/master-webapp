@@ -1,6 +1,16 @@
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import SendIcon from '@mui/icons-material/Send';
-import { Button, CircularProgress, IconButton, Link } from '@mui/material';
+import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Button,
+    CircularProgress,
+    IconButton,
+    Link,
+    Stack,
+    Typography,
+} from '@mui/material';
 import { useUnit } from 'effector-react';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -11,8 +21,11 @@ import { $updateOrderStore } from './model/setUpdateOrderStore';
 import { $userGetStatus } from './model/userStore';
 import { OrderDesc } from './OrderDesc';
 import { OrderWorksButton } from './OrderWorkButtons';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { UserType } from '../../types/UserType';
+import { AdminButtons } from './AdminButtons';
 
-export const OrderDescPage = () => {
+export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
     const id = useParams().id as string;
 
@@ -50,6 +63,20 @@ export const OrderDescPage = () => {
                         orderId={String(order.Id)}
                         status={order.Status as OrderStatusEnum}
                     />
+                    {currentUser.Role === 'admin' && (
+                        <Accordion>
+                            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                <Typography>ADMIN tools</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <AdminButtons
+                                    chatId={String(user.TelegramChatId)}
+                                    messageId={String(order.MessageId)}
+                                    orderId={String(order.Id)}
+                                />
+                            </AccordionDetails>
+                        </Accordion>
+                    )}
                 </>
             ) : (
                 <CircularProgress />
