@@ -10,7 +10,7 @@ type SalaryChartsProps = {
 };
 
 export const SalaryCharts: React.FC<SalaryChartsProps> = ({ orders }) => {
-    let totalSalaryPerMonth = 0;
+    const totalSalaryPerMonth = 0;
 
     /* orders.map((order, index) => (totalSalaryPerMonth += order.MasterSalary)); */
 
