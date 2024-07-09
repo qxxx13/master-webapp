@@ -1,10 +1,10 @@
 import { Stack, Typography } from '@mui/material';
 import { LineChart } from '@mui/x-charts';
 import moment from 'moment';
+import { useState } from 'react';
 
 import { useSalaryCharts } from '../../hooks/useSalaryCharts';
 import { OrderType } from '../../types/OrderType';
-import { useState } from 'react';
 import { handleTotalSalary } from './handleTotalSalary';
 
 type SalaryChartsProps = {
