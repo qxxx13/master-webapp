@@ -25,6 +25,10 @@ export const OrderCard: React.FC<{ order: OrderType }> = ({ order }) => {
                         <Typography variant="body1">{moment(order.Date).format('DD.MM.YY')}</Typography>
                         <Typography variant="body1">{order.Time}</Typography>
                     </Stack>
+                    <Stack flexDirection="row" alignItems="center" justifyContent="space-between">
+                        <Typography variant="body1">{order.Address}</Typography>
+                    </Stack>
+                    <Typography variant="body1">{order.Description}</Typography>
                 </CardContent>
             </CardActionArea>
         </Card>

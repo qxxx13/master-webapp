@@ -30,7 +30,7 @@ export const OrdersList: React.FC<{ currentPage: number }> = ({ currentPage }) =
         <Stack
             alignItems="center"
             id="scrollableStack"
-            sx={{ height: 'calc(100vh - 280px)', overflowY: 'scroll', mt: '225px' }}
+            sx={{ height: 'calc(100vh - 169px)', overflowY: 'scroll', mt: '110px' }}
         >
             <InfiniteScroll
                 dataLength={data.data.length}
@@ -51,3 +51,7 @@ export const OrdersList: React.FC<{ currentPage: number }> = ({ currentPage }) =
         </Stack>
     );
 };
+
+/* 225px  */
+
+/* 169px */

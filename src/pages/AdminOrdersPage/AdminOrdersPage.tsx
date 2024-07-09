@@ -18,8 +18,8 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
                 <Button variant="outlined" onClick={goToCreateNewOrderPage}>
                     Создать заявку
                 </Button>
-                <TextField label="Поиск по номеру" />
-                <Button variant="outlined">Поиск</Button>
+                {/* <TextField label="Поиск по номеру" />
+                <Button variant="outlined">Поиск</Button> */}
             </Stack>
             <OrdersList currentPage={1} />
         </>
