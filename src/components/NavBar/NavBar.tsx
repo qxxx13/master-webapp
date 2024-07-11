@@ -1,14 +1,14 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import GroupIcon from '@mui/icons-material/Group';
 import PaidIcon from '@mui/icons-material/Paid';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import { BottomNavigation, BottomNavigationAction, Box, Divider } from '@mui/material';
 import { useUnit } from 'effector-react';
-import { useNavigate } from 'react-router-dom';
-import GroupIcon from '@mui/icons-material/Group';
-
-import { $navBarStore, setNavBar } from './model/navBarStore';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { UserType } from '../../types/UserType';
+import { $navBarStore, setNavBar } from './model/navBarStore';
 
 export const NavBar = () => {
     const [currentUser, setCurrentUser] = useState<UserType | Record<string, unknown>>({});

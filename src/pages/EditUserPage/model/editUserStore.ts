@@ -1,4 +1,5 @@
 import { combine, createEffect, createStore, restore } from 'effector';
+
 import { UserType } from '../../../types/UserType';
 import { getUserById } from '../api/editUserPageApi';
 

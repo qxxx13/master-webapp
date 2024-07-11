@@ -1,9 +1,10 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { UserType } from '../../types/UserType';
-import { initialValues } from './model/initialValues';
-import { editUserFx } from './model/editUserFormStore';
 import { Button, Stack } from '@mui/material';
+import { SubmitHandler, useForm } from 'react-hook-form';
+
+import { UserType } from '../../types/UserType';
 import { RoleSelectField, TextFields } from './FieldsForForm';
+import { editUserFx } from './model/editUserFormStore';
+import { initialValues } from './model/initialValues';
 
 export const EditUserForm: React.FC<{ user: UserType }> = ({ user }) => {
     const { handleSubmit, control } = useForm<UserType>({

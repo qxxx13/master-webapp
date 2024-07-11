@@ -1,10 +1,11 @@
 import { Button, CircularProgress, Stack, Typography } from '@mui/material';
-import { UserType } from '../../types/UserType';
-import { UsersList } from './UsersList/UsersList';
-import { useEffect } from 'react';
-import { $usersPageStoreGetStatus, fetchAllUsersFx } from './model/usersPageStore';
 import { useUnit } from 'effector-react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { UserType } from '../../types/UserType';
+import { $usersPageStoreGetStatus, fetchAllUsersFx } from './model/usersPageStore';
+import { UsersList } from './UsersList/UsersList';
 
 export const UsersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

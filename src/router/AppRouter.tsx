@@ -2,21 +2,21 @@ import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { AdminOrdersPage } from '../pages/AdminOrdersPage/AdminOrdersPage';
+import { AdminPaymentOrderPage } from '../pages/AdminPaymentOrderPage/AdminPaymentOrderPage';
 import { CloseOrderPage } from '../pages/CloseOrderPage/CloseOrderPage';
 import { CreateNewOrderPage } from '../pages/CreateNewOrderPage/CreateNewOrderPage';
+import { CreateNewUserPage } from '../pages/CreateNewUserPage/CreateNewUserPage';
 import { EditOrderPage } from '../pages/EditOrderPage/EditOrderPage';
+import { EditUserPage } from '../pages/EditUserPage/EditUserPage';
 import { LoginPage } from '../pages/LoginPage/LoginPage';
 import { OrderDescPage } from '../pages/OrderDescPage/OrderDescPage';
 import { OrdersPage } from '../pages/OrdersPage/OrdersPage';
 import { PaymentOrderPage } from '../pages/PaymentOrderPage/PaymentOrderPage';
 import { ProfilePage } from '../pages/ProfilePage/ProfilePage';
+import { UserDescPage } from '../pages/UserDescPage/UserDescPage';
+import { UsersPage } from '../pages/UsersPage/UsersPage';
 import { UserType } from '../types/UserType';
 import { ProtectedRoute } from './ProtectedRoute';
-import { UsersPage } from '../pages/UsersPage/UsersPage';
-import { UserDescPage } from '../pages/UserDescPage/UserDescPage';
-import { CreateNewUserPage } from '../pages/CreateNewUserPage/CreateNewUserPage';
-import { EditUserPage } from '../pages/EditUserPage/EditUserPage';
-import { AdminPaymentOrderPage } from '../pages/AdminPaymentOrderPage/AdminPaymentOrderPage';
 
 export const AppRouter = () => {
     const [currentUser, setCurrentUser] = useState<UserType | Record<string, unknown>>({});

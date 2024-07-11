@@ -1,4 +1,5 @@
 import { combine, createEffect, createStore, restore } from 'effector';
+
 import { NewUserType, UserType } from '../../../types/UserType';
 import { createNewUser } from '../api/newUserFormApi';
 

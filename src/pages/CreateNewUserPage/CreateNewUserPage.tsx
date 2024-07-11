@@ -1,7 +1,8 @@
 import { Stack, Typography } from '@mui/material';
-import { UserType } from '../../types/UserType';
 import { useEffect } from 'react';
+
 import { NewUserForm } from '../../components/NewUserForm/NewUserForm';
+import { UserType } from '../../types/UserType';
 
 export const CreateNewUserPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     useEffect(() => {

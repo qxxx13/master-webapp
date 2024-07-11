@@ -1,10 +1,11 @@
-import { Control } from 'react-hook-form';
-import { InitialValues } from './model/initialValues';
-import { NewUserType, RoleEnum } from '../../types/UserType';
-import { TextFieldForForm } from '../TextFieldForForm/TextFieldForForm';
 import { MenuItem } from '@mui/material';
+import { Control } from 'react-hook-form';
+
 import { translate } from '../../common/translate/translate';
+import { NewUserType, RoleEnum } from '../../types/UserType';
 import { SelectFieldForForm } from '../SelectFieldForForm/SelectFieldForForm';
+import { TextFieldForForm } from '../TextFieldForForm/TextFieldForForm';
+import { InitialValues } from './model/initialValues';
 
 const { Role, IsOnline, Status, ...textFields } = InitialValues;
 

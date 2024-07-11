@@ -1,7 +1,8 @@
 import { Box, Card, CardActionArea, CardContent, Stack, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
 import { UserType } from '../../types/UserType';
 import { bgHandler } from './bgHandler';
-import { useNavigate } from 'react-router-dom';
 
 export const UserCard: React.FC<{ user: UserType }> = ({ user }) => {
     const navigate = useNavigate();

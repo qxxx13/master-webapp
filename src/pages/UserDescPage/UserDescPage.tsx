@@ -1,11 +1,12 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { UserType } from '../../types/UserType';
-import { useEffect } from 'react';
-import { $userDescPageStoreGetStatus, fetchUserByIdFx } from './model/userDescPageStore';
-import { useUnit } from 'effector-react';
 import { Box, Button, CircularProgress, Divider, Stack, Typography } from '@mui/material';
+import { useUnit } from 'effector-react';
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import { StatusChip } from '../../components/StatusChip/StatusChip';
 import { OrderStatusEnum } from '../../types/OrderType';
+import { UserType } from '../../types/UserType';
+import { $userDescPageStoreGetStatus, fetchUserByIdFx } from './model/userDescPageStore';
 
 export const UserDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

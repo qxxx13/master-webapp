@@ -1,8 +1,9 @@
 import { Button, Stack } from '@mui/material';
 import { SubmitHandler, useForm } from 'react-hook-form';
+
 import { NewUserType } from '../../types/UserType';
-import { InitialValues } from './model/initialValues';
 import { RoleSelectField, TextFields } from './FieldsForForm';
+import { InitialValues } from './model/initialValues';
 import { addNewUserFx } from './model/newUserFormStore';
 
 export const NewUserForm = () => {

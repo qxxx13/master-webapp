@@ -1,9 +1,10 @@
-import { Control } from 'react-hook-form';
-import { RoleEnum, UserType } from '../../types/UserType';
-import { TextFieldForForm } from '../TextFieldForForm/TextFieldForForm';
 import { MenuItem } from '@mui/material';
+import { Control } from 'react-hook-form';
+
 import { translate } from '../../common/translate/translate';
+import { RoleEnum, UserType } from '../../types/UserType';
 import { SelectFieldForForm } from '../SelectFieldForForm/SelectFieldForForm';
+import { TextFieldForForm } from '../TextFieldForForm/TextFieldForForm';
 
 export const TextFields = (control: Control<UserType, unknown>, initialValues: UserType) => {
     const { IsOnline, Status, Id, ...textFields } = initialValues;
