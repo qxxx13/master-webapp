@@ -26,6 +26,9 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
         localStorage.setItem('currentStatusSelect', event.target.value);
     };
 
+    const BackBTN = Telegram.WebApp.BackButton;
+    BackBTN.hide();
+
     useEffect(() => {
         Telegram.WebApp.ready();
     }, []);

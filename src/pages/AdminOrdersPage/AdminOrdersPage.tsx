@@ -3,11 +3,19 @@ import { useNavigate } from 'react-router-dom';
 
 import { UserType } from '../../types/UserType';
 import { OrdersList } from './OrdersList/OrdersList';
+import { useEffect } from 'react';
 
 export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
 
     const goToCreateNewOrderPage = () => navigate('/createNewOrder');
+
+    const BackBTN = Telegram.WebApp.BackButton;
+    BackBTN.hide();
+
+    useEffect(() => {
+        Telegram.WebApp.ready();
+    }, []);
 
     return (
         <>

@@ -18,7 +18,7 @@ export const UserDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser 
     const goToEditUser = () => navigate(`/editUser/${id}`);
 
     const BackBTN = Telegram.WebApp.BackButton;
-    BackBTN.isVisible = true;
+    BackBTN.show();
     BackBTN.onClick(goBack);
 
     useEffect(() => {

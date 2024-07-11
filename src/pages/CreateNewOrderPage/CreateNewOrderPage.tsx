@@ -16,7 +16,7 @@ export const CreateNewOrderPage: React.FC<{ currentUser: UserType }> = ({ curren
     const { data, loading } = useUnit($usersGetStatus);
 
     const BackBTN = Telegram.WebApp.BackButton;
-    BackBTN.isVisible = true;
+    BackBTN.show();
     BackBTN.onClick(goBack);
 
     useEffect(() => {

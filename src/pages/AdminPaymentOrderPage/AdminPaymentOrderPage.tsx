@@ -54,10 +54,14 @@ export const AdminPaymentOrderPage: React.FC<{ currentUser: UserType }> = ({ cur
         setUpdate();
     };
 
+    const BackBTN = Telegram.WebApp.BackButton;
+    BackBTN.hide();
+
     useEffect(() => {
         fetchOrdersFx({ userId: +selectedUserId });
         fetchAllUsersFx();
-    }, [update]);
+        Telegram.WebApp.ready();
+    }, [update, selectedUserId]);
 
     return (
         <>

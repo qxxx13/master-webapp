@@ -23,7 +23,7 @@ export const EditOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser
     const update = useUnit($updateOrderStore);
 
     const BackBTN = Telegram.WebApp.BackButton;
-    BackBTN.isVisible = true;
+    BackBTN.show();
     BackBTN.onClick(goBack);
 
     useEffect(() => {

@@ -17,8 +17,12 @@ export const PaymentOrderPage: React.FC<{ currentUser: UserType }> = ({ currentU
         totalCompanyShare = totalCompanyShare + (order.CompanyShare as number);
     });
 
+    const BackBTN = Telegram.WebApp.BackButton;
+    BackBTN.hide();
+
     useEffect(() => {
         fetchOrdersFx({ userId: String(currentUser.Id) });
+        Telegram.WebApp.ready();
     }, []);
 
     return (

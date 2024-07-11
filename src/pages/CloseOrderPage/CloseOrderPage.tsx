@@ -64,7 +64,7 @@ export const CloseOrderPage = () => {
     const goBack = () => navigate(-1);
 
     const BackBTN = Telegram.WebApp.BackButton;
-    BackBTN.isVisible = true;
+    BackBTN.show();
     BackBTN.onClick(goBack);
 
     useEffect(() => {

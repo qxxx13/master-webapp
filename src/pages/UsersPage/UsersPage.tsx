@@ -15,8 +15,12 @@ export const UsersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) 
         navigate('/createNewUser');
     };
 
+    const BackBTN = Telegram.WebApp.BackButton;
+    BackBTN.hide();
+
     useEffect(() => {
         fetchAllUsersFx();
+        Telegram.WebApp.ready();
     }, []);
     return (
         <Stack sx={{ p: 2 }} gap={1}>
