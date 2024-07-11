@@ -22,10 +22,16 @@ export const PaymentOrderPage: React.FC<{ currentUser: UserType }> = ({ currentU
     }, []);
 
     return (
-        <Stack sx={{ p: 2, textAlign: 'center' }} gap={1}>
-            <Typography variant="h4">Сдача</Typography>
-            <Typography variant="h6">Сумма к сдаче: {totalCompanyShare}₽</Typography>
-            {OrderList}
-        </Stack>
+        <>
+            <Stack sx={{ position: 'absolute', top: 8, textAlign: 'center', width: '100%', p: 2 }}>
+                <Typography variant="h4">Сдача</Typography>
+                <Typography variant="h6">Сумма к сдаче: {totalCompanyShare}₽</Typography>
+            </Stack>
+            <Stack alignItems="center" sx={{ mt: '100px', height: 'calc(100vh - 150px)', overflowY: 'scroll', p: 2 }}>
+                <Stack gap={1} sx={{ width: '100%' }}>
+                    {OrderList}
+                </Stack>
+            </Stack>
+        </>
     );
 };

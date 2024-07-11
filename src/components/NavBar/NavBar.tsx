@@ -4,12 +4,20 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import { BottomNavigation, BottomNavigationAction, Box, Divider } from '@mui/material';
 import { useUnit } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
+import GroupIcon from '@mui/icons-material/Group';
 
 import { $navBarStore, setNavBar } from './model/navBarStore';
+import { useEffect, useState } from 'react';
+import { UserType } from '../../types/UserType';
 
 export const NavBar = () => {
+    const [currentUser, setCurrentUser] = useState<UserType | Record<string, unknown>>({});
     const pageNum = useUnit($navBarStore);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setCurrentUser(JSON.parse(localStorage.getItem('user') || '{}'));
+    }, []);
 
     const handleChangePage = (pageNum: number) => {
         setNavBar(pageNum);
@@ -24,6 +32,10 @@ export const NavBar = () => {
                 break;
             }
             case 2: {
+                currentUser.Role === 'admin' ? navigate('/users') : navigate('/profile');
+                break;
+            }
+            case 3: {
                 navigate('/profile');
                 break;
             }
@@ -42,6 +54,7 @@ export const NavBar = () => {
             >
                 <BottomNavigationAction label="Заявки" icon={<TaskAltIcon />} />
                 <BottomNavigationAction label="Сдача" icon={<PaidIcon />} />
+                {currentUser.Role === 'admin' && <BottomNavigationAction label="Пользователи" icon={<GroupIcon />} />}
                 <BottomNavigationAction label="Профиль" icon={<AccountCircleIcon />} />
             </BottomNavigation>
         </Box>

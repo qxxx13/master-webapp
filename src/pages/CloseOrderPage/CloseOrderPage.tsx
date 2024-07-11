@@ -61,7 +61,14 @@ export const CloseOrderPage = () => {
         setInterestRate(interestRate);
     };
 
+    const goBack = () => navigate(-1);
+
+    const BackBTN = Telegram.WebApp.BackButton;
+    BackBTN.isVisible = true;
+    BackBTN.onClick(goBack);
+
     useEffect(() => {
+        Telegram.WebApp.ready();
         getData();
     }, []);
 

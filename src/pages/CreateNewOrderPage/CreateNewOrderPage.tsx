@@ -15,15 +15,20 @@ export const CreateNewOrderPage: React.FC<{ currentUser: UserType }> = ({ curren
 
     const { data, loading } = useUnit($usersGetStatus);
 
+    const BackBTN = Telegram.WebApp.BackButton;
+    BackBTN.isVisible = true;
+    BackBTN.onClick(goBack);
+
     useEffect(() => {
+        Telegram.WebApp.ready();
         fetchAllUsersFx();
     }, []);
 
     return (
         <Stack>
-            <IconButton sx={{ position: 'absolute', left: 8, top: 11 }} onClick={goBack}>
+            {/* <IconButton sx={{ position: 'absolute', left: 8, top: 11 }} onClick={goBack}>
                 <ArrowBackIosNewIcon />
-            </IconButton>
+            </IconButton> */}
             <Typography variant="h5" sx={{ textAlign: 'center', p: 2 }}>
                 Создание новой заявки
             </Typography>

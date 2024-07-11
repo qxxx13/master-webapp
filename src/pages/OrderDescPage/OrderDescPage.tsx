@@ -35,7 +35,12 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
 
     const goBack = () => navigate(-1);
 
+    const BackBTN = Telegram.WebApp.BackButton;
+    BackBTN.show();
+    BackBTN.onClick(goBack);
+
     useEffect(() => {
+        Telegram.WebApp.ready();
         fetchOrderByIdFx({ orderId: id });
     }, [update]);
 
@@ -43,10 +48,10 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
         <>
             {!loading && Object.keys(order).length !== 0 ? (
                 <>
-                    <IconButton onClick={goBack} sx={{ position: 'absolute', left: 2, top: 2 }} size="large">
+                    {/* <IconButton onClick={goBack} sx={{ position: 'absolute', left: 2, top: 2 }} size="large">
                         <ArrowBackIosNewIcon />
-                    </IconButton>
-                    <Button
+                    </IconButton> */}
+                    {/* <Button
                         startIcon={<SendIcon />}
                         variant="outlined"
                         sx={{ position: 'absolute', top: 10, right: 10 }}
@@ -54,7 +59,7 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
                         <Link href="https://t.me/dirrnd" sx={{ textDecoration: 'none' }}>
                             Связать с диспом
                         </Link>
-                    </Button>
+                    </Button> */}
 
                     <OrderDesc order={order as OrderType} />
                     <OrderWorksButton
@@ -73,6 +78,7 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
                                     chatId={String(user.TelegramChatId)}
                                     messageId={String(order.MessageId)}
                                     orderId={String(order.Id)}
+                                    status={order.Status as OrderStatusEnum}
                                 />
                             </AccordionDetails>
                         </Accordion>

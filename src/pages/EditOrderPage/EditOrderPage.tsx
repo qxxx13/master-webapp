@@ -22,16 +22,21 @@ export const EditOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser
 
     const update = useUnit($updateOrderStore);
 
+    const BackBTN = Telegram.WebApp.BackButton;
+    BackBTN.isVisible = true;
+    BackBTN.onClick(goBack);
+
     useEffect(() => {
+        Telegram.WebApp.ready();
         fetchOrderFx({ orderId: id as string });
         fetchUsersFx();
     }, [update]);
 
     return (
         <Stack>
-            <IconButton sx={{ position: 'absolute', left: 8, top: 11 }} onClick={goBack}>
+            {/* <IconButton sx={{ position: 'absolute', left: 8, top: 11 }} onClick={goBack}>
                 <ArrowBackIosNewIcon />
-            </IconButton>
+            </IconButton> */}
             <Typography variant="h6" sx={{ textAlign: 'center', p: 2 }}>
                 Редактирование заявки №{id}
             </Typography>

@@ -38,3 +38,8 @@ export const takeToSDOrder = async (chatId: string, messageId: string, orderId: 
 export const returnToOrder = async (chatId: string, messageId: string, orderId: string) => {
     instance.patch(`/bot/atWork?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`).then((res) => res.data);
 };
+
+export const deliveredOrder = async (chatId: string, messageId: string, orderId: string) => {
+    instance.patch(`/orders/status?id=${orderId}&status=fulfilled`);
+    instance.patch(`/bot/close?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`);
+};

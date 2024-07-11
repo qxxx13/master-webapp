@@ -20,9 +20,9 @@ export type UserType = {
     TelegramChatId: string;
     MessageThreadId: string;
     Role: RoleEnum;
-    IsOnline: boolean;
+    IsOnline?: boolean;
     InterestRate: number; // Процентная ставка
-    Status: UserStatusEnum;
+    Status?: UserStatusEnum;
     Region: string;
     TelegramId: string;
 };
@@ -39,3 +39,5 @@ export type LoginedUserType = {
     accessToken: string;
     refreshToken: string;
 };
+
+export type NewUserType = Omit<UserType, 'Id'>;

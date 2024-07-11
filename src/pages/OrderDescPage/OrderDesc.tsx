@@ -6,7 +6,7 @@ import { OrderType } from '../../types/OrderType';
 
 export const OrderDesc: React.FC<{ order: OrderType }> = ({ order }) => {
     return (
-        <Stack sx={{ mt: 4, p: 2 }}>
+        <Stack sx={{ p: 2 }}>
             <Typography sx={{ mt: 1, mb: 1 }} variant="h5">
                 Заявка №{order.Id}
             </Typography>

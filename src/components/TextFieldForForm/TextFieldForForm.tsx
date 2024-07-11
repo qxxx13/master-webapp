@@ -20,7 +20,7 @@ export const TextFieldForForm = <T extends Control<any, unknown>, U extends stri
             rules={{ required: true }}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
                 <TextField
-                    value={value as string}
+                    value={value}
                     onChange={(event) => onChange(event.target.value)}
                     placeholder={translate(name)}
                     type={typeof value}
