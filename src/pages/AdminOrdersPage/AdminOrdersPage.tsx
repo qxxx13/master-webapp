@@ -1,9 +1,9 @@
 import { Button, Stack, TextField, Typography } from '@mui/material';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { UserType } from '../../types/UserType';
 import { OrdersList } from './OrdersList/OrdersList';
-import { useEffect } from 'react';
 
 export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

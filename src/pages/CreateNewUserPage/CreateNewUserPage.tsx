@@ -1,9 +1,9 @@
 import { Stack, Typography } from '@mui/material';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { NewUserForm } from '../../components/NewUserForm/NewUserForm';
 import { UserType } from '../../types/UserType';
-import { useNavigate } from 'react-router-dom';
 
 export const CreateNewUserPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
