@@ -29,7 +29,7 @@ export const AppRouter = () => {
 
     const test = `/${Telegram.WebApp.initDataUnsafe.start_param}`;
 
-    if (!!Telegram.WebApp.initDataUnsafe.start_param) {
+    if (Telegram.WebApp.initDataUnsafe.start_param) {
         return <Navigate to={test} replace />;
     }
 
