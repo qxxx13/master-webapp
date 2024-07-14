@@ -25,7 +25,7 @@ export const AppRouter = () => {
 
     useEffect(() => {
         setCurrentUser(JSON.parse(localStorage.getItem('user') || '{}'));
-        setUrl(`/${Telegram.WebApp.initDataUnsafe.start_param}`);
+        Telegram.WebApp.initDataUnsafe.start_param && setUrl(`/${Telegram.WebApp.initDataUnsafe.start_param}`);
     }, []);
 
     if (url !== '') {
