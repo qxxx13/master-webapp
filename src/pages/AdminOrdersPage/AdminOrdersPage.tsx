@@ -24,7 +24,7 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
                 <Typography variant="h5" sx={{ textAlign: 'center' }}>
                     Заявки
                 </Typography>
-                <MainButton text="Закрыть все заявки" onClick={goToCreateNewOrderPage} />
+                <MainButton text="Создать заявку" onClick={goToCreateNewOrderPage} />
                 {/* <TextField label="Поиск по номеру" />
                 <Button variant="outlined">Поиск</Button> */}
             </Stack>
