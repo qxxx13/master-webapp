@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { UserType } from '../../types/UserType';
 import { OrdersList } from './OrdersList/OrdersList';
+import { MainButton } from '@vkruglikov/react-telegram-web-app';
 
 export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
@@ -19,13 +20,11 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
 
     return (
         <>
-            <Stack sx={{ p: 2, gap: 1, position: 'absolute', width: '100%', top: 0 }}>
-                <Typography variant="h4" sx={{ textAlign: 'center' }}>
+            <Stack sx={{ p: 2 }}>
+                <Typography variant="h5" sx={{ textAlign: 'center' }}>
                     Заявки
                 </Typography>
-                <Button variant="outlined" onClick={goToCreateNewOrderPage}>
-                    Создать заявку
-                </Button>
+                <MainButton text="Закрыть все заявки" onClick={goToCreateNewOrderPage} />
                 {/* <TextField label="Поиск по номеру" />
                 <Button variant="outlined">Поиск</Button> */}
             </Stack>
