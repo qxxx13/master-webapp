@@ -21,16 +21,18 @@ import { ProtectedRoute } from './ProtectedRoute';
 export const AppRouter = () => {
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState<UserType | Record<string, unknown>>({});
-    const [url, setUrl] = useState('/');
+    const [url, setUrl] = useState('');
 
     useEffect(() => {
         setCurrentUser(JSON.parse(localStorage.getItem('user') || '{}'));
-        Telegram.WebApp.initDataUnsafe.start_param && setUrl(`/${Telegram.WebApp.initDataUnsafe.start_param}`);
+        Telegram.WebApp.initDataUnsafe.start_param
+            ? setUrl(`/${Telegram.WebApp.initDataUnsafe.start_param}`)
+            : setUrl('/');
     }, []);
 
     if (url !== '') {
         navigate(url);
-        setUrl('/');
+        setUrl('');
     }
 
     return (
