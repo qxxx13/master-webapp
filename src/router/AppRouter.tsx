@@ -19,6 +19,7 @@ import { UserType } from '../types/UserType';
 import { ProtectedRoute } from './ProtectedRoute';
 
 export const AppRouter = () => {
+    const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState<UserType | Record<string, unknown>>({});
 
     useEffect(() => {
@@ -30,7 +31,7 @@ export const AppRouter = () => {
     const test = `/${Telegram.WebApp.initDataUnsafe.start_param}`;
 
     if (Telegram.WebApp.initDataUnsafe.start_param) {
-        return <Navigate to={test} replace />;
+        navigate(test);
     }
 
     return (
