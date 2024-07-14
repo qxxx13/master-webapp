@@ -21,17 +21,16 @@ import { ProtectedRoute } from './ProtectedRoute';
 export const AppRouter = () => {
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState<UserType | Record<string, unknown>>({});
-    const [isRedirected, setIsRedirected] = useState(false);
+    const [url, setUrl] = useState('');
 
     useEffect(() => {
         setCurrentUser(JSON.parse(localStorage.getItem('user') || '{}'));
+        setUrl(`/${Telegram.WebApp.initDataUnsafe.start_param}`);
     }, []);
 
-    const url = `/${Telegram.WebApp.initDataUnsafe.start_param}`;
-
-    if (Telegram.WebApp.initDataUnsafe.start_param && isRedirected !== true) {
+    if (url !== '') {
         navigate(url);
-        setIsRedirected(true);
+        setUrl('');
     }
 
     return (
