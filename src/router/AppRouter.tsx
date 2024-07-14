@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 
 import { AdminOrdersPage } from '../pages/AdminOrdersPage/AdminOrdersPage';
 import { AdminPaymentOrderPage } from '../pages/AdminPaymentOrderPage/AdminPaymentOrderPage';
@@ -24,6 +24,14 @@ export const AppRouter = () => {
     useEffect(() => {
         setCurrentUser(JSON.parse(localStorage.getItem('user') || '{}'));
     }, []);
+
+    console.log(Telegram.WebApp.initDataUnsafe.start_param);
+
+    const test = `/${Telegram.WebApp.initDataUnsafe.start_param}`;
+
+    if (!!Telegram.WebApp.initDataUnsafe.start_param) {
+        return <Navigate to={test} replace />;
+    }
 
     return (
         <Routes>
