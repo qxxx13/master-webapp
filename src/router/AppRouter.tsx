@@ -21,7 +21,7 @@ import { ProtectedRoute } from './ProtectedRoute';
 export const AppRouter = () => {
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState<UserType | Record<string, unknown>>({});
-    const [url, setUrl] = useState('');
+    const [url, setUrl] = useState('/');
 
     useEffect(() => {
         setCurrentUser(JSON.parse(localStorage.getItem('user') || '{}'));
@@ -30,7 +30,7 @@ export const AppRouter = () => {
 
     if (url !== '') {
         navigate(url);
-        setUrl('');
+        setUrl('/');
     }
 
     return (
