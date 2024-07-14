@@ -1,10 +1,10 @@
 import { Button, Stack, TextField, Typography } from '@mui/material';
+import { MainButton } from '@vkruglikov/react-telegram-web-app';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { UserType } from '../../types/UserType';
 import { OrdersList } from './OrdersList/OrdersList';
-import { MainButton } from '@vkruglikov/react-telegram-web-app';
 
 export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

@@ -3,9 +3,9 @@ import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 
 import { OrderType } from '../../types/OrderType';
+import { UserType } from '../../types/UserType';
 import { StatusChip } from '../StatusChip/StatusChip';
 import { bgHandler } from './bgHandler';
-import { UserType } from '../../types/UserType';
 
 export const OrderCard: React.FC<{ order: OrderType; user?: UserType }> = ({ order, user }) => {
     const navigate = useNavigate();

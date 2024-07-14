@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { OrderCard } from '../../../components/OrderCard/OrderCard';
+import { UserType } from '../../../types/UserType';
 import { $allOrdersGetStatus, fetchAllOrdersFx } from '../model/ordersStore';
 import { $usersGetStatus, fetchUsersFx } from '../model/usersStore';
-import { UserType } from '../../../types/UserType';
 
 export const OrdersList: React.FC<{ currentPage: number }> = ({ currentPage }) => {
     const [hasMore, setHasMore] = useState(true);
