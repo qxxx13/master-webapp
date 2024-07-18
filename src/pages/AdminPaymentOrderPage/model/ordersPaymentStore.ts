@@ -1,8 +1,8 @@
+import { Dayjs } from 'dayjs';
 import { combine, createEffect, createStore, restore } from 'effector';
 
 import { GetOrdersType } from '../../../types/OrderType';
 import { fetchAllOrders } from '../api/adminPaymentPageApi';
-import { Dayjs } from 'dayjs';
 
 export const $ordersPaymentStore = createStore<GetOrdersType>({ meta: {} as GetOrdersType['meta'], data: [] });
 
