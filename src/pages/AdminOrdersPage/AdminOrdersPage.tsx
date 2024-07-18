@@ -1,3 +1,4 @@
+import MenuIcon from '@mui/icons-material/Menu';
 import {
     CircularProgress,
     Drawer,
@@ -10,15 +11,14 @@ import {
     Typography,
 } from '@mui/material';
 import { MainButton } from '@vkruglikov/react-telegram-web-app';
+import { useUnit } from 'effector-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import MenuIcon from '@mui/icons-material/Menu';
 
-import { RoleEnum, UserType } from '../../types/UserType';
-import { OrdersList } from './OrdersList/OrdersList';
-import { $usersGetStatus, fetchUsersFx } from './model/usersStore';
-import { useUnit } from 'effector-react';
 import { OrdersSortForm } from '../../components/OrdersSortForm/OrdersSortForm';
+import { RoleEnum, UserType } from '../../types/UserType';
+import { $usersGetStatus, fetchUsersFx } from './model/usersStore';
+import { OrdersList } from './OrdersList/OrdersList';
 
 export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

@@ -5,11 +5,11 @@ import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { EditOrderForm } from '../../components/EditOrderForm/EditOrderForm';
+import { $updateOrderStore } from '../../components/EditOrderForm/model/setUpdateOrderStore';
 import { OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { $editOrderStoreGetStatus, fetchOrderFx } from './model/editOrderStore';
 import { $editOrderUsersStoreGetStatus, fetchUsersFx } from './model/editOrderUsersStore';
-import { $updateOrderStore } from '../../components/EditOrderForm/model/setUpdateOrderStore';
 
 export const EditOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

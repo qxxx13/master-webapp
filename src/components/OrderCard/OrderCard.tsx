@@ -2,12 +2,12 @@ import { Button, Card, CardActionArea, CardContent, Chip, Stack, Typography } fr
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 
+import { deliveredOrder } from '../../pages/OrderDescPage/api/workOrderApi';
+import { setUpdate } from '../../pages/OrderDescPage/model/setUpdateOrderStore';
 import { OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { StatusChip } from '../StatusChip/StatusChip';
 import { bgHandler } from './bgHandler';
-import { deliveredOrder } from '../../pages/OrderDescPage/api/workOrderApi';
-import { setUpdate } from '../../pages/OrderDescPage/model/setUpdateOrderStore';
 
 export const OrderCard: React.FC<{
     order: OrderType;

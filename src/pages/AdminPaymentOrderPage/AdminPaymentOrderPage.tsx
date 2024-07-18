@@ -116,7 +116,7 @@ export const AdminPaymentOrderPage: React.FC<{ currentUser: UserType }> = ({ cur
                             <Button variant="outlined" color="warning" onClick={handleCloseDialog}>
                                 Нет
                             </Button>
-                            <Button variant="outlined" color="success" autoFocus onClick={closeAllOrders}>
+                            <Button variant="outlined" color="success" onClick={closeAllOrders}>
                                 Да
                             </Button>
                         </DialogActions>
