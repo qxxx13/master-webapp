@@ -2,12 +2,13 @@ import { combine, createEffect, createStore, restore } from 'effector';
 
 import { GetOrdersType } from '../../../types/OrderType';
 import { fetchAllOrders } from '../api/adminPaymentPageApi';
+import { Dayjs } from 'dayjs';
 
 export const $ordersPaymentStore = createStore<GetOrdersType>({ meta: {} as GetOrdersType['meta'], data: [] });
 
-export const fetchOrdersFx = createEffect<{ userId: number }, GetOrdersType>();
+export const fetchOrdersFx = createEffect<{ userId: number; ordersDate: Dayjs | null }, GetOrdersType>();
 
-fetchOrdersFx.use((params) => fetchAllOrders(String(params.userId)));
+fetchOrdersFx.use((params) => fetchAllOrders(String(params.userId), params.ordersDate?.format('YYYY-MM-DD')));
 
 $ordersPaymentStore.on(fetchOrdersFx.doneData, (_, orders) => orders);
 

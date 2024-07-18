@@ -22,12 +22,17 @@ import { deliveredOrder } from '../OrderDescPage/api/workOrderApi';
 import { $updateOrderStore, setUpdate } from '../OrderDescPage/model/setUpdateOrderStore';
 import { $ordersPaymentStoreGetStatus, fetchOrdersFx } from './model/ordersPaymentStore';
 import { $usersPaymentStoreGetStatus, fetchAllUsersFx } from './model/usersPaymentStore';
+import { Dayjs } from 'dayjs';
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 
 export const AdminPaymentOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const [selectedUserId, setSelectedUserId] = useState(
         localStorage.getItem('selectedUserId') || String(currentUser.Id),
     );
     const [showDialog, setShowDialog] = useState(false);
+    const [ordersDate, setOrdersDate] = useState<Dayjs | null>(null);
 
     const update = useUnit($updateOrderStore);
 
@@ -83,10 +88,10 @@ export const AdminPaymentOrderPage: React.FC<{ currentUser: UserType }> = ({ cur
     ));
 
     useEffect(() => {
-        fetchOrdersFx({ userId: +selectedUserId });
+        fetchOrdersFx({ userId: +selectedUserId, ordersDate: ordersDate });
         fetchAllUsersFx();
         Telegram.WebApp.ready();
-    }, [update, selectedUserId]);
+    }, [update, selectedUserId, ordersDate]);
 
     return (
         <>
@@ -100,6 +105,24 @@ export const AdminPaymentOrderPage: React.FC<{ currentUser: UserType }> = ({ cur
                     <Select value={selectedUserId} onChange={handleChange} sx={{ height: 45 }}>
                         {menuItems}
                     </Select>
+                    <Stack flexDirection="row" alignItems="center" justifyContent="space-between">
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DemoContainer components={['DatePicker']} sx={{ width: '75%' }}>
+                                <DatePicker
+                                    label="Дата заявок"
+                                    value={ordersDate}
+                                    onChange={(date) => setOrdersDate(date)}
+                                />
+                            </DemoContainer>
+                        </LocalizationProvider>
+                        <Button
+                            variant="contained"
+                            sx={{ height: 54, width: 84, mt: 1 }}
+                            onClick={() => setOrdersDate(null)}
+                        >
+                            Все
+                        </Button>
+                    </Stack>
 
                     <Stack alignItems="center">
                         <Stack gap={1} sx={{ width: '100%', p: 1, mb: 6 }}>
