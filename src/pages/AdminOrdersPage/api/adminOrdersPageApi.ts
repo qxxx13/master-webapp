@@ -7,9 +7,10 @@ export const fetchAllOrders = async (
     perPage: number,
     status: OrderStatusEnum | 'all',
     phoneNumber: string | '',
+    masterId: string | 'all',
 ): Promise<GetOrdersType> => {
     const orders = await instance
-        .get(`orders?page=${page}&perPage=${perPage}&status=${status}&searchValue=${phoneNumber}`)
+        .get(`orders?page=${page}&perPage=${perPage}&status=${status}&searchValue=${phoneNumber}&masterId=${masterId}`)
         .then((res) => res.data);
 
     return orders;

@@ -5,14 +5,12 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { OrderCard } from '../../../components/OrderCard/OrderCard';
 import { UserType } from '../../../types/UserType';
-import { $allOrdersGetStatus, fetchAllOrdersFx } from '../model/ordersStore';
-import { $usersGetStatus, fetchUsersFx } from '../model/usersStore';
+import { $allOrdersGetStatus, clearOrdersStore, fetchAllOrdersFx } from '../model/ordersStore';
 
-export const OrdersList: React.FC<{ currentPage: number }> = ({ currentPage }) => {
+export const OrdersList: React.FC<{ masterId: string | 'all'; users: UserType[] }> = ({ masterId, users }) => {
     const [hasMore, setHasMore] = useState(true);
     const [index, setIndex] = useState(2);
-    const { data, error, loading } = useUnit($allOrdersGetStatus);
-    const { data: users, loading: usersLoading } = useUnit($usersGetStatus);
+    const { data } = useUnit($allOrdersGetStatus);
 
     const allOrdersList = data.data.map((order, index) => {
         const user = users.find((user) => user.Id === order.MasterId);
@@ -20,16 +18,17 @@ export const OrdersList: React.FC<{ currentPage: number }> = ({ currentPage }) =
     });
 
     const fetchMore = () => {
-        index <= data.meta.lastPage && fetchAllOrdersFx({ page: index, perPage: 10, phoneNumber: '', status: 'all' });
+        index <= data.meta.lastPage &&
+            fetchAllOrdersFx({ page: index, perPage: 10, phoneNumber: '', status: 'all', masterId: masterId });
 
         index <= data.meta.lastPage && setIndex((prevIndex) => prevIndex + 1);
         index <= data.meta.lastPage ? setHasMore(true) : setHasMore(false);
     };
 
     useEffect(() => {
-        fetchUsersFx();
-        fetchAllOrdersFx({ page: 1, perPage: 10, phoneNumber: '', status: 'all' });
-    }, []);
+        clearOrdersStore();
+        fetchAllOrdersFx({ page: 1, perPage: 10, phoneNumber: '', status: 'all', masterId: masterId });
+    }, [masterId]);
 
     return (
         <Stack alignItems="center" sx={{ mb: '60px' }}>

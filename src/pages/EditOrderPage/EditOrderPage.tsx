@@ -7,9 +7,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { EditOrderForm } from '../../components/EditOrderForm/EditOrderForm';
 import { OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
-import { $updateOrderStore } from '../OrderDescPage/model/setUpdateOrderStore';
 import { $editOrderStoreGetStatus, fetchOrderFx } from './model/editOrderStore';
 import { $editOrderUsersStoreGetStatus, fetchUsersFx } from './model/editOrderUsersStore';
+import { $updateOrderStore } from '../../components/EditOrderForm/model/setUpdateOrderStore';
 
 export const EditOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
@@ -34,9 +34,6 @@ export const EditOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser
 
     return (
         <Stack>
-            {/* <IconButton sx={{ position: 'absolute', left: 8, top: 11 }} onClick={goBack}>
-                <ArrowBackIosNewIcon />
-            </IconButton> */}
             <Typography variant="h6" sx={{ textAlign: 'center', p: 2 }}>
                 Редактирование заявки №{id}
             </Typography>
