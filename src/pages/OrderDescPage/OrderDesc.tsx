@@ -5,6 +5,14 @@ import { StatusChip } from '../../components/StatusChip/StatusChip';
 import { OrderType } from '../../types/OrderType';
 
 export const OrderDesc: React.FC<{ order: OrderType }> = ({ order }) => {
+    const totalFormat = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(order.Total);
+    const expensesFormat = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(
+        order.Expenses,
+    );
+    const companyShareFormat =
+        order.CompanyShare !== 0 &&
+        new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(+String(order.CompanyShare));
+
     return (
         <Stack sx={{ p: 2 }}>
             <Typography sx={{ mt: 1, mb: 1 }} variant="h5">
@@ -39,10 +47,10 @@ export const OrderDesc: React.FC<{ order: OrderType }> = ({ order }) => {
 
             {order.CompanyShare !== 0 && (
                 <>
-                    <Typography variant="h6">Забрал: {order.Total}₽</Typography>
-                    <Typography variant="h6">Расход: {order.Expenses}₽</Typography>
+                    <Typography variant="h6">Забрал: {totalFormat}</Typography>
+                    <Typography variant="h6">Расход: {expensesFormat}</Typography>
                     <Typography variant="h5" sx={{ textAlign: 'center' }}>
-                        К сдаче: {order.CompanyShare}₽
+                        К сдаче: {companyShareFormat}
                     </Typography>
                 </>
             )}

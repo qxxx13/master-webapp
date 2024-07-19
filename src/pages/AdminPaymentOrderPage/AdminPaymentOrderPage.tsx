@@ -57,6 +57,11 @@ export const AdminPaymentOrderPage: React.FC<{ currentUser: UserType }> = ({ cur
         totalCompanyShare = totalCompanyShare + (order.CompanyShare as number);
     });
 
+    const totalCompanyShareFormat = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(
+        totalCompanyShare,
+    );
+    const totalPriceFormat = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(totalPrice);
+
     const handleChange = (event: SelectChangeEvent) => {
         setSelectedUserId(event.target.value);
         localStorage.setItem('selectedUserId', event.target.value);
@@ -98,8 +103,8 @@ export const AdminPaymentOrderPage: React.FC<{ currentUser: UserType }> = ({ cur
             {!loading ? (
                 <Stack sx={{ p: 2, textAlign: 'center' }}>
                     <Typography variant="h5">Сдача</Typography>
-                    <Typography variant="h6">Сумма к сдаче: {totalCompanyShare}₽</Typography>
-                    <Typography variant="h6">Общая касса: {totalPrice}₽</Typography>
+                    <Typography variant="h6">Сумма к сдаче: {totalCompanyShareFormat}</Typography>
+                    <Typography variant="h6">Общая касса: {totalPriceFormat}</Typography>
                     <MainButton text="Закрыть все заявки" onClick={handleShowDialog} />
 
                     <Select value={selectedUserId} onChange={handleChange} sx={{ height: 45 }}>
