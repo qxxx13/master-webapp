@@ -5,3 +5,21 @@ export const fetchUserById = (userId: string) => {
 
     return user;
 };
+
+export const fetchAllOrdersPerMonth = (userId: number, startDate: string, endDate: string) => {
+    const ordersPerMonth = instance
+        .get(
+            `orders/?page=${1}&perPage=${200}&masterId=${userId}&startDate=${startDate}&endDate=${endDate}&status=fulfilled`,
+        )
+        .then((res) => res.data);
+
+    return ordersPerMonth;
+};
+
+export const fetchAllOrders = (userId: number) => {
+    const allOrders = instance
+        .get(`orders/?page=${1}&perPage=${500}&masterId=${userId}&status=fulfilled`)
+        .then((res) => res.data);
+
+    return allOrders;
+};

@@ -63,7 +63,7 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
                 <IconButton sx={{ position: 'absolute', top: 8, left: 8 }} onClick={toggleDrawer(true)}>
                     <MenuIcon />
                 </IconButton>
-                <Drawer open={openSortMenu} onClose={toggleDrawer(false)}>
+                <Drawer open={openSortMenu} onClose={toggleDrawer(false)} elevation={1}>
                     <OrdersSortForm />
                 </Drawer>
                 <Typography variant="h5" sx={{ textAlign: 'center' }}>

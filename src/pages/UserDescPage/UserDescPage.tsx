@@ -7,15 +7,39 @@ import { StatusChip } from '../../components/StatusChip/StatusChip';
 import { OrderStatusEnum } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { $userDescPageStoreGetStatus, fetchUserByIdFx } from './model/userDescPageStore';
+import { $userAllOrdersStoreGetStatus, fetchAllUserOrdersFx } from './model/userAllOrdersStore';
+import { $userOrdersPerMonthStoreGetStatus, fetchUserOrdersPerMonthFx } from './model/userOrdersPerMonthStore';
+import moment from 'moment';
+import { handleTotalSalary } from '../../components/SalaryCharts/handleTotalSalary';
 
 export const UserDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
     const id = useParams().id;
 
     const { data, loading } = useUnit($userDescPageStoreGetStatus);
+    const { data: ordersAllTime, loading: ordersAllTimeLoading } = useUnit($userAllOrdersStoreGetStatus);
+    const { data: ordersPerMonth } = useUnit($userOrdersPerMonthStoreGetStatus);
+
+    const salaryForMonth = handleTotalSalary(ordersPerMonth.data);
+    const salaryForAllTime = handleTotalSalary(ordersAllTime.data);
+
+    const averageBill = Math.round(salaryForMonth / ordersPerMonth.data.length);
+
+    const salaryForMonthFormat = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(
+        salaryForMonth,
+    );
+    const salaryForAllTimeFormat = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(
+        salaryForAllTime,
+    );
+    const averageBillFormat = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(
+        averageBill,
+    );
 
     const goBack = () => navigate(-1);
     const goToEditUser = () => navigate(`/editUser/${id}`);
+
+    const firstDay = moment().startOf('month').format('YYYY-MM-DD'); // Отмечаем начало месяца!
+    const lastDay = moment().endOf('month').format('YYYY-MM-DD');
 
     const BackBTN = Telegram.WebApp.BackButton;
     BackBTN.show();
@@ -24,11 +48,13 @@ export const UserDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser 
     useEffect(() => {
         Telegram.WebApp.ready();
         fetchUserByIdFx({ userId: String(id) });
+        fetchAllUserOrdersFx({ userId: +String(id) });
+        fetchUserOrdersPerMonthFx({ userId: +String(id), startDate: firstDay, endDate: lastDay });
     }, []);
 
     return (
         <>
-            {!loading ? (
+            {!loading && !ordersAllTimeLoading ? (
                 <Stack sx={{ p: 2 }}>
                     <Typography variant="h5" sx={{ mb: 1 }}>
                         Пользователь: {data.UserName as string}
@@ -41,6 +67,17 @@ export const UserDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser 
                     <Typography variant="h6">Пароль: {data.Password as string}</Typography>
                     <Divider />
                     <Typography variant="h6">Процент: {data.InterestRate as string}%</Typography>
+                    <Divider />
+                    <Typography variant="h6">ЗП за месяц: {salaryForMonthFormat}</Typography>
+                    <Divider />
+                    <Typography variant="h6">ЗП за все время: {salaryForAllTimeFormat}</Typography>
+                    <Divider />
+                    <Typography variant="h6">Заявок за месяц: {ordersPerMonth.data.length}</Typography>
+                    <Divider />
+                    <Typography variant="h6">Заявок за все время: {ordersAllTime.data.length}</Typography>
+                    <Divider />
+                    <Typography variant="h6">Средний чек за месяц: {averageBillFormat}</Typography>
+
                     <Box sx={{ position: 'absolute', bottom: 70, width: '100%', left: 0, p: 2 }}>
                         <Button variant="outlined" sx={{ width: '100%' }} onClick={goToEditUser}>
                             Редактировать

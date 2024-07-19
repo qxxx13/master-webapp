@@ -10,7 +10,7 @@ import { EditOrderDatePickerForForm } from './EditOrderDatePickerForForm/EditOrd
 import { MasterSelectField, OrderTypeSelectField, TextFields, VisitSelectField } from './FieldsForForm';
 import { editOrderFx } from './model/editOrderFormStore';
 import { initialValues } from './model/initialValues';
-import { setUpdate } from './model/setUpdateOrderStore';
+import { setUpdateOrderStore } from './model/setUpdateOrderStore';
 
 export const EditOrderForm: React.FC<{ users: UserType[]; order: OrderType }> = ({ order, users }) => {
     const { handleSubmit, control } = useForm<OrderType>({
@@ -19,19 +19,19 @@ export const EditOrderForm: React.FC<{ users: UserType[]; order: OrderType }> = 
 
     const handleSave: SubmitHandler<OrderType> = (data) => {
         editOrderFx(data);
-        setUpdate();
+        setUpdateOrderStore();
     };
 
     const handleSendToMaster: SubmitHandler<OrderType> = (data) => {
         data.Status = OrderStatusEnum.pending;
         sendToMaster(data);
-        setUpdate();
+        setUpdateOrderStore();
     };
 
     const handleTransfer: SubmitHandler<OrderType> = (data) => {
         data.Status = OrderStatusEnum.transfer;
         transferOrder(data);
-        setUpdate();
+        setUpdateOrderStore();
     };
 
     const textFields = TextFields(control, initialValues(order));

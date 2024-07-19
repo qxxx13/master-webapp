@@ -9,7 +9,7 @@ import { OrderStatusEnum } from '../../types/OrderType';
 const MenuProps = {
     PaperProps: {
         style: {
-            height: 200,
+            height: 300,
             overflow: 'scroll',
         },
     },
@@ -18,6 +18,8 @@ const MenuProps = {
 enum SearchByEnum {
     phoneNumber = 'phoneNumber',
     orderId = 'orderId',
+    city = 'city',
+    address = 'address',
 }
 
 export const OrdersSortForm = () => {
@@ -54,17 +56,14 @@ export const OrdersSortForm = () => {
                     {StatusMenuItems}
                 </Select>
             </FormControl>
-            <Typography variant="body1">Диапазон заявок по дате</Typography>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={['DatePicker']}>
-                    <DatePicker label="Начало" />
+                    <DatePicker label="Дата заявок" />
                 </DemoContainer>
             </LocalizationProvider>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={['DatePicker']}>
-                    <DatePicker label="Конец" />
-                </DemoContainer>
-            </LocalizationProvider>
+            <Button variant="contained" color="secondary">
+                Сбросить дату
+            </Button>
             <Button variant="contained" onClick={handleClick}>
                 Применить
             </Button>

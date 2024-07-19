@@ -14,6 +14,10 @@ type SalaryChartsProps = {
 export const SalaryCharts: React.FC<SalaryChartsProps> = ({ orders }) => {
     const totalSalaryPerMonth = handleTotalSalary(orders);
 
+    const totalSalaryPerMonthFormat = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(
+        totalSalaryPerMonth,
+    );
+
     /* const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
     const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
 
@@ -30,7 +34,7 @@ export const SalaryCharts: React.FC<SalaryChartsProps> = ({ orders }) => {
     return (
         <>
             <Stack sx={{ p: 2 }}>
-                <Typography variant="h6">ЗП за месяц: {totalSalaryPerMonth}₽</Typography>
+                <Typography variant="h6">ЗП за месяц: {totalSalaryPerMonthFormat}</Typography>
                 <Typography variant="h6">Отработано заявок: {orders.length}</Typography>
             </Stack>
             {/* <LineChart

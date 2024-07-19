@@ -15,7 +15,7 @@ import {
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { MainButton, useShowPopup } from '@vkruglikov/react-telegram-web-app';
+import { MainButton } from '@vkruglikov/react-telegram-web-app';
 import { Dayjs } from 'dayjs';
 import { useUnit } from 'effector-react';
 import { useEffect, useState } from 'react';

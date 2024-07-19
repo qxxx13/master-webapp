@@ -2,6 +2,6 @@ import { createEvent, createStore } from 'effector';
 
 export const $updateOrderStore = createStore(0);
 
-export const setUpdate = createEvent();
+export const setUpdateOrderStore = createEvent();
 
-$updateOrderStore.on(setUpdate, (state) => state + 1);
+$updateOrderStore.on(setUpdateOrderStore, (state) => state + 1);
