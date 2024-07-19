@@ -2,6 +2,7 @@ import { Button, Stack, TextField, Typography } from '@mui/material';
 import { MainButton } from '@vkruglikov/react-telegram-web-app';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { loginByTelegramId, loginByUsername } from './api/api';
 
 export const LoginPage = () => {
