@@ -7,10 +7,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { SalaryCharts } from '../../components/SalaryCharts/SalaryCharts';
 import { UserType } from '../../types/UserType';
-import { $ordersPerMonthGetStatus, fetchOrdersPerMonthFx } from './model/orderPerMonthStore';
-import { $userStoreGetStatus, fetchUserByIdFx } from './model/userStore';
 import { postAvatar } from './api/profileApi';
+import { $ordersPerMonthGetStatus, fetchOrdersPerMonthFx } from './model/orderPerMonthStore';
 import { $updateProfilePageStore, setUpdateProfilePage } from './model/updateProfilePageStore';
+import { $userStoreGetStatus, fetchUserByIdFx } from './model/userStore';
 
 export const ProfilePage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

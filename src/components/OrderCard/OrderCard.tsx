@@ -14,17 +14,17 @@ import {
     Typography,
 } from '@mui/material';
 import moment from 'moment';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { instance } from '../../config/apiConfig/apiConfig';
 import { deliveredOrder } from '../../pages/OrderDescPage/api/workOrderApi';
 import { setUpdate } from '../../pages/OrderDescPage/model/setUpdateOrderStore';
 import { OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { StatusChip } from '../StatusChip/StatusChip';
-import { bgHandler } from './bgHandler';
-import { useState } from 'react';
-import { instance } from '../../config/apiConfig/apiConfig';
 import { UserChip } from '../UserChip/UserChip';
+import { bgHandler } from './bgHandler';
 
 export const OrderCard: React.FC<{
     order: OrderType;

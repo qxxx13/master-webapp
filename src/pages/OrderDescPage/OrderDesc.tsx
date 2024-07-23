@@ -1,13 +1,13 @@
 import { CircularProgress, Divider, Link, Stack, Typography } from '@mui/material';
+import { useUnit } from 'effector-react';
 import moment from 'moment';
+import { useEffect } from 'react';
 
 import { StatusChip } from '../../components/StatusChip/StatusChip';
+import { UserChip } from '../../components/UserChip/UserChip';
 import { OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
-import { UserChip } from '../../components/UserChip/UserChip';
-import { useEffect } from 'react';
 import { $dispStoreGetStatus, fetchDispByIdFx } from './model/dispStore';
-import { useUnit } from 'effector-react';
 
 type OrderDescProps = {
     order: OrderType;

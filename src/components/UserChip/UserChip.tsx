@@ -1,4 +1,5 @@
 import { Avatar, Chip } from '@mui/material';
+
 import { instance } from '../../config/apiConfig/apiConfig';
 import { UserType } from '../../types/UserType';
 

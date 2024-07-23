@@ -19,12 +19,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { OrderStatusEnum, OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { AdminButtons } from './AdminButtons';
+import { $dispStoreGetStatus, fetchDispByIdFx } from './model/dispStore';
 import { $ordersGetStatus, fetchOrderByIdFx } from './model/orderDescStore';
 import { $updateOrderStore } from './model/setUpdateOrderStore';
 import { $userGetStatus } from './model/userStore';
 import { OrderDesc } from './OrderDesc';
 import { OrderWorksButton } from './OrderWorkButtons';
-import { $dispStoreGetStatus, fetchDispByIdFx } from './model/dispStore';
 
 export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

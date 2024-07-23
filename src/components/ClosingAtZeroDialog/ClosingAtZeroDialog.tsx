@@ -11,10 +11,11 @@ import {
     Stack,
 } from '@mui/material';
 import { useState } from 'react';
-import { translate } from '../../common/translate/translate';
-import { closeOrder, closingOrderAtZero } from './api/closingAtZeroDialogApi';
-import { OrderStatusEnum } from '../../types/OrderType';
 import { useNavigate } from 'react-router-dom';
+
+import { translate } from '../../common/translate/translate';
+import { OrderStatusEnum } from '../../types/OrderType';
+import { closeOrder, closingOrderAtZero } from './api/closingAtZeroDialogApi';
 
 type ClosingAtZeroDialogProps = {
     orderId: string;

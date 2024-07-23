@@ -1,7 +1,8 @@
 import { combine, createEffect, createStore, restore } from 'effector';
+
+import { instance } from '../../../config/apiConfig/apiConfig';
 import { UserType } from '../../../types/UserType';
 import { getUserById } from '../api/profileApi';
-import { instance } from '../../../config/apiConfig/apiConfig';
 
 export const $userStore = createStore<UserType | Record<string, unknown>>({});
 
