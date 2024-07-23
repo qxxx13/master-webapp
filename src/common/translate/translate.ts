@@ -70,6 +70,7 @@ const dictionary: Record<string, string> = {
     awaitingPayment: 'Ожидает сдачи', // ожидает оплаты
     all: 'Все',
     debt: 'Долг',
+    missedCall: 'Недозвон',
 
     //? Статусы пользователя
     waitForWork: 'Свободен',

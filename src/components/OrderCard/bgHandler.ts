@@ -29,6 +29,15 @@ export const bgHandler = (status: OrderStatusEnum) => {
         case 'masterWentForSparePart': {
             return '#b38f2e';
         }
+        case 'missedCall': {
+            return '#b3372e';
+        }
+        case 'rejectedByClient': {
+            return '#b3372e';
+        }
+        case 'rejectedByMaster': {
+            return '#b3372e';
+        }
         default: {
             return '#8774e1';
         }

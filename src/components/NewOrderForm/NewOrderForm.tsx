@@ -7,21 +7,29 @@ import { translate } from '../../common/translate/translate';
 import { NewOrderType, OrderStatusEnum } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { DatePickerForForm } from './DatePickerForForm/DatePickerForForm';
-import { MasterSelectField, OrderTypeSelectField, TextFields, VisitSelectField } from './FieldsForForm';
+import {
+    MasterSelectField,
+    OrderTypeSelectField,
+    ReferralSelectField,
+    TextFields,
+    VisitSelectField,
+} from './FieldsForForm';
 import { initialValues } from './model/initialValues';
 import { addNewOrderFx } from './model/newOrderFormStore';
 
-export const NewOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
+export const NewOrderForm: React.FC<{ users: UserType[]; currentUser: UserType }> = ({ users, currentUser }) => {
     const { handleSubmit, reset, control } = useForm<NewOrderType>({
         defaultValues: initialValues,
     });
 
     const handleSendToMaster: SubmitHandler<NewOrderType> = (data) => {
+        data.DispId = currentUser.Id;
         addNewOrderFx(data);
         reset();
     };
 
     const handleSendSendToDistribution: SubmitHandler<NewOrderType> = (data) => {
+        data.DispId = currentUser.Id;
         data.Status = OrderStatusEnum.distribution;
         addNewOrderFx(data);
         reset();
@@ -52,6 +60,7 @@ export const NewOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
                 {VisitSelectField(control)}
                 {OrderTypeSelectField(control)}
                 {MasterSelectField(control, users)}
+                {ReferralSelectField(control, users)}
 
                 <Button
                     variant="outlined"

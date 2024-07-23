@@ -1,4 +1,18 @@
-import { Button, Card, CardActionArea, CardContent, Chip, Stack, Typography } from '@mui/material';
+import {
+    Avatar,
+    Button,
+    Card,
+    CardActionArea,
+    CardContent,
+    Chip,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    Stack,
+    Typography,
+} from '@mui/material';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,6 +22,9 @@ import { OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { StatusChip } from '../StatusChip/StatusChip';
 import { bgHandler } from './bgHandler';
+import { useState } from 'react';
+import { instance } from '../../config/apiConfig/apiConfig';
+import { UserChip } from '../UserChip/UserChip';
 
 export const OrderCard: React.FC<{
     order: OrderType;
@@ -15,6 +32,13 @@ export const OrderCard: React.FC<{
     currentUserRole?: 'admin' | 'disp' | 'master';
 }> = ({ order, user, currentUserRole }) => {
     const navigate = useNavigate();
+    const [showDialog, setShowDialog] = useState(false);
+
+    const toggleShowDialog = (showDialog: boolean) => () => {
+        setShowDialog(showDialog);
+    };
+
+    const avatarUrl = user && user.AvatarId ? `${instance.defaults.baseURL}files/${user.AvatarId}` : '';
 
     const goToOrderDescPage = () => navigate(`/${order.Id}`);
 
@@ -23,6 +47,7 @@ export const OrderCard: React.FC<{
     const handleDelivered = () => {
         deliveredOrder(user!.TelegramChatId, String(order.MessageId), String(order.Id));
         setUpdate();
+        toggleShowDialog(false);
     };
 
     return (
@@ -39,17 +64,32 @@ export const OrderCard: React.FC<{
                         <Stack alignItems="flex-end" gap={1}>
                             <StatusChip status={order.Status} />
                             <Typography variant="body1">{order.Time}</Typography>
-                            {user && <Chip variant="outlined" label={user?.UserName} />}
+                            {user && <UserChip user={user} />}
                         </Stack>
                     </Stack>
                     <Typography variant="body1">{order.Description}</Typography>
                 </CardContent>
             </CardActionArea>
             {currentUserRole === 'admin' && (
-                <Button variant="contained" sx={{ width: '100%' }} color="success" onClick={handleDelivered}>
+                <Button variant="contained" sx={{ width: '100%' }} color="success" onClick={toggleShowDialog(true)}>
                     Закрыть
                 </Button>
             )}
+
+            <Dialog open={showDialog} onClose={toggleShowDialog(false)}>
+                <DialogTitle>Закрыть все заявки</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>Вы уверены, что хотите закрыть заявку №{order.Id}?</DialogContentText>
+                </DialogContent>
+                <DialogActions sx={{ justifyContent: 'space-between', p: 2 }}>
+                    <Button variant="outlined" color="warning" onClick={toggleShowDialog(false)}>
+                        Нет
+                    </Button>
+                    <Button variant="outlined" color="success" onClick={handleDelivered}>
+                        Да
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Card>
     );
 };
@@ -60,6 +100,4 @@ export const OrderCard: React.FC<{
 #128a92
 #b38f2e
 #058d32
-
-
 */

@@ -7,3 +7,23 @@ export const fetchAllOrdersPerMonth = (userId: number, startDate: string, endDat
 
     return ordersPerMonth;
 };
+
+export const getUserById = (userId: number) => {
+    const user = instance.get(`/user/${userId}`).then((res) => res.data);
+
+    return user;
+};
+
+export const postAvatar = (userId: number, avatar: File) => {
+    const post = instance.post(
+        `user/avatar?userId=${userId}`,
+        { file: avatar },
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        },
+    );
+
+    return post;
+};

@@ -3,7 +3,7 @@ import { Control } from 'react-hook-form';
 
 import { translate } from '../../common/translate/translate';
 import { NewOrderType, OrderTypeEnum, OrderVisitEnum } from '../../types/OrderType';
-import { UserType } from '../../types/UserType';
+import { RoleEnum, UserType } from '../../types/UserType';
 import { SelectFieldForForm } from '../SelectFieldForForm/SelectFieldForForm';
 import { TextFieldForForm } from '../TextFieldForForm/TextFieldForForm';
 import { initialValues } from './model/initialValues';
@@ -20,6 +20,7 @@ export const {
     Type,
     Debt,
     MasterSalary,
+    ReferralId,
     ...textFields
 } = initialValues;
 
@@ -40,7 +41,16 @@ export const TypeOptions = Object.values(OrderTypeEnum).map((value, index) => (
     </MenuItem>
 ));
 
-export const MasterOptions = (users: UserType[]) =>
+export const MasterOptions = (users: UserType[]) => {
+    const masters = [...users].filter((user) => user.Role === RoleEnum.master);
+    return masters.map((user, index) => (
+        <MenuItem value={user.Id} key={index}>
+            {user.UserName} ({user.Region})
+        </MenuItem>
+    ));
+};
+
+export const ReferralOptions = (users: UserType[]) =>
     users.map((user, index) => (
         <MenuItem value={user.Id} key={index}>
             {user.UserName} ({user.Region})
@@ -55,4 +65,8 @@ export const MasterSelectField = (control: Control<NewOrderType, unknown>, users
 );
 export const OrderTypeSelectField = (control: Control<NewOrderType, unknown>) => (
     <SelectFieldForForm control={control} name="Type" option={TypeOptions} />
+);
+
+export const ReferralSelectField = (control: Control<NewOrderType, unknown>, users: UserType[]) => (
+    <SelectFieldForForm control={control} name="ReferralId" option={ReferralOptions(users)} required={false} />
 );

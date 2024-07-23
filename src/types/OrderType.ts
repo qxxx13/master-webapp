@@ -11,6 +11,7 @@ export enum OrderStatusEnum {
     debt = 'debt', //Долг
     distribution = 'distribution', // На распределении
     transfer = 'transfer', // Перенос
+    missedCall = 'missedCall', // Недозвон
 }
 
 export enum MasterOrderStatusEnum {
@@ -83,6 +84,9 @@ export type OrderType = {
     ClosingOrderId?: number;
     IsWorking?: IsWorkingOrderEnum;
     Type: OrderTypeEnum;
+    ReferralId?: number;
+    OrderCloserId?: number;
+    DispId?: number;
 };
 
 export type GetOrdersType = {

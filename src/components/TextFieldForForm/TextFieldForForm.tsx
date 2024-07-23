@@ -24,7 +24,7 @@ export const TextFieldForForm = <T extends Control<any, unknown>, U extends stri
                     onChange={(event) => onChange(event.target.value)}
                     placeholder={translate(name)}
                     type={typeof value}
-                    label={name}
+                    label={translate(name)}
                     error={!!error}
                 />
             )}

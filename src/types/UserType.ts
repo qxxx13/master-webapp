@@ -4,6 +4,8 @@ export enum RoleEnum {
     disp = 'disp',
     regional = 'regional',
     promouter = 'promouter',
+    dir = 'dir',
+    fired = 'fired',
 }
 
 export enum UserStatusEnum {
@@ -25,6 +27,8 @@ export type UserType = {
     Status?: UserStatusEnum;
     Region: string;
     TelegramId: string;
+    AvatarId?: number;
+    AvatarUrl?: string;
 };
 
 export type LoginedUserType = {

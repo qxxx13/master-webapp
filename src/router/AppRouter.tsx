@@ -70,7 +70,7 @@ export const AppRouter = () => {
                 path="/closeOrder/:chatId/:messageId/:orderId"
                 element={
                     <ProtectedRoute>
-                        <CloseOrderPage />
+                        <CloseOrderPage currentUser={currentUser as UserType} />
                     </ProtectedRoute>
                 }
             />

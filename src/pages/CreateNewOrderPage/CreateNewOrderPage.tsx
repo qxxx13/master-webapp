@@ -26,13 +26,10 @@ export const CreateNewOrderPage: React.FC<{ currentUser: UserType }> = ({ curren
 
     return (
         <Stack>
-            {/* <IconButton sx={{ position: 'absolute', left: 8, top: 11 }} onClick={goBack}>
-                <ArrowBackIosNewIcon />
-            </IconButton> */}
             <Typography variant="h5" sx={{ textAlign: 'center', p: 2 }}>
                 Создание новой заявки
             </Typography>
-            {!loading ? <NewOrderForm users={data} /> : <CircularProgress />}
+            {!loading ? <NewOrderForm users={data} currentUser={currentUser} /> : <CircularProgress />}
         </Stack>
     );
 };

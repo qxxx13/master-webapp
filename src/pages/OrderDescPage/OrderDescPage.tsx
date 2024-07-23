@@ -24,13 +24,14 @@ import { $updateOrderStore } from './model/setUpdateOrderStore';
 import { $userGetStatus } from './model/userStore';
 import { OrderDesc } from './OrderDesc';
 import { OrderWorksButton } from './OrderWorkButtons';
+import { $dispStoreGetStatus, fetchDispByIdFx } from './model/dispStore';
 
 export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
     const id = useParams().id as string;
 
     const { data: order, error, loading } = useUnit($ordersGetStatus);
-    const { data: user, loading: userLoading } = useUnit($userGetStatus);
+    const { data: master, loading: masterLoading } = useUnit($userGetStatus);
     const update = useUnit($updateOrderStore);
 
     const goBack = () => navigate(-1);
@@ -46,24 +47,11 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
 
     return (
         <>
-            {!loading && Object.keys(order).length !== 0 ? (
+            {!loading && !masterLoading && Object.keys(order).length !== 0 ? (
                 <>
-                    {/* <IconButton onClick={goBack} sx={{ position: 'absolute', left: 2, top: 2 }} size="large">
-                        <ArrowBackIosNewIcon />
-                    </IconButton> */}
-                    {/* <Button
-                        startIcon={<SendIcon />}
-                        variant="outlined"
-                        sx={{ position: 'absolute', top: 10, right: 10 }}
-                    >
-                        <Link href="https://t.me/dirrnd" sx={{ textDecoration: 'none' }}>
-                            Связать с диспом
-                        </Link>
-                    </Button> */}
-
-                    <OrderDesc order={order as OrderType} />
+                    <OrderDesc order={order as OrderType} master={master as UserType} />
                     <OrderWorksButton
-                        chatId={String(user.TelegramChatId)}
+                        chatId={String(master.TelegramChatId)}
                         messageId={String(order.MessageId)}
                         orderId={String(order.Id)}
                         status={order.Status as OrderStatusEnum}
@@ -75,7 +63,7 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
                             </AccordionSummary>
                             <AccordionDetails>
                                 <AdminButtons
-                                    chatId={String(user.TelegramChatId)}
+                                    chatId={String(master.TelegramChatId)}
                                     messageId={String(order.MessageId)}
                                     orderId={String(order.Id)}
                                     status={order.Status as OrderStatusEnum}

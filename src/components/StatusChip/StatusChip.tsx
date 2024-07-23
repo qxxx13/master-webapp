@@ -7,6 +7,7 @@ import DoneIcon from '@mui/icons-material/Done';
 import ElectricCarIcon from '@mui/icons-material/ElectricCar';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import PhoneDisabledIcon from '@mui/icons-material/PhoneDisabled';
 import PaidIcon from '@mui/icons-material/Paid';
 import TransferWithinAStationIcon from '@mui/icons-material/TransferWithinAStation';
 import { Chip } from '@mui/material';
@@ -53,6 +54,9 @@ export const StatusChip: React.FC<{ status: OrderStatusEnum }> = ({ status }) =>
                     }
                     case 'transfer': {
                         return <Chip icon={<TransferWithinAStationIcon />} label="Перенос" />;
+                    }
+                    case 'missedCall': {
+                        return <Chip icon={<PhoneDisabledIcon />} label="Недозвон" />;
                     }
                 }
             })()}

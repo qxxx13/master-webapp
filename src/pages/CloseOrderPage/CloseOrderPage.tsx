@@ -1,4 +1,4 @@
-import { Button, Stack, TextField, Typography } from '@mui/material';
+import { Button, Dialog, Stack, TextField, Typography } from '@mui/material';
 import { useUnit } from 'effector-react';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -7,19 +7,24 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { CloseOrderType } from '../../types/OrderType';
 import { closeOrder, getInterestRate, getMasterId } from './api/CloseOrderApi';
 import { $closeOrderGetStatus, $closeOrderStore } from './model/closeOrderStore';
+import { UserType } from '../../types/UserType';
+import { ClosingAtZeroDialog } from '../../components/ClosingAtZeroDialog/ClosingAtZeroDialog';
 
-export const CloseOrderPage = () => {
+export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
     const params = useParams();
     const [masterId, setMasterId] = useState('');
     const [interestRate, setInterestRate] = useState(0);
+    const [openDialog, setOpenDialog] = useState(false);
     const { data: order, loading } = useUnit($closeOrderGetStatus);
-
-    const [userId, setUserId] = useState<number>();
 
     const chatId = params.chatId as string;
     const messageId = params.messageId as string;
     const orderId = params.orderId as string;
+
+    const toggleSetOpenDialog = (openDialog: boolean) => () => {
+        setOpenDialog(openDialog);
+    };
 
     const {
         register,
@@ -35,22 +40,27 @@ export const CloseOrderPage = () => {
 
         const companyShare = price - masterSalary;
 
-        await closeOrder(
-            orderId,
-            {
-                Price: String(price),
-                MasterSalary: String(masterSalary),
-                CompanyShare: String(companyShare),
-                Expenses: data.Expenses,
-                TotalPrice: data.TotalPrice,
-                Comments: data.Comments,
-                Debt: data.Debt,
-            },
-            chatId,
-            messageId,
-        );
+        if (+data.TotalPrice === 0) {
+            toggleSetOpenDialog(true)();
+        } else {
+            await closeOrder(
+                orderId,
+                {
+                    Price: String(price),
+                    MasterSalary: String(masterSalary),
+                    CompanyShare: String(companyShare),
+                    Expenses: data.Expenses,
+                    TotalPrice: data.TotalPrice,
+                    Comments: data.Comments,
+                    Debt: data.Debt,
+                },
+                chatId,
+                messageId,
+                String(currentUser.Id),
+            );
 
-        navigate('/');
+            navigate('/');
+        }
     };
 
     const getData = async () => {
@@ -77,6 +87,14 @@ export const CloseOrderPage = () => {
             <Typography variant="h5" sx={{ p: 2, textAlign: 'center' }}>
                 Закрытие заявки №{orderId}
             </Typography>
+            <Dialog open={openDialog} onClose={toggleSetOpenDialog(false)}>
+                <ClosingAtZeroDialog
+                    chatId={chatId}
+                    closerId={String(currentUser.Id)}
+                    messageId={messageId}
+                    orderId={orderId}
+                />
+            </Dialog>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Stack gap={1} sx={{ p: 2 }}>
                     <TextField

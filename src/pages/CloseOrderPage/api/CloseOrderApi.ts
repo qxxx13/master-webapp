@@ -13,9 +13,15 @@ export const getMasterId = (orderId: string) => {
     return masterId;
 };
 
-export const closeOrder = (orderId: string, closeData: CloseOrderType, chatId: string, messageId: string) => {
+export const closeOrder = (
+    orderId: string,
+    closeData: CloseOrderType,
+    chatId: string,
+    messageId: string,
+    closerId: string,
+) => {
     const closeOrder = instance
-        .post(`/orders/closeOrder/${orderId}?chatId=${chatId}&messageId=${messageId}`, closeData)
+        .post(`/orders/closeOrder/${orderId}?chatId=${chatId}&messageId=${messageId}&closerId=${closerId}`, closeData)
         .then((res) => res.data);
 
     return closeOrder;
