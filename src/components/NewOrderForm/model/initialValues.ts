@@ -19,5 +19,5 @@ export const initialValues: NewOrderType = {
     Type: OrderTypeEnum.notSpecialized,
     Debt: 0,
     MasterSalary: 0,
-    ReferralId: undefined,
+    ReferralId: 14,
 };

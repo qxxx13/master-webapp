@@ -59,7 +59,7 @@ export const ClosingAtZeroDialog: React.FC<ClosingAtZeroDialogProps> = ({ chatId
                             <MenuItem value={'missedCall'}>{translate('missedCall')}</MenuItem>
                             <MenuItem value={'rejectedByClient'}>{translate('rejectedByClient')}</MenuItem>
                         </Select>
-                        <input type="file" onChange={(e) => handleSetImage(e)} />
+                        <input type="file" accept="image/png, image/jpeg" onChange={(e) => handleSetImage(e)} />
                         <Button variant="contained" onClick={handleCloseOrder}>
                             Отправить
                         </Button>
