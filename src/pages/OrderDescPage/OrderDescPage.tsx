@@ -46,25 +46,27 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
     }, [update]);
 
     return (
-        <Stack sx={{ height: 'calc(100vh - 60px)', mb: '60px' }} justifyContent="space-between">
+        <Stack sx={{ mb: '60px' }}>
             {!loading && !masterLoading && Object.keys(order).length !== 0 ? (
                 <>
-                    <OrderDesc order={order as OrderType} master={master as UserType} />
-                    {currentUser.Role === 'admin' && (
-                        <Accordion>
-                            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography>ADMIN tools</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <AdminButtons
-                                    chatId={String(master.TelegramChatId)}
-                                    messageId={String(order.MessageId)}
-                                    orderId={String(order.Id)}
-                                    status={order.Status as OrderStatusEnum}
-                                />
-                            </AccordionDetails>
-                        </Accordion>
-                    )}
+                    <Stack>
+                        <OrderDesc order={order as OrderType} master={master as UserType} />
+                        {currentUser.Role === 'admin' && (
+                            <Accordion>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                    <Typography>ADMIN tools</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <AdminButtons
+                                        chatId={String(master.TelegramChatId)}
+                                        messageId={String(order.MessageId)}
+                                        orderId={String(order.Id)}
+                                        status={order.Status as OrderStatusEnum}
+                                    />
+                                </AccordionDetails>
+                            </Accordion>
+                        )}
+                    </Stack>
                     <OrderWorksButton
                         chatId={String(master.TelegramChatId)}
                         messageId={String(order.MessageId)}
