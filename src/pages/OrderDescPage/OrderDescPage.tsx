@@ -46,16 +46,10 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
     }, [update]);
 
     return (
-        <>
+        <Stack sx={{ height: 'calc(100vh - 60px)', mb: '60px' }} justifyContent="space-between">
             {!loading && !masterLoading && Object.keys(order).length !== 0 ? (
                 <>
                     <OrderDesc order={order as OrderType} master={master as UserType} />
-                    <OrderWorksButton
-                        chatId={String(master.TelegramChatId)}
-                        messageId={String(order.MessageId)}
-                        orderId={String(order.Id)}
-                        status={order.Status as OrderStatusEnum}
-                    />
                     {currentUser.Role === 'admin' && (
                         <Accordion>
                             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -71,10 +65,16 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
                             </AccordionDetails>
                         </Accordion>
                     )}
+                    <OrderWorksButton
+                        chatId={String(master.TelegramChatId)}
+                        messageId={String(order.MessageId)}
+                        orderId={String(order.Id)}
+                        status={order.Status as OrderStatusEnum}
+                    />
                 </>
             ) : (
                 <CircularProgress />
             )}
-        </>
+        </Stack>
     );
 };
