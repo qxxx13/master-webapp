@@ -3,10 +3,10 @@ import { useUnit } from 'effector-react';
 import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+import { CardLoading } from '../../../components/CardLoading/CardLoading';
 import { OrderCard } from '../../../components/OrderCard/OrderCard';
 import { UserType } from '../../../types/UserType';
 import { $allOrdersGetStatus, clearOrdersStore, fetchAllOrdersFx } from '../model/ordersStore';
-import { CardLoading } from '../../../components/CardLoading/CardLoading';
 
 export const OrdersList: React.FC<{ masterId: string | 'all'; users: UserType[] }> = ({ masterId, users }) => {
     const [hasMore, setHasMore] = useState(true);

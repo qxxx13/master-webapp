@@ -4,6 +4,7 @@ import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { AdminOrdersPage } from '../pages/AdminOrdersPage/AdminOrdersPage';
 import { AdminPaymentOrderPage } from '../pages/AdminPaymentOrderPage/AdminPaymentOrderPage';
 import { CloseOrderPage } from '../pages/CloseOrderPage/CloseOrderPage';
+import { CompanyPage } from '../pages/CompanyPage/CompanyPage';
 import { CreateNewOrderPage } from '../pages/CreateNewOrderPage/CreateNewOrderPage';
 import { CreateNewUserPage } from '../pages/CreateNewUserPage/CreateNewUserPage';
 import { EditOrderPage } from '../pages/EditOrderPage/EditOrderPage';
@@ -17,7 +18,6 @@ import { UserDescPage } from '../pages/UserDescPage/UserDescPage';
 import { UsersPage } from '../pages/UsersPage/UsersPage';
 import { UserType } from '../types/UserType';
 import { ProtectedRoute } from './ProtectedRoute';
-import { CompanyPage } from '../pages/CompanyPage/CompanyPage';
 
 export const AppRouter = () => {
     const navigate = useNavigate();

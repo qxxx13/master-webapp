@@ -1,13 +1,13 @@
 import { Button, CircularProgress, Stack, Typography } from '@mui/material';
+import { MainButton } from '@vkruglikov/react-telegram-web-app';
 import { useUnit } from 'effector-react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { CardLoading } from '../../components/CardLoading/CardLoading';
 import { UserType } from '../../types/UserType';
 import { $usersPageStoreGetStatus, fetchAllUsersFx } from './model/usersPageStore';
 import { UsersList } from './UsersList/UsersList';
-import { MainButton } from '@vkruglikov/react-telegram-web-app';
-import { CardLoading } from '../../components/CardLoading/CardLoading';
 
 export const UsersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

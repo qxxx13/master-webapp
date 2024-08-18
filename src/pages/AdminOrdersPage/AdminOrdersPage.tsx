@@ -5,11 +5,11 @@ import { useUnit } from 'effector-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { CardLoading } from '../../components/CardLoading/CardLoading';
 import { OrdersSortForm } from '../../components/OrdersSortForm/OrdersSortForm';
 import { RoleEnum, UserType } from '../../types/UserType';
 import { $usersGetStatus, fetchUsersFx } from './model/usersStore';
 import { OrdersList } from './OrdersList/OrdersList';
-import { CardLoading } from '../../components/CardLoading/CardLoading';
 
 export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

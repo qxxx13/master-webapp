@@ -16,6 +16,7 @@ import { useUnit } from 'effector-react';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { DescLoading } from '../../components/CardLoading/DescLoading';
 import { OrderStatusEnum, OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { AdminButtons } from './AdminButtons';
@@ -25,7 +26,6 @@ import { $updateOrderStore } from './model/setUpdateOrderStore';
 import { $userGetStatus } from './model/userStore';
 import { OrderDesc } from './OrderDesc';
 import { OrderWorksButton } from './OrderWorkButtons';
-import { DescLoading } from '../../components/CardLoading/DescLoading';
 
 export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

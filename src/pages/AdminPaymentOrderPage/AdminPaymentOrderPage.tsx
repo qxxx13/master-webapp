@@ -21,14 +21,14 @@ import { Dayjs } from 'dayjs';
 import { useUnit } from 'effector-react';
 import { useEffect, useState } from 'react';
 
+import { CardLoading } from '../../components/CardLoading/CardLoading';
 import { OrderCard } from '../../components/OrderCard/OrderCard';
+import { useRubFormat } from '../../hooks/useRubFormat';
 import { RoleEnum, UserType } from '../../types/UserType';
 import { deliveredOrder } from '../OrderDescPage/api/workOrderApi';
 import { $updateOrderStore, setUpdate } from '../OrderDescPage/model/setUpdateOrderStore';
 import { $ordersPaymentStoreGetStatus, fetchOrdersFx } from './model/ordersPaymentStore';
 import { $usersPaymentStoreGetStatus, fetchAllUsersFx } from './model/usersPaymentStore';
-import { CardLoading } from '../../components/CardLoading/CardLoading';
-import { useRubFormat } from '../../hooks/useRubFormat';
 
 export const AdminPaymentOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const [selectedUserId, setSelectedUserId] = useState(

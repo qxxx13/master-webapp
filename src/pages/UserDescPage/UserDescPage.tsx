@@ -1,9 +1,11 @@
 import { Box, Button, CircularProgress, Divider, Stack, Typography } from '@mui/material';
+import { MainButton } from '@vkruglikov/react-telegram-web-app';
 import { useUnit } from 'effector-react';
 import moment from 'moment';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { DescLoading } from '../../components/CardLoading/DescLoading';
 import { handleTotal, handleTotalSalary } from '../../components/SalaryCharts/handleTotalSalary';
 import { StatusChip } from '../../components/StatusChip/StatusChip';
 import { OrderStatusEnum } from '../../types/OrderType';
@@ -11,8 +13,6 @@ import { UserType } from '../../types/UserType';
 import { $userAllOrdersStoreGetStatus, fetchAllUserOrdersFx } from './model/userAllOrdersStore';
 import { $userDescPageStoreGetStatus, fetchUserByIdFx } from './model/userDescPageStore';
 import { $userOrdersPerMonthStoreGetStatus, fetchUserOrdersPerMonthFx } from './model/userOrdersPerMonthStore';
-import { DescLoading } from '../../components/CardLoading/DescLoading';
-import { MainButton } from '@vkruglikov/react-telegram-web-app';
 
 export const UserDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

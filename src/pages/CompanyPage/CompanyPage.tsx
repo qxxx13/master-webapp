@@ -1,4 +1,5 @@
 import { Stack, Typography } from '@mui/material';
+
 import { UserType } from '../../types/UserType';
 
 export const CompanyPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
