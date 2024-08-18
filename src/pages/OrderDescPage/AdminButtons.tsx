@@ -28,17 +28,12 @@ export const AdminButtons: React.FC<{
 
     return (
         <Stack gap={1}>
-            <Button variant="outlined" onClick={handleEditOrder}>
+            <Button variant="contained" onClick={handleEditOrder}>
                 Редактировать
             </Button>
-            <Button variant="outlined" onClick={handleClose}>
+            <Button variant="contained" onClick={handleClose} color="success">
                 Закрыть
             </Button>
-            {status === 'awaitingPayment' && (
-                <Button variant="outlined" color="success" onClick={handleDelivered}>
-                    Сдана
-                </Button>
-            )}
         </Stack>
     );
 };

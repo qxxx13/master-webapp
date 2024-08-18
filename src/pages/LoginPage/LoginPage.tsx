@@ -21,9 +21,11 @@ export const LoginPage = () => {
         if (password !== '' && !isLoginByUsername) {
             await loginByTelegramId(Telegram.WebApp.initDataUnsafe.user!.id, password);
             navigate('/');
+            window.location.reload();
         } else if (username !== '' && password !== '' && isLoginByUsername) {
             await loginByUsername(username, password);
             navigate('/');
+            window.location.reload();
         }
     };
 
@@ -65,6 +67,7 @@ export const LoginPage = () => {
                     {isLoginByUsername ? 'Вход по telegramId' : 'Вход по логину'}
                 </Button>
                 <MainButton text="Войти" onClick={loginHandler} />
+                <Button onClick={loginHandler}>123</Button>
             </Stack>
         </form>
     );

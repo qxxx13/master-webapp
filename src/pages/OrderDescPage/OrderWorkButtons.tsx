@@ -52,10 +52,10 @@ export const OrderWorksButton: React.FC<{
         case 'pending':
             return (
                 <Stack sx={{ p: 2 }} gap={1}>
-                    <Button onClick={handleTake} variant="outlined">
+                    <Button onClick={handleTake} variant="contained">
                         Принять
                     </Button>
-                    <Button onClick={handleCancel} color="error" variant="outlined">
+                    <Button onClick={handleCancel} color="error" variant="contained">
                         Отказаться
                     </Button>
                 </Stack>
@@ -63,13 +63,13 @@ export const OrderWorksButton: React.FC<{
         case 'atWork':
             return (
                 <Stack sx={{ p: 2 }} gap={1}>
-                    <Button onClick={handleWent} color="warning" variant="outlined">
+                    <Button onClick={handleWent} color="warning" variant="contained">
                         Отъехал за ЗЧ
                     </Button>
-                    <Button onClick={handleSD} color="warning" variant="outlined">
+                    <Button onClick={handleSD} color="warning" variant="contained">
                         Забрал на СД
                     </Button>
-                    <Button onClick={handleClose} color="success" variant="outlined">
+                    <Button onClick={handleClose} color="success" variant="contained">
                         Закрыть заявку
                     </Button>
                 </Stack>
@@ -77,16 +77,16 @@ export const OrderWorksButton: React.FC<{
         case 'active':
             return (
                 <Stack sx={{ p: 2 }} gap={1}>
-                    <Button onClick={handleAtWork} variant="outlined">
+                    <Button onClick={handleAtWork} variant="contained">
                         В работе
                     </Button>
-                    <Button onClick={handleWent} color="warning" variant="outlined">
+                    <Button onClick={handleWent} color="warning" variant="contained">
                         Отъехал за ЗЧ
                     </Button>
-                    <Button onClick={handleSD} color="warning" variant="outlined">
+                    <Button onClick={handleSD} color="warning" variant="contained">
                         Забрал на СД
                     </Button>
-                    <Button onClick={handleClose} color="success" variant="outlined">
+                    <Button onClick={handleClose} color="success" variant="contained">
                         Закрыть заявку
                     </Button>
                 </Stack>
@@ -94,7 +94,7 @@ export const OrderWorksButton: React.FC<{
         case 'masterWentForSparePart':
             return (
                 <Stack sx={{ p: 2 }} gap={1}>
-                    <Button onClick={handleReturn} variant="outlined">
+                    <Button onClick={handleReturn} variant="contained">
                         Вернулся
                     </Button>
                 </Stack>
@@ -102,14 +102,14 @@ export const OrderWorksButton: React.FC<{
         case 'takeToSD':
             return (
                 <Stack sx={{ p: 2 }} gap={1}>
-                    <Button onClick={handleReturn} variant="outlined">
+                    <Button onClick={handleReturn} variant="contained">
                         Вернулся
                     </Button>
                 </Stack>
             );
         case 'debt':
             return (
-                <Button onClick={handleClose} variant="outlined">
+                <Button onClick={handleClose} variant="contained">
                     Закрыть
                 </Button>
             );

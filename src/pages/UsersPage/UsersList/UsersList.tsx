@@ -8,7 +8,7 @@ export const UsersList: React.FC<{ users: UserType[] }> = ({ users }) => {
     const usersList = users.map((user, index) => <UserCard user={user} key={index} />);
 
     return (
-        <Stack gap={1} sx={{ mb: '62px' }}>
+        <Stack gap={1} sx={{ mb: '62px', p: 2 }}>
             {usersList}
         </Stack>
     );

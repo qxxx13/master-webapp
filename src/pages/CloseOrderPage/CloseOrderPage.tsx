@@ -126,7 +126,7 @@ export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUse
                         color="primary"
                     />
 
-                    <Button variant="outlined" type="submit">
+                    <Button variant="contained" type="submit" color="success">
                         Закрыть
                     </Button>
                 </Stack>

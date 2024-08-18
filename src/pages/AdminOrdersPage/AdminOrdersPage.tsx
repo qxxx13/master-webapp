@@ -1,16 +1,5 @@
 import MenuIcon from '@mui/icons-material/Menu';
-import {
-    Button,
-    CircularProgress,
-    Drawer,
-    IconButton,
-    MenuItem,
-    Select,
-    SelectChangeEvent,
-    Stack,
-    TextField,
-    Typography,
-} from '@mui/material';
+import { Drawer, IconButton, MenuItem, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import { MainButton } from '@vkruglikov/react-telegram-web-app';
 import { useUnit } from 'effector-react';
 import { useEffect, useState } from 'react';
@@ -20,6 +9,7 @@ import { OrdersSortForm } from '../../components/OrdersSortForm/OrdersSortForm';
 import { RoleEnum, UserType } from '../../types/UserType';
 import { $usersGetStatus, fetchUsersFx } from './model/usersStore';
 import { OrdersList } from './OrdersList/OrdersList';
+import { CardLoading } from '../../components/CardLoading/CardLoading';
 
 export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
@@ -72,11 +62,11 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
                 </Typography>
                 <Select value={selectedOrdersUserId} onChange={handleChange} sx={{ height: 45 }}>
                     <MenuItem value="all">All</MenuItem>
-                    {menuItems}
+                    {!loading && menuItems}
                 </Select>
                 <MainButton text="Создать заявку" onClick={goToCreateNewOrderPage} />
             </Stack>
-            {!loading ? <OrdersList masterId={selectedOrdersUserId} users={users} /> : <CircularProgress />}
+            {!loading ? <OrdersList masterId={selectedOrdersUserId} users={users} /> : <CardLoading height={160} />}
         </>
     );
 };

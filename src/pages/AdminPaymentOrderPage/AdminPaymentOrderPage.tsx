@@ -9,6 +9,7 @@ import {
     MenuItem,
     Select,
     SelectChangeEvent,
+    Skeleton,
     Stack,
     Typography,
 } from '@mui/material';
@@ -26,6 +27,8 @@ import { deliveredOrder } from '../OrderDescPage/api/workOrderApi';
 import { $updateOrderStore, setUpdate } from '../OrderDescPage/model/setUpdateOrderStore';
 import { $ordersPaymentStoreGetStatus, fetchOrdersFx } from './model/ordersPaymentStore';
 import { $usersPaymentStoreGetStatus, fetchAllUsersFx } from './model/usersPaymentStore';
+import { CardLoading } from '../../components/CardLoading/CardLoading';
+import { useRubFormat } from '../../hooks/useRubFormat';
 
 export const AdminPaymentOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const [selectedUserId, setSelectedUserId] = useState(
@@ -57,10 +60,8 @@ export const AdminPaymentOrderPage: React.FC<{ currentUser: UserType }> = ({ cur
         totalCompanyShare = totalCompanyShare + (order.CompanyShare as number);
     });
 
-    const totalCompanyShareFormat = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(
-        totalCompanyShare,
-    );
-    const totalPriceFormat = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(totalPrice);
+    const totalCompanyShareFormat = useRubFormat(totalCompanyShare).format;
+    const totalPriceFormat = useRubFormat(totalPrice).format;
 
     const handleChange = (event: SelectChangeEvent) => {
         setSelectedUserId(event.target.value);
@@ -99,60 +100,56 @@ export const AdminPaymentOrderPage: React.FC<{ currentUser: UserType }> = ({ cur
     }, [update, selectedUserId, ordersDate]);
 
     return (
-        <>
-            {!loading ? (
-                <Stack sx={{ p: 2, textAlign: 'center' }}>
-                    <Typography variant="h5">Сдача</Typography>
-                    <Typography variant="h6">Сумма к сдаче: {totalCompanyShareFormat}</Typography>
-                    <Typography variant="h6">Общая касса: {totalPriceFormat}</Typography>
-                    <MainButton text="Закрыть все заявки" onClick={handleShowDialog} />
+        <Stack sx={{ p: 2, textAlign: 'center' }}>
+            <Typography variant="h4">Сдача</Typography>
+            <Typography variant="h6">
+                Сумма к сдаче:{' '}
+                {!loading ? (
+                    totalCompanyShareFormat
+                ) : (
+                    <Skeleton sx={{ display: 'inline-block' }} width={120} variant="text" />
+                )}
+            </Typography>
+            <Typography variant="h6">
+                Общая касса:{' '}
+                {!loading ? totalPriceFormat : <Skeleton sx={{ display: 'inline-block' }} width={120} variant="text" />}
+            </Typography>
+            <MainButton text="Закрыть все заявки" onClick={handleShowDialog} />
 
-                    <Select value={selectedUserId} onChange={handleChange} sx={{ height: 45 }}>
-                        {menuItems}
-                    </Select>
-                    <Stack flexDirection="row" alignItems="center" justifyContent="space-between">
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DemoContainer components={['DatePicker']} sx={{ width: '75%' }}>
-                                <DatePicker
-                                    label="Дата заявок"
-                                    value={ordersDate}
-                                    onChange={(date) => setOrdersDate(date)}
-                                />
-                            </DemoContainer>
-                        </LocalizationProvider>
-                        <Button
-                            variant="contained"
-                            sx={{ height: 54, width: 84, mt: 1 }}
-                            onClick={() => setOrdersDate(null)}
-                        >
-                            Все
-                        </Button>
-                    </Stack>
+            <Select value={selectedUserId} onChange={handleChange} sx={{ height: 45 }}>
+                {menuItems}
+            </Select>
+            <Stack flexDirection="row" alignItems="center" justifyContent="space-between">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DemoContainer components={['DatePicker']} sx={{ width: '75%' }}>
+                        <DatePicker label="Дата заявок" value={ordersDate} onChange={(date) => setOrdersDate(date)} />
+                    </DemoContainer>
+                </LocalizationProvider>
+                <Button variant="contained" sx={{ height: 54, width: 84, mt: 1 }} onClick={() => setOrdersDate(null)}>
+                    Все
+                </Button>
+            </Stack>
 
-                    <Stack alignItems="center">
-                        <Stack gap={1} sx={{ width: '100%', p: 1, mb: 6 }}>
-                            {OrderList}
-                        </Stack>
-                    </Stack>
-
-                    <Dialog open={showDialog} onClose={handleCloseDialog}>
-                        <DialogTitle>Закрыть все заявки</DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>Вы уверены, что хотите закрыть все заявки?</DialogContentText>
-                        </DialogContent>
-                        <DialogActions sx={{ justifyContent: 'space-between', p: 2 }}>
-                            <Button variant="outlined" color="warning" onClick={handleCloseDialog}>
-                                Нет
-                            </Button>
-                            <Button variant="outlined" color="success" onClick={closeAllOrders}>
-                                Да
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
+            <Stack alignItems="center">
+                <Stack gap={1} sx={{ width: '100%', p: 1, mb: 6 }}>
+                    {!loading ? OrderList : <CardLoading height={160} />}
                 </Stack>
-            ) : (
-                <CircularProgress />
-            )}
-        </>
+            </Stack>
+
+            <Dialog open={showDialog} onClose={handleCloseDialog}>
+                <DialogTitle>Закрыть все заявки</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>Вы уверены, что хотите закрыть все заявки?</DialogContentText>
+                </DialogContent>
+                <DialogActions sx={{ justifyContent: 'space-between', p: 2 }}>
+                    <Button variant="outlined" color="warning" onClick={handleCloseDialog}>
+                        Нет
+                    </Button>
+                    <Button variant="outlined" color="success" onClick={closeAllOrders}>
+                        Да
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </Stack>
     );
 };

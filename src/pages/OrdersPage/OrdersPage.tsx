@@ -11,9 +11,7 @@ type OrdersPageProps = {
 };
 
 export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
-    const [status, setStatus] = useState<MasterOrderStatusEnum>(
-        localStorage.getItem('currentStatusSelect') as MasterOrderStatusEnum,
-    );
+    const [status, setStatus] = useState<MasterOrderStatusEnum>(MasterOrderStatusEnum.all);
 
     const MenuItems = Object.values(MasterOrderStatusEnum).map((status, index) => (
         <MenuItem key={index} value={status}>
@@ -23,7 +21,6 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
 
     const handleChangeStatus = (event: SelectChangeEvent) => {
         setStatus(event.target.value as MasterOrderStatusEnum);
-        localStorage.setItem('currentStatusSelect', event.target.value);
     };
 
     const BackBTN = Telegram.WebApp.BackButton;

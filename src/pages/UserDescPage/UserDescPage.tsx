@@ -11,6 +11,8 @@ import { UserType } from '../../types/UserType';
 import { $userAllOrdersStoreGetStatus, fetchAllUserOrdersFx } from './model/userAllOrdersStore';
 import { $userDescPageStoreGetStatus, fetchUserByIdFx } from './model/userDescPageStore';
 import { $userOrdersPerMonthStoreGetStatus, fetchUserOrdersPerMonthFx } from './model/userOrdersPerMonthStore';
+import { DescLoading } from '../../components/CardLoading/DescLoading';
+import { MainButton } from '@vkruglikov/react-telegram-web-app';
 
 export const UserDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
@@ -88,14 +90,10 @@ export const UserDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser 
                     <Divider />
                     <Typography variant="h6">Средний чек за месяц: {averageBillFormat}</Typography>
 
-                    <Box sx={{ position: 'absolute', bottom: 70, width: '100%', left: 0, p: 2 }}>
-                        <Button variant="outlined" sx={{ width: '100%' }} onClick={goToEditUser}>
-                            Редактировать
-                        </Button>
-                    </Box>
+                    <MainButton text="Редактировать" onClick={goToEditUser} />
                 </Stack>
             ) : (
-                <CircularProgress />
+                <DescLoading />
             )}
         </>
     );

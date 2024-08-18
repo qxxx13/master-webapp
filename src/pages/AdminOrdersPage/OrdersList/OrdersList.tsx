@@ -6,6 +6,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { OrderCard } from '../../../components/OrderCard/OrderCard';
 import { UserType } from '../../../types/UserType';
 import { $allOrdersGetStatus, clearOrdersStore, fetchAllOrdersFx } from '../model/ordersStore';
+import { CardLoading } from '../../../components/CardLoading/CardLoading';
 
 export const OrdersList: React.FC<{ masterId: string | 'all'; users: UserType[] }> = ({ masterId, users }) => {
     const [hasMore, setHasMore] = useState(true);
@@ -36,7 +37,7 @@ export const OrdersList: React.FC<{ masterId: string | 'all'; users: UserType[] 
                 dataLength={data.data.length}
                 next={fetchMore}
                 hasMore={hasMore}
-                loader={<CircularProgress />}
+                loader={<CardLoading height={160} />}
                 style={{
                     display: 'flex',
                     gap: 8,
@@ -50,7 +51,3 @@ export const OrdersList: React.FC<{ masterId: string | 'all'; users: UserType[] 
         </Stack>
     );
 };
-
-/* 225px  */
-
-/* 169px */

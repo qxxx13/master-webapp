@@ -17,6 +17,7 @@ import { UserDescPage } from '../pages/UserDescPage/UserDescPage';
 import { UsersPage } from '../pages/UsersPage/UsersPage';
 import { UserType } from '../types/UserType';
 import { ProtectedRoute } from './ProtectedRoute';
+import { CompanyPage } from '../pages/CompanyPage/CompanyPage';
 
 export const AppRouter = () => {
     const navigate = useNavigate();
@@ -107,6 +108,14 @@ export const AppRouter = () => {
                 element={
                     <ProtectedRoute>
                         <UsersPage currentUser={currentUser as UserType} />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/company"
+                element={
+                    <ProtectedRoute>
+                        <CompanyPage currentUser={currentUser as UserType} />
                     </ProtectedRoute>
                 }
             />

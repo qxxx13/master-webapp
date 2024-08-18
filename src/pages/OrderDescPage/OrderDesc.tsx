@@ -1,4 +1,4 @@
-import { CircularProgress, Divider, Link, Stack, Typography } from '@mui/material';
+import { Box, Divider, Skeleton, Stack, Typography } from '@mui/material';
 import { useUnit } from 'effector-react';
 import moment from 'moment';
 import { useEffect } from 'react';
@@ -8,6 +8,7 @@ import { UserChip } from '../../components/UserChip/UserChip';
 import { OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { $dispStoreGetStatus, fetchDispByIdFx } from './model/dispStore';
+import { useRubFormat } from '../../hooks/useRubFormat';
 
 type OrderDescProps = {
     order: OrderType;
@@ -17,13 +18,13 @@ type OrderDescProps = {
 export const OrderDesc: React.FC<OrderDescProps> = ({ order, master }) => {
     const { data, loading } = useUnit($dispStoreGetStatus);
 
-    const totalFormat = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(order.Total);
-    const expensesFormat = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(
-        order.Expenses,
-    );
-    const companyShareFormat =
-        order.CompanyShare !== 0 &&
-        new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(+String(order.CompanyShare));
+    const totalFormat = useRubFormat(order.Total).format;
+    const expensesFormat = useRubFormat(order.Expenses).format;
+    const companyShareFormat = order.CompanyShare !== 0 && useRubFormat(+String(order.CompanyShare)).format;
+
+    const callToClient = () => {
+        window.open(`tel:${order.ClientPhoneNumber.replaceAll('-', '')}`);
+    };
 
     useEffect(() => {
         order.DispId && fetchDispByIdFx({ userId: order.DispId });
@@ -44,21 +45,20 @@ export const OrderDesc: React.FC<OrderDescProps> = ({ order, master }) => {
             <Divider />
             <Typography variant="h6">Время: {order.Time}</Typography>
             <Divider />
-            {order.DispId && !loading && (
-                <>
-                    <Typography variant="h6">Диспетчер: {<UserChip user={data as UserType} />}</Typography>
-                    <Divider />
-                </>
-            )}
-
+            <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center' }}>
+                Диспетчер:
+                {order.DispId && !loading ? (
+                    <UserChip user={data as UserType} />
+                ) : (
+                    <Skeleton variant="rounded" sx={{ display: 'inline-block' }} width={80} />
+                )}
+            </Typography>
+            <Divider />
             <Typography variant="h6">
                 Номер:{' '}
-                <a
-                    style={{ color: 'hsla(206,100%,73.3%,1)', textDecoration: 'none' }}
-                    href={`tel:${order.ClientPhoneNumber.replaceAll('-', '')}`}
-                >
+                <Box sx={{ color: 'hsla(206,100%,73.3%,1)', display: 'inline' }} onClick={callToClient}>
                     {order.ClientPhoneNumber}
-                </a>
+                </Box>
             </Typography>
             <Divider />
             <Typography variant="h6">Город: {order.City}</Typography>

@@ -25,6 +25,7 @@ import { $updateOrderStore } from './model/setUpdateOrderStore';
 import { $userGetStatus } from './model/userStore';
 import { OrderDesc } from './OrderDesc';
 import { OrderWorksButton } from './OrderWorkButtons';
+import { DescLoading } from '../../components/CardLoading/DescLoading';
 
 export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
@@ -75,7 +76,7 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
                     />
                 </>
             ) : (
-                <CircularProgress />
+                <DescLoading />
             )}
         </Stack>
     );

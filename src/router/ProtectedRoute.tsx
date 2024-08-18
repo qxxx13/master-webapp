@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import { Navigate } from 'react-router-dom';
 
 type ProtectedRouteProps = {
@@ -6,8 +7,9 @@ type ProtectedRouteProps = {
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     const isAuth = localStorage.getItem('isAuth');
+    const role = localStorage.getItem('userRole');
 
-    if (isAuth === 'false' || isAuth === null) {
+    if (isAuth === null) {
         return <Navigate to="/login" replace />;
     } else {
         return <>{children}</>;

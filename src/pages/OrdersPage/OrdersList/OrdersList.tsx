@@ -7,6 +7,7 @@ import { OrderCard } from '../../../components/OrderCard/OrderCard';
 import { MasterOrderStatusEnum } from '../../../types/OrderType';
 import { UserType } from '../../../types/UserType';
 import { $ordersGetStatus, fetchOrdersFx } from '../model/OrdersStore';
+import { CardLoading } from '../../../components/CardLoading/CardLoading';
 
 export const OrdersList: React.FC<{ currentUser: UserType; page: number; status: MasterOrderStatusEnum }> = ({
     currentUser,
@@ -42,7 +43,7 @@ export const OrdersList: React.FC<{ currentUser: UserType; page: number; status:
     return (
         <Stack alignItems="center" sx={{ mt: '145px', height: 'calc(100vh - 190px)', overflowY: 'scroll', p: 2 }}>
             <Stack gap={1} sx={{ width: '100%' }}>
-                {!loading ? orderList : <CircularProgress />}
+                {!loading ? orderList : <CardLoading height={160} />}
             </Stack>
         </Stack>
     );

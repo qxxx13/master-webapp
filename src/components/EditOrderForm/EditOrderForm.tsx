@@ -62,12 +62,12 @@ export const EditOrderForm: React.FC<{ users: UserType[]; order: OrderType }> = 
                 {OrderTypeSelectField(control)}
                 {MasterSelectField(control, users)}
 
-                <Button variant="outlined" onClick={handleSubmit((editedOrder) => handleSave(editedOrder))}>
+                <Button variant="contained" onClick={handleSubmit((editedOrder) => handleSave(editedOrder))}>
                     {translate('Save')}
                 </Button>
                 {order.Status === 'distribution' && (
                     <Button
-                        variant="outlined"
+                        variant="contained"
                         color="info"
                         onClick={handleSubmit((editedOrder) => handleSendToMaster(editedOrder))}
                     >
@@ -76,7 +76,7 @@ export const EditOrderForm: React.FC<{ users: UserType[]; order: OrderType }> = 
                 )}
                 {order.Status === 'transfer' && (
                     <Button
-                        variant="outlined"
+                        variant="contained"
                         color="warning"
                         onClick={handleSubmit((editedOrder) => handleSendToMaster(editedOrder))}
                     >
@@ -84,7 +84,7 @@ export const EditOrderForm: React.FC<{ users: UserType[]; order: OrderType }> = 
                     </Button>
                 )}
                 <Button
-                    variant="outlined"
+                    variant="contained"
                     onClick={handleSubmit((editedOrder) => handleTransfer(editedOrder))}
                     color="secondary"
                 >

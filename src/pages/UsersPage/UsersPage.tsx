@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { UserType } from '../../types/UserType';
 import { $usersPageStoreGetStatus, fetchAllUsersFx } from './model/usersPageStore';
 import { UsersList } from './UsersList/UsersList';
+import { MainButton } from '@vkruglikov/react-telegram-web-app';
+import { CardLoading } from '../../components/CardLoading/CardLoading';
 
 export const UsersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
@@ -22,15 +24,14 @@ export const UsersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) 
         fetchAllUsersFx();
         Telegram.WebApp.ready();
     }, []);
+
     return (
-        <Stack sx={{ p: 2 }} gap={1}>
-            <Typography variant="h5" textAlign="center">
+        <Stack gap={1}>
+            <Typography sx={{ paddingTop: 2 }} variant="h5" textAlign="center">
                 Пользователи
             </Typography>
-            <Button variant="outlined" onClick={goToCreateNewUser}>
-                Создать пользователя
-            </Button>
-            {!loading ? <UsersList users={data} /> : <CircularProgress />}
+            <MainButton text="Создать пользователя" onClick={goToCreateNewUser} />
+            {!loading ? <UsersList users={data} /> : <CardLoading height={80} />}
         </Stack>
     );
 };
