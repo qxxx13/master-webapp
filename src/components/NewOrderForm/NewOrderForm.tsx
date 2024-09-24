@@ -63,14 +63,14 @@ export const NewOrderForm: React.FC<{ users: UserType[]; currentUser: UserType }
                 {ReferralSelectField(control, users)}
 
                 <Button
-                    variant="outlined"
+                    variant="contained"
                     type="submit"
                     onClick={handleSubmit((newOrder) => handleSendToMaster(newOrder))}
                 >
                     Создать и отправить мастеру
                 </Button>
                 <Button
-                    variant="outlined"
+                    variant="contained"
                     color="warning"
                     onClick={handleSubmit((newOrder) => handleSendSendToDistribution(newOrder))}
                 >
