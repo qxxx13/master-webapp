@@ -8,9 +8,11 @@ type ProtectedRouteProps = {
 };
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-    const user = JSON.stringify(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user') as string);
 
-    if (Object.keys(user).length === 0) {
+    console.log(user);
+
+    if (Object.keys(user).length === 0 || user === null) {
         return <Navigate to="/login" replace />;
     } else {
         return <>{children}</>;
