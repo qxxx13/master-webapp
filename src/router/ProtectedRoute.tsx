@@ -12,9 +12,9 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
     console.log(user);
 
-    if (Object.keys(user).length === 0 || user === null) {
-        return <Navigate to="/login" replace />;
-    } else {
+    if (user && Object.keys(user).length > 0) {
         return <>{children}</>;
+    } else {
+        return <Navigate to="/login" replace />;
     }
 };
