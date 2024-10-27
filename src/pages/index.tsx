@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { UserType } from '../shared/types/UserType';
-import { LoginPage } from './LoginPage/LoginPage';
+
 import { ProtectedRoute } from '../features/protected-route';
+import { UserType } from '../shared/types/UserType';
 import { AdminOrdersPage } from './AdminOrdersPage/AdminOrdersPage';
-import { OrdersPage } from './OrdersPage';
-import { CreateNewOrderPage } from './CreateNewOrderPage/CreateNewOrderPage';
-import { OrderDescPage } from './OrderDescPage/OrderDescPage';
-import { CloseOrderPage } from './CloseOrderPage/CloseOrderPage';
-import { ProfilePage } from './ProfilePage/ProfilePage';
 import { AdminPaymentOrderPage } from './AdminPaymentOrderPage/AdminPaymentOrderPage';
-import { PaymentOrderPage } from './PaymentOrderPage/PaymentOrderPage';
-import { EditOrderPage } from './EditOrderPage/EditOrderPage';
-import { UsersPage } from './UsersPage/UsersPage';
+import { CloseOrderPage } from './CloseOrderPage/CloseOrderPage';
 import { CompanyPage } from './CompanyPage/CompanyPage';
-import { UserDescPage } from './UserDescPage/UserDescPage';
+import { CreateNewOrderPage } from './CreateNewOrderPage/CreateNewOrderPage';
 import { CreateNewUserPage } from './CreateNewUserPage/CreateNewUserPage';
+import { EditOrderPage } from './EditOrderPage/EditOrderPage';
 import { EditUserPage } from './EditUserPage/EditUserPage';
+import { LoginPage } from './LoginPage/LoginPage';
+import { OrderDescPage } from './OrderDescPage/OrderDescPage';
+import { OrdersPage } from './OrdersPage';
+import { PaymentOrderPage } from './PaymentOrderPage/PaymentOrderPage';
+import { ProfilePage } from './ProfilePage/ProfilePage';
+import { UserDescPage } from './UserDescPage/UserDescPage';
+import { UsersPage } from './UsersPage/UsersPage';
 
 export const AppRouter = () => {
     const navigate = useNavigate();

@@ -1,4 +1,14 @@
-export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
+import { MasterOrderStatusEnum, UserType } from '@shared/types';
+import { OrdersList } from '@widgets/OrdersList/ui';
+import { translate } from 'common/translate/translate';
+import { FC, useEffect, useState } from 'react';
+
+type OrdersPageProps = {
+    currentUser: UserType;
+};
+
+export const OrdersPage: FC<OrdersPageProps> = ({ currentUser }) => {
     const [status, setStatus] = useState<MasterOrderStatusEnum>(MasterOrderStatusEnum.all);
 
     const MenuItems = Object.values(MasterOrderStatusEnum).map((status, index) => (
@@ -31,7 +41,7 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
                     </Select>
                 </FormControl>
             </Stack>
-            <OrdersList page={1} currentUser={currentUser} status={status} />
+            {/* <OrdersList page={1} currentUser={currentUser} status={status} /> */}
         </>
     );
 };

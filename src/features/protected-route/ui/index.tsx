@@ -1,4 +1,5 @@
 import { Navigate } from 'react-router-dom';
+
 import { ProtectedRouteProps } from '../model/type';
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {

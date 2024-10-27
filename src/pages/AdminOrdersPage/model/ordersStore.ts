@@ -1,6 +1,6 @@
+import { GetOrdersType, OrderStatusEnum, OrderType } from '@shared/types';
 import { combine, createEffect, createEvent, createStore, restore } from 'effector';
 
-import { GetOrdersType, OrderStatusEnum, OrderType } from '../../../types/OrderType';
 import { fetchAllOrders } from '../api/adminOrdersPageApi';
 
 export const $allOrders = createStore<GetOrdersType>({ meta: {} as GetOrdersType['meta'], data: [] });

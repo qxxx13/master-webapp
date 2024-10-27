@@ -1,7 +1,12 @@
-import { MasterOrderStatusEnum, UserType } from '@shared/types';
-import { format } from 'date-fns';
+import { Stack } from '@mui/material';
+import { $allOrdersGetStatus, clearOrdersStore, fetchAllOrdersFx } from '@pages/AdminOrdersPage/model/ordersStore';
+import { UserType } from '@shared/types';
+import { CardLoading } from 'components/CardLoading/CardLoading';
+import { OrderCard } from 'components/OrderCard/OrderCard';
 import { useUnit } from 'effector-react';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 import { OrdersListProps } from '../model/types';
 
 export const OrdersList: FC<OrdersListProps> = ({ masterId, users }) => {

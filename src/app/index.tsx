@@ -1,11 +1,12 @@
-import { useEffect } from 'react';
-import { NavBar } from '../components/NavBar/NavBar';
-import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
-import { WebAppProvider } from '@vkruglikov/react-telegram-web-app';
 import { CssBaseline } from '@mui/material';
-import { theme } from './theme/themeConfig';
 import { AppRouter } from '@pages';
+import { WebAppProvider } from '@vkruglikov/react-telegram-web-app';
+import { useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+
+import { NavBar } from '../components/NavBar/NavBar';
+import { theme } from './theme/themeConfig';
 
 export const App = () => {
     useEffect(() => {
