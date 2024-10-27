@@ -1,23 +1,22 @@
 import { useEffect, useState } from 'react';
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
-
-import { AdminOrdersPage } from '../pages/AdminOrdersPage/AdminOrdersPage';
-import { AdminPaymentOrderPage } from '../pages/AdminPaymentOrderPage/AdminPaymentOrderPage';
-import { CloseOrderPage } from '../pages/CloseOrderPage/CloseOrderPage';
-import { CompanyPage } from '../pages/CompanyPage/CompanyPage';
-import { CreateNewOrderPage } from '../pages/CreateNewOrderPage/CreateNewOrderPage';
-import { CreateNewUserPage } from '../pages/CreateNewUserPage/CreateNewUserPage';
-import { EditOrderPage } from '../pages/EditOrderPage/EditOrderPage';
-import { EditUserPage } from '../pages/EditUserPage/EditUserPage';
-import { LoginPage } from '../pages/LoginPage/LoginPage';
-import { OrderDescPage } from '../pages/OrderDescPage/OrderDescPage';
-import { OrdersPage } from '../pages/OrdersPage/OrdersPage';
-import { PaymentOrderPage } from '../pages/PaymentOrderPage/PaymentOrderPage';
-import { ProfilePage } from '../pages/ProfilePage/ProfilePage';
-import { UserDescPage } from '../pages/UserDescPage/UserDescPage';
-import { UsersPage } from '../pages/UsersPage/UsersPage';
-import { UserType } from '../types/UserType';
-import { ProtectedRoute } from './ProtectedRoute';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { UserType } from '../shared/types/UserType';
+import { LoginPage } from './LoginPage/LoginPage';
+import { ProtectedRoute } from '../features/protected-route';
+import { AdminOrdersPage } from './AdminOrdersPage/AdminOrdersPage';
+import { OrdersPage } from './OrdersPage';
+import { CreateNewOrderPage } from './CreateNewOrderPage/CreateNewOrderPage';
+import { OrderDescPage } from './OrderDescPage/OrderDescPage';
+import { CloseOrderPage } from './CloseOrderPage/CloseOrderPage';
+import { ProfilePage } from './ProfilePage/ProfilePage';
+import { AdminPaymentOrderPage } from './AdminPaymentOrderPage/AdminPaymentOrderPage';
+import { PaymentOrderPage } from './PaymentOrderPage/PaymentOrderPage';
+import { EditOrderPage } from './EditOrderPage/EditOrderPage';
+import { UsersPage } from './UsersPage/UsersPage';
+import { CompanyPage } from './CompanyPage/CompanyPage';
+import { UserDescPage } from './UserDescPage/UserDescPage';
+import { CreateNewUserPage } from './CreateNewUserPage/CreateNewUserPage';
+import { EditUserPage } from './EditUserPage/EditUserPage';
 
 export const AppRouter = () => {
     const navigate = useNavigate();

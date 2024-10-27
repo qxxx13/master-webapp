@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 
 import { StatusChip } from '../../components/StatusChip/StatusChip';
 import { UserChip } from '../../components/UserChip/UserChip';
-import { useRubFormat } from '../../hooks/useRubFormat';
+import { useRubFormat } from '../../features/hooks/useRubFormat';
 import { OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { $dispStoreGetStatus, fetchDispByIdFx } from './model/dispStore';

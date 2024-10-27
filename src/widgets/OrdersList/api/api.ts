@@ -1,6 +1,3 @@
-import { instance } from '../../../config/apiConfig/apiConfig';
-import { GetOrdersType, MasterOrderStatusEnum, OrderType } from '../../../types/OrderType';
-
 export const fetchOrdersByMasterId = async (
     page: number,
     perPage: number,

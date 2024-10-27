@@ -23,7 +23,7 @@ import { useEffect, useState } from 'react';
 
 import { CardLoading } from '../../components/CardLoading/CardLoading';
 import { OrderCard } from '../../components/OrderCard/OrderCard';
-import { useRubFormat } from '../../hooks/useRubFormat';
+import { useRubFormat } from '../../features/hooks/useRubFormat';
 import { RoleEnum, UserType } from '../../types/UserType';
 import { deliveredOrder } from '../OrderDescPage/api/workOrderApi';
 import { $updateOrderStore, setUpdate } from '../OrderDescPage/model/setUpdateOrderStore';

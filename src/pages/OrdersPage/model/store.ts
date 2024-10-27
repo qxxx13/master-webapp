@@ -1,8 +1,3 @@
-import { combine, createEffect, createStore, restore } from 'effector';
-
-import { GetOrdersType, MasterOrderStatusEnum } from '../../../types/OrderType';
-import { fetchOrdersByMasterId } from '../api/ordersApi';
-
 export const $ordersStore = createStore<GetOrdersType>({ meta: {} as GetOrdersType['meta'], data: [] });
 
 export const fetchOrdersFx = createEffect<

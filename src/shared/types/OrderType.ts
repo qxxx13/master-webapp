@@ -30,27 +30,10 @@ export enum OrderTypeEnum {
     airConditioner = 'airConditioner',
 }
 
-export enum UserStatusEnum {
-    atWork = 'atWork', // Работает
-    waitForWork = 'waitForWork', // Ждет заказ
-    wentForSparePart = 'wentForSparePart', // Уехал за ЗЧ
-    dayOff = 'dayOff', // Выходной
-}
-
 export enum VisitEnum {
     primary = 'primary', // Первичный
     repeated = 'repeated', // Повторный
     guarantee = 'guarantee', //Гарантия
-}
-
-export enum RoleEnum {
-    master = 'master',
-    admin = 'admin',
-    disp = 'disp',
-    regional = 'regional',
-    promouter = 'promouter',
-    fired = 'fired', //уволен
-    all = 'all',
 }
 
 export type OrderType = {

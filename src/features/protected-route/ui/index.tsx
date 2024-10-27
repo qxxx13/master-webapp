@@ -1,11 +1,5 @@
 import { Navigate } from 'react-router-dom';
-
-import { RoleEnum } from '../types/UserType';
-
-type ProtectedRouteProps = {
-    children: React.ReactNode;
-    admitLevel?: RoleEnum;
-};
+import { ProtectedRouteProps } from '../model/type';
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     const user = JSON.parse(localStorage.getItem('user') as string);

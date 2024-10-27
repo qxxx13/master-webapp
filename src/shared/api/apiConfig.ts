@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const instance = axios.create({
-    baseURL: 'https://initcrm.ru/',
+    baseURL: 'http://localhost:5555/api/',
     headers: {
         'Content-Type': 'application/json',
     },

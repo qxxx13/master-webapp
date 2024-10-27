@@ -18,8 +18,6 @@ export const NavBar = () => {
 
     const display = Object.keys(currentUser).length !== 0 ? 'flex' : 'none';
 
-    console.log(currentUser);
-
     useEffect(() => {
         setCurrentUser(JSON.parse(localStorage.getItem('user') || '{}'));
     }, []);

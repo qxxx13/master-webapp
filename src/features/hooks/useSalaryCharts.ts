@@ -1,6 +1,5 @@
 import moment from 'moment';
-
-import { OrderType } from '../types/OrderType';
+import { OrderType } from '../../shared/types';
 
 export const useSalaryCharts = (orders: OrderType[], lastDay: number) => {
     const pData: number[] = [];
