@@ -113,7 +113,7 @@ export const CompanyDesc: FC<CompanyDescProps> = (props) => {
     };
 
     return (
-        <Stack sx={{ p: 2, textAlign: 'center' }} gap={1}>
+        <Stack sx={{ p: 2, textAlign: 'center', mb: '56px' }} gap={1}>
             <Typography variant="h5">
                 <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'center'} gap={1}>
                     {company.CompanyName} {company.Primary && <NewReleasesIcon />}
