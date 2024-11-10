@@ -29,6 +29,8 @@ export type UserType = {
     TelegramId: string;
     AvatarId?: number;
     AvatarUrl?: string;
+    CompanyInterest?: number;
+    CompanyId?: number;
 };
 
 export type LoginedUserType = {

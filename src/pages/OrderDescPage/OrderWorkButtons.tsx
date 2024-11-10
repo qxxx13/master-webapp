@@ -9,8 +9,9 @@ export const OrderWorksButton: React.FC<{
     chatId: string;
     messageId: string;
     orderId: string;
+    companyId: string;
     status: OrderStatusEnum;
-}> = ({ chatId, messageId, orderId, status }) => {
+}> = ({ chatId, messageId, orderId, status, companyId }) => {
     const navigate = useNavigate();
 
     const handleTake = async () => {
@@ -40,7 +41,7 @@ export const OrderWorksButton: React.FC<{
     };
 
     const handleClose = () => {
-        navigate(`/closeorder/${chatId}/${messageId}/${orderId}`);
+        navigate(`/closeorder/${chatId}/${messageId}/${orderId}/${companyId}`);
     };
 
     const handleReturn = async () => {

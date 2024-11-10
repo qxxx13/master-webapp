@@ -18,6 +18,9 @@ import { UserDescPage } from '../pages/UserDescPage/UserDescPage';
 import { UsersPage } from '../pages/UsersPage/UsersPage';
 import { UserType } from '../types/UserType';
 import { ProtectedRoute } from './ProtectedRoute';
+import { CreateCompanyPage } from '../pages/CompanyPage/CreateCompanyPage/CreateCompanyPage';
+import { CompanyDescPage } from '../pages/CompanyDescPage/CompanyDescPage';
+import { AddNewWorkersPage } from '../pages/AddNewWorkersPage/AddNewWorkersPage';
 
 export const AppRouter = () => {
     const navigate = useNavigate();
@@ -68,7 +71,7 @@ export const AppRouter = () => {
                 }
             />
             <Route
-                path="/closeOrder/:chatId/:messageId/:orderId"
+                path="/closeOrder/:chatId/:messageId/:orderId/:companyId"
                 element={
                     <ProtectedRoute>
                         <CloseOrderPage currentUser={currentUser as UserType} />
@@ -140,6 +143,30 @@ export const AppRouter = () => {
                 element={
                     <ProtectedRoute>
                         <EditUserPage currentUser={currentUser as UserType} />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/createCompany"
+                element={
+                    <ProtectedRoute>
+                        <CreateCompanyPage currentUser={currentUser as UserType} />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/company/:id"
+                element={
+                    <ProtectedRoute>
+                        <CompanyDescPage currentUser={currentUser as UserType} />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/company/addNewWorkers/:id"
+                element={
+                    <ProtectedRoute>
+                        <AddNewWorkersPage currentUser={currentUser as UserType} />
                     </ProtectedRoute>
                 }
             />

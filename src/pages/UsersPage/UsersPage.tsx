@@ -20,6 +20,8 @@ export const UsersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) 
     const BackBTN = Telegram.WebApp.BackButton;
     BackBTN.hide();
 
+    console.log(data);
+
     useEffect(() => {
         fetchAllUsersFx();
         Telegram.WebApp.ready();

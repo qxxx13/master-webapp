@@ -8,6 +8,7 @@ type Props<T, U> = {
     name: U;
     option: JSX.Element[];
     required?: boolean;
+    isLoading?: boolean;
 };
 
 export const SelectFieldForForm = <T extends Control<any, unknown>, U extends string>({
@@ -15,6 +16,7 @@ export const SelectFieldForForm = <T extends Control<any, unknown>, U extends st
     name,
     option,
     required,
+    isLoading,
 }: Props<T, U>) => {
     const isRequired = required !== undefined ? required : true;
 
@@ -26,7 +28,12 @@ export const SelectFieldForForm = <T extends Control<any, unknown>, U extends st
             render={({ field: { onChange, value }, fieldState: { error } }) => (
                 <FormControl fullWidth>
                     <InputLabel id="select-label">{translate(name)}</InputLabel>
-                    <Select value={value} onChange={(event) => onChange(event.target.value)} error={!!error}>
+                    <Select
+                        value={value}
+                        onChange={(event) => onChange(event.target.value)}
+                        error={!!error}
+                        disabled={isLoading}
+                    >
                         {option}
                     </Select>
                 </FormControl>

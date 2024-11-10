@@ -11,6 +11,8 @@ export const initialValues = (user: UserType): UserType => {
         InterestRate: user.InterestRate,
         Region: user.Region,
         TelegramId: user.TelegramId,
+        CompanyId: user.CompanyId,
+        CompanyInterest: user.CompanyInterest,
     };
 
     return initialUser;

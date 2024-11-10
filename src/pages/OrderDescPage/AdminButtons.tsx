@@ -10,7 +10,8 @@ export const AdminButtons: React.FC<{
     messageId: string;
     orderId: string;
     status: OrderStatusEnum;
-}> = ({ chatId, messageId, orderId, status }) => {
+    companyId: string;
+}> = ({ chatId, messageId, orderId, status, companyId }) => {
     const navigate = useNavigate();
 
     const handleEditOrder = () => {
@@ -18,7 +19,7 @@ export const AdminButtons: React.FC<{
     };
 
     const handleClose = () => {
-        navigate(`/closeorder/${chatId}/${messageId}/${orderId}`);
+        navigate(`/closeorder/${chatId}/${messageId}/${orderId}/${companyId}`);
     };
 
     const handleDelivered = () => {

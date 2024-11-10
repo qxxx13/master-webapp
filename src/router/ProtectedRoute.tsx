@@ -10,8 +10,6 @@ type ProtectedRouteProps = {
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     const user = JSON.parse(localStorage.getItem('user') as string);
 
-    console.log(user);
-
     if (user && Object.keys(user).length > 0) {
         return <>{children}</>;
     } else {

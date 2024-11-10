@@ -63,6 +63,7 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
                                         messageId={String(order.MessageId)}
                                         orderId={String(order.Id)}
                                         status={order.Status as OrderStatusEnum}
+                                        companyId={String(master.CompanyId)}
                                     />
                                 </AccordionDetails>
                             </Accordion>
@@ -72,6 +73,7 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
                         chatId={String(master.TelegramChatId)}
                         messageId={String(order.MessageId)}
                         orderId={String(order.Id)}
+                        companyId={String(master.CompanyId)}
                         status={order.Status as OrderStatusEnum}
                     />
                 </>

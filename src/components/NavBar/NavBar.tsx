@@ -65,7 +65,7 @@ export const NavBar = () => {
                 <BottomNavigationAction label="Заявки" icon={<TaskAltIcon />} />
                 <BottomNavigationAction label="Сдача" icon={<PaidIcon />} />
                 {currentUser.Role === 'admin' && <BottomNavigationAction label="Пользователи" icon={<GroupIcon />} />}
-                {currentUser.Role === 'admin' && <BottomNavigationAction label="Компания" icon={<WorkIcon />} />}
+                {currentUser.Role === 'admin' && <BottomNavigationAction label="Компании" icon={<WorkIcon />} />}
                 <BottomNavigationAction label="Профиль" icon={<AccountCircleIcon />} />
             </BottomNavigation>
         </Box>

@@ -1,5 +1,4 @@
-import { FormControl, FormLabel, Input, TextField } from '@mui/material';
-import React from 'react';
+import { TextField } from '@mui/material';
 import { Control, Controller } from 'react-hook-form';
 
 import { translate } from '../../common/translate/translate';
@@ -7,11 +6,13 @@ import { translate } from '../../common/translate/translate';
 type Props<T, U> = {
     name: U;
     control: T;
+    isLoading?: boolean;
 };
 
 export const TextFieldForForm = <T extends Control<any, unknown>, U extends string>({
     name,
     control,
+    isLoading,
 }: Props<T, U>): JSX.Element => {
     return (
         <Controller
@@ -26,6 +27,7 @@ export const TextFieldForForm = <T extends Control<any, unknown>, U extends stri
                     type={typeof value}
                     label={translate(name)}
                     error={!!error}
+                    disabled={isLoading}
                 />
             )}
         />

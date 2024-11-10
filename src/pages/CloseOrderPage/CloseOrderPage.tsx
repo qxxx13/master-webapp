@@ -9,6 +9,7 @@ import { CloseOrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { closeOrder, getInterestRate, getMasterId } from './api/CloseOrderApi';
 import { $closeOrderGetStatus, $closeOrderStore } from './model/closeOrderStore';
+import { instance } from '../../config/apiConfig/apiConfig';
 
 export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
@@ -21,6 +22,7 @@ export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUse
     const chatId = params.chatId as string;
     const messageId = params.messageId as string;
     const orderId = params.orderId as string;
+    const companyId = params.companyId as string;
 
     const toggleSetOpenDialog = (openDialog: boolean) => () => {
         setOpenDialog(openDialog);
@@ -57,7 +59,11 @@ export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUse
                 chatId,
                 messageId,
                 String(currentUser.Id),
-            );
+            ).then(() => {
+                instance
+                    .patch(`/company/addMoneyToCompany?companyId=${companyId}&sum=${companyShare}`)
+                    .catch((e) => console.log(e));
+            });
 
             navigate('/');
         }

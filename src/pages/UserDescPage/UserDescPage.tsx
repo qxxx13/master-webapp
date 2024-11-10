@@ -90,6 +90,7 @@ export const UserDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser 
                     <Divider />
                     <Typography variant="h6">Средний чек за месяц: {averageBillFormat}</Typography>
 
+                    <Button onClick={goToEditUser}>Редактировать</Button>
                     <MainButton text="Редактировать" onClick={goToEditUser} />
                 </Stack>
             ) : (
