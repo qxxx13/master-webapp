@@ -1,7 +1,8 @@
-import { FC } from 'react';
-import { CompanyType } from '../../../types/CompanyType';
 import { Card, CardActionArea, CardContent, Stack, Typography } from '@mui/material';
+import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { CompanyType } from '../../../types/CompanyType';
 
 type CompanyListItemProps = {
     company: CompanyType;

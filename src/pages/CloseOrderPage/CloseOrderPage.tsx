@@ -5,11 +5,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { ClosingAtZeroDialog } from '../../components/ClosingAtZeroDialog/ClosingAtZeroDialog';
+import { instance } from '../../config/apiConfig/apiConfig';
 import { CloseOrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { closeOrder, getInterestRate, getMasterId } from './api/CloseOrderApi';
 import { $closeOrderGetStatus, $closeOrderStore } from './model/closeOrderStore';
-import { instance } from '../../config/apiConfig/apiConfig';
 
 export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

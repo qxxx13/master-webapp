@@ -1,4 +1,5 @@
 import { combine, createEffect, createStore, restore } from 'effector';
+
 import { NewCompanyType } from '../../../types/CompanyType';
 import { postNewCompany } from '../api/addNewCompanyApi';
 

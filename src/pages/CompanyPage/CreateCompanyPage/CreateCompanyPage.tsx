@@ -1,9 +1,10 @@
-import { FC, useEffect } from 'react';
-import { UserType } from '../../../types/UserType';
 import { Stack, Typography } from '@mui/material';
 import { useUnit } from 'effector-react';
-import { $usersGetStatus, fetchAllUsersFx } from './model/usersStore';
+import { FC, useEffect } from 'react';
+
 import { NewCompanyForm } from '../../../components/NewCompanyForm/NewCompanyForm';
+import { UserType } from '../../../types/UserType';
+import { $usersGetStatus, fetchAllUsersFx } from './model/usersStore';
 
 type CreateCompanyPageProps = {
     currentUser: UserType;

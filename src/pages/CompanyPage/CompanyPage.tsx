@@ -1,8 +1,8 @@
 import { Button, Stack, Typography } from '@mui/material';
-
-import { UserType } from '../../types/UserType';
 import { MainButton } from '@vkruglikov/react-telegram-web-app';
 import { useNavigate } from 'react-router-dom';
+
+import { UserType } from '../../types/UserType';
 import { CompanyList } from './CompanyList/CompanyList';
 
 export const CompanyPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {

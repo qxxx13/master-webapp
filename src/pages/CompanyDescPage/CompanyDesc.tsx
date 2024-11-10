@@ -1,5 +1,8 @@
-import { ChangeEvent, FC, useState } from 'react';
-import { CompanyType } from '../../types/CompanyType';
+import CreditScoreIcon from '@mui/icons-material/CreditScore';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import MoneyOffIcon from '@mui/icons-material/MoneyOff';
+import NewReleasesIcon from '@mui/icons-material/NewReleases';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import {
     Box,
     Button,
@@ -23,18 +26,16 @@ import {
     TextField,
     Typography,
 } from '@mui/material';
-import { UserChip } from '../../components/UserChip/UserChip';
-import { UserType } from '../../types/UserType';
-import NewReleasesIcon from '@mui/icons-material/NewReleases';
-import { sumToSend } from './helper/sumToSend';
+import { ChangeEvent, FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import MoneyOffIcon from '@mui/icons-material/MoneyOff';
-import CreditScoreIcon from '@mui/icons-material/CreditScore';
+
+import { UserChip } from '../../components/UserChip/UserChip';
 import { instance } from '../../config/apiConfig/apiConfig';
 import { useRubFormat } from '../../hooks/useRubFormat';
+import { CompanyType } from '../../types/CompanyType';
+import { UserType } from '../../types/UserType';
 import { setUpdate } from '../CompanyPage/CompanyList/model/updateStore';
-import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import { sumToSend } from './helper/sumToSend';
 
 type CompanyDescProps = {
     company: CompanyType;
@@ -205,7 +206,7 @@ export const CompanyDesc: FC<CompanyDescProps> = (props) => {
                         <Button onClick={toggleIsOpenPaidDialog(false)} variant="contained" color="warning">
                             Отмена
                         </Button>
-                        <Button onClick={handleClosePaid} autoFocus variant="contained" color="success">
+                        <Button onClick={handleClosePaid} variant="contained" color="success">
                             Согласен
                         </Button>
                     </DialogActions>

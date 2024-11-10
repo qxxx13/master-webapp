@@ -1,13 +1,13 @@
 import { Button, Stack } from '@mui/material';
+import { useUnit } from 'effector-react';
+import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { UserType } from '../../types/UserType';
 import { CompanySelect, RoleSelectField, TextFields } from './FieldsForForm';
+import { $companyListStoresGetStatus, fetchAllCompanyFx } from './model/companyListStore';
 import { editUserFx } from './model/editUserFormStore';
 import { initialValues } from './model/initialValues';
-import { $companyListStoresGetStatus, fetchAllCompanyFx } from './model/companyListStore';
-import { useEffect } from 'react';
-import { useUnit } from 'effector-react';
 
 export const EditUserForm: React.FC<{ user: UserType }> = ({ user }) => {
     const { handleSubmit, control } = useForm<UserType>({

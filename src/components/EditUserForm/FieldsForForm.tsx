@@ -2,10 +2,10 @@ import { MenuItem } from '@mui/material';
 import { Control } from 'react-hook-form';
 
 import { translate } from '../../common/translate/translate';
+import { CompanyType } from '../../types/CompanyType';
 import { RoleEnum, UserType } from '../../types/UserType';
 import { SelectFieldForForm } from '../SelectFieldForForm/SelectFieldForForm';
 import { TextFieldForForm } from '../TextFieldForForm/TextFieldForForm';
-import { CompanyType } from '../../types/CompanyType';
 
 export const TextFields = (control: Control<UserType, unknown>, initialValues: UserType) => {
     const { IsOnline, Status, Id, CompanyId, ...textFields } = initialValues;

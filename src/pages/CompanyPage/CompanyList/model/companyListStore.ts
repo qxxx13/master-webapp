@@ -1,6 +1,7 @@
 import { combine, createEffect, createStore, restore } from 'effector';
-import { getAllCompanies } from '../api/companyListApi';
+
 import { CompanyType } from '../../../../types/CompanyType';
+import { getAllCompanies } from '../api/companyListApi';
 
 export const $companyListStore = createStore<CompanyType[]>([]);
 

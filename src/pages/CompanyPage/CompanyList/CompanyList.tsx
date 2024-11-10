@@ -1,8 +1,9 @@
 import { Stack } from '@mui/material';
-import { FC, useEffect } from 'react';
-import { $companyListStoreGetStatus, fetchAllCompanyFx } from './model/companyListStore';
 import { useUnit } from 'effector-react';
+import { FC, useEffect } from 'react';
+
 import { CompanyListItem } from './CompanyItem';
+import { $companyListStoreGetStatus, fetchAllCompanyFx } from './model/companyListStore';
 
 export const CompanyList: FC = () => {
     const { data, error, loading } = useUnit($companyListStoreGetStatus);

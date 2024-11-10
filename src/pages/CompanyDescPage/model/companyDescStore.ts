@@ -1,4 +1,5 @@
 import { combine, createEffect, createEvent, createStore, restore } from 'effector';
+
 import { CompanyType } from '../../../types/CompanyType';
 import { fetchCompanyById } from '../api/companyDescApi';
 

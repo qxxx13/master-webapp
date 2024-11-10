@@ -1,7 +1,7 @@
 import { combine, createEffect, createStore, restore } from 'effector';
 
-import { getAllUsers } from '../api/createNewOrderPageApi';
 import { UserType } from '../../../../types/UserType';
+import { getAllUsers } from '../api/createNewOrderPageApi';
 
 export const $usersStore = createStore<UserType[]>([]);
 

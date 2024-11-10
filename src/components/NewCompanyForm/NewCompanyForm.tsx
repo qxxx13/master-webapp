@@ -1,15 +1,16 @@
 import { Button, Stack } from '@mui/material';
+import { MainButton } from '@vkruglikov/react-telegram-web-app';
+import { useUnit } from 'effector-react';
 import { FC, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { CompanySelect, CompanyTextField, OwnerSelect, PrimaryCompanySwitch } from './FieldsForForm';
-import { addNewCompanyFx } from './model/newOrderFormStore';
-import { initialValues } from './model/initialValues';
+
 import { NewCompanyType } from '../../types/CompanyType';
 import { UserType } from '../../types/UserType';
+import { CompanySelect, CompanyTextField, OwnerSelect, PrimaryCompanySwitch } from './FieldsForForm';
 import { $companyListStoresGetStatus, fetchAllCompanyFx } from './model/companyListStore';
-import { useUnit } from 'effector-react';
-import { MainButton } from '@vkruglikov/react-telegram-web-app';
+import { initialValues } from './model/initialValues';
+import { addNewCompanyFx } from './model/newOrderFormStore';
 
 type NewCompanyFormProps = {
     isLoading: boolean;

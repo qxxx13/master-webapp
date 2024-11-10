@@ -1,15 +1,16 @@
-import { FC, useEffect } from 'react';
-import { UserType } from '../../types/UserType';
-import { useParams } from 'react-router-dom';
-import { $companyDescStoreGetStatus, fetchCompanyByIdFx } from './model/companyDescStore';
-import { useUnit } from 'effector-react';
-import { $companyOwnerStoreGetStatus } from './model/userStore';
 import { CircularProgress, Stack, Typography } from '@mui/material';
-import { CompanyDesc } from './CompanyDesc';
+import { useUnit } from 'effector-react';
+import { FC, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
 import { CompanyType } from '../../types/CompanyType';
-import { $primaryCompanyStoreGetStatus, fetchPrimaryCompanyByIdFx } from './model/primaryCompanyStore';
-import { $companyWorkersStoreGetStatus } from './model/workersStore';
+import { UserType } from '../../types/UserType';
 import { $updateStore } from '../CompanyPage/CompanyList/model/updateStore';
+import { CompanyDesc } from './CompanyDesc';
+import { $companyDescStoreGetStatus, fetchCompanyByIdFx } from './model/companyDescStore';
+import { $primaryCompanyStoreGetStatus, fetchPrimaryCompanyByIdFx } from './model/primaryCompanyStore';
+import { $companyOwnerStoreGetStatus } from './model/userStore';
+import { $companyWorkersStoreGetStatus } from './model/workersStore';
 
 type CompanyDescPageProps = {
     currentUser: UserType;

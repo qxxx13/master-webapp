@@ -1,10 +1,10 @@
 import { Box, FormControlLabel, MenuItem, Switch } from '@mui/material';
 import { Control, Controller } from 'react-hook-form';
 
-import { TextFieldForForm } from '../TextFieldForForm/TextFieldForForm';
 import { CompanyType, NewCompanyType } from '../../types/CompanyType';
 import { RoleEnum, UserType } from '../../types/UserType';
 import { SelectFieldForForm } from '../SelectFieldForForm/SelectFieldForForm';
+import { TextFieldForForm } from '../TextFieldForForm/TextFieldForForm';
 
 export const CompanyTextField = (control: Control<NewCompanyType, unknown>, isLoading: boolean) => (
     <TextFieldForForm name={'CompanyName'} control={control} isLoading={isLoading} />

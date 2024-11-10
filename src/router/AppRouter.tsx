@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 
+import { AddNewWorkersPage } from '../pages/AddNewWorkersPage/AddNewWorkersPage';
 import { AdminOrdersPage } from '../pages/AdminOrdersPage/AdminOrdersPage';
 import { AdminPaymentOrderPage } from '../pages/AdminPaymentOrderPage/AdminPaymentOrderPage';
 import { CloseOrderPage } from '../pages/CloseOrderPage/CloseOrderPage';
+import { CompanyDescPage } from '../pages/CompanyDescPage/CompanyDescPage';
 import { CompanyPage } from '../pages/CompanyPage/CompanyPage';
+import { CreateCompanyPage } from '../pages/CompanyPage/CreateCompanyPage/CreateCompanyPage';
 import { CreateNewOrderPage } from '../pages/CreateNewOrderPage/CreateNewOrderPage';
 import { CreateNewUserPage } from '../pages/CreateNewUserPage/CreateNewUserPage';
 import { EditOrderPage } from '../pages/EditOrderPage/EditOrderPage';
@@ -18,9 +21,6 @@ import { UserDescPage } from '../pages/UserDescPage/UserDescPage';
 import { UsersPage } from '../pages/UsersPage/UsersPage';
 import { UserType } from '../types/UserType';
 import { ProtectedRoute } from './ProtectedRoute';
-import { CreateCompanyPage } from '../pages/CompanyPage/CreateCompanyPage/CreateCompanyPage';
-import { CompanyDescPage } from '../pages/CompanyDescPage/CompanyDescPage';
-import { AddNewWorkersPage } from '../pages/AddNewWorkersPage/AddNewWorkersPage';
 
 export const AppRouter = () => {
     const navigate = useNavigate();

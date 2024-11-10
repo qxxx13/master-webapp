@@ -1,9 +1,10 @@
-import { FC, useEffect } from 'react';
-import { UserType } from '../../types/UserType';
-import { useParams } from 'react-router-dom';
 import { Button, Stack, Typography } from '@mui/material';
-import { $newWorkersStoreGetStatus, fetchAllUsersFx } from './model/newWorkersStore';
 import { useUnit } from 'effector-react';
+import { FC, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { UserType } from '../../types/UserType';
+import { $newWorkersStoreGetStatus, fetchAllUsersFx } from './model/newWorkersStore';
 
 type AddNewWorkersPageProps = {
     currentUser: UserType;
