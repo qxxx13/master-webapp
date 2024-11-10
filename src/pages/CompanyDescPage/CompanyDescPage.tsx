@@ -25,6 +25,8 @@ export const CompanyDescPage: FC<CompanyDescPageProps> = ({ currentUser }) => {
     const { data: companyWorkers } = useUnit($companyWorkersStoreGetStatus);
     const update = useUnit($updateStore);
 
+    const companyWorkersFiltered = companyWorkers.filter((worker) => worker.CompanyInterest !== 0);
+
     useEffect(() => {
         id && fetchCompanyByIdFx({ orderId: id });
     }, [id, update]);
@@ -41,7 +43,7 @@ export const CompanyDescPage: FC<CompanyDescPageProps> = ({ currentUser }) => {
                     company={companyDesc as CompanyType}
                     owner={companyOwner as UserType}
                     primaryCompany={primaryCompany && (primaryCompany as CompanyType)}
-                    companyWorkers={companyWorkers}
+                    companyWorkers={companyWorkersFiltered}
                 />
             ) : (
                 <CircularProgress />
