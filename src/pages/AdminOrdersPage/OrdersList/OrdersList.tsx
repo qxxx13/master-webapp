@@ -61,6 +61,7 @@ export const OrdersList: FC<OrdersListProps> = ({ masterId, users, type }) => {
                     order.Status !== OrderStatusEnum.fulfilled &&
                     order.Status !== OrderStatusEnum.missedCall &&
                     order.Status !== OrderStatusEnum.rejectedByClient &&
+                    order.Status !== OrderStatusEnum.debt &&
                     order.Status !== OrderStatusEnum.rejectedByMaster,
             );
 
