@@ -33,7 +33,7 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
 
     return (
         <>
-            <Stack gap={2} sx={{ p: 2, position: 'absolute', top: 0, width: '100%' }}>
+            <Stack gap={2} sx={{ p: 2 }}>
                 <Typography variant="h4" sx={{ textAlign: 'center' }}>
                     {typeOfPage === 'archive' ? 'Архив' : 'Хронология'}
                 </Typography>
