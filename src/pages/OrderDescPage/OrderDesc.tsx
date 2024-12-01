@@ -9,6 +9,7 @@ import { useRubFormat } from '../../hooks/useRubFormat';
 import { OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { $dispStoreGetStatus, fetchDispByIdFx } from './model/dispStore';
+import { translate } from '../../common/translate/translate';
 
 type OrderDescProps = {
     order: OrderType;
@@ -20,6 +21,7 @@ export const OrderDesc: React.FC<OrderDescProps> = ({ order, master }) => {
 
     const totalFormat = useRubFormat(order.Total).format;
     const expensesFormat = useRubFormat(order.Expenses).format;
+    const debtFormat = useRubFormat(order.Debt).format;
     const companyShareFormat = order.CompanyShare !== 0 && useRubFormat(+String(order.CompanyShare)).format;
 
     const callToClient = () => {
@@ -40,7 +42,7 @@ export const OrderDesc: React.FC<OrderDescProps> = ({ order, master }) => {
                 <UserChip user={master} />
             </Stack>
             <Typography sx={{ mt: 1 }} variant="h6">
-                Дата: {moment(order.Date).format('DD.MM.YY')}
+                Дата: {translate(moment(order.Date).format('dddd'))} {moment(order.Date).format('DD.MM.YY')}
             </Typography>
             <Divider />
             <Typography variant="h6">Время: {order.Time}</Typography>
@@ -80,6 +82,12 @@ export const OrderDesc: React.FC<OrderDescProps> = ({ order, master }) => {
                 <>
                     <Divider />
                     <Typography variant="h6">Забрал: {totalFormat}</Typography>
+                    {order.Debt > 0 && (
+                        <>
+                            <Divider />
+                            <Typography variant="h6">Долг: {debtFormat}</Typography>
+                        </>
+                    )}
                     <Divider />
                     <Typography variant="h6">Расход: {expensesFormat}</Typography>
                     <Divider />

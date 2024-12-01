@@ -89,6 +89,15 @@ const dictionary: Record<string, string> = {
     MessageId: 'Message_thread_id',
     master: 'Мастер',
     admin: 'Администратор',
+
+    //? Дни недели
+    Monday: 'Понедельник',
+    Tuesday: 'Вторник',
+    Wednesday: 'Среда',
+    Thursday: 'Четверг',
+    Friday: 'Пятница',
+    Saturday: 'Суббота',
+    Sunday: 'Воскресенье',
 };
 
 export const translate = (key: string) => {

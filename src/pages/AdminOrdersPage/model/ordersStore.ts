@@ -8,7 +8,6 @@ export const $allOrders = createStore<GetOrdersType>({ meta: {} as GetOrdersType
 export const fetchAllOrdersFx = createEffect<
     {
         page: number;
-        perPage: number;
         status: OrderStatusEnum | 'all';
         phoneNumber: string | 'all';
         masterId: string | 'all';
@@ -16,9 +15,7 @@ export const fetchAllOrdersFx = createEffect<
     GetOrdersType
 >();
 
-fetchAllOrdersFx.use((params) =>
-    fetchAllOrders(params.page, params.perPage, params.status, params.phoneNumber, params.masterId),
-);
+fetchAllOrdersFx.use((params) => fetchAllOrders(params.page, params.status, params.phoneNumber, params.masterId));
 
 const uniqueOrders = (orders: OrderType[]) => {
     return orders.reduce((res, cur) => {

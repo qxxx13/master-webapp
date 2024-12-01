@@ -3,16 +3,12 @@ import { GetOrdersType, MasterOrderStatusEnum, OrderType } from '../../../types/
 
 export const fetchOrdersByMasterId = async (
     page: number,
-    perPage: number,
     phoneNumber: string | '',
     userId: string,
     status: MasterOrderStatusEnum,
-    startDate: Date,
 ): Promise<GetOrdersType> => {
     const orders = await instance
-        .get(
-            `orders/?page=${page}&perPage=${perPage}&searchValue=${phoneNumber}&masterId=${userId}&status=${status}&startDate=${startDate}`,
-        )
+        .get(`orders/?page=${page}&searchValue=${phoneNumber}&masterId=${userId}&status=${status}`)
         .then((res) => res.data);
 
     return orders;

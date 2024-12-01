@@ -1,7 +1,7 @@
 import { instance } from '../../../config/apiConfig/apiConfig';
 import { OrderStatusEnum } from '../../../types/OrderType';
 
-export const closingOrderAtZero = (orderId: string, image: File) => {
+/* export const closingOrderAtZero = (orderId: string, image: File) => {
     const reasonImage = instance.patch(
         `orders/reasonImage?orderId=${orderId}`,
         { file: image },
@@ -14,7 +14,7 @@ export const closingOrderAtZero = (orderId: string, image: File) => {
 
     return reasonImage;
 };
-
+ */
 export const closeOrder = async (
     orderId: string,
     chatId: string,

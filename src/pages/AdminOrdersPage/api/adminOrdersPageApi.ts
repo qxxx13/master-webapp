@@ -4,13 +4,12 @@ import { UserType } from '../../../types/UserType';
 
 export const fetchAllOrders = async (
     page: number,
-    perPage: number,
     status: OrderStatusEnum | 'all',
     phoneNumber: string | '',
     masterId: string | 'all',
 ): Promise<GetOrdersType> => {
     const orders = await instance
-        .get(`orders?page=${page}&perPage=${perPage}&status=${status}&searchValue=${phoneNumber}&masterId=${masterId}`)
+        .get(`orders?page=${page}&status=${status}&searchValue=${phoneNumber}&masterId=${masterId}`)
         .then((res) => res.data);
 
     return orders;

@@ -34,10 +34,12 @@ export const AppRouter = () => {
             : setUrl('/');
     }, []);
 
-    if (url !== '') {
-        navigate(url);
-        setUrl('');
-    }
+    useEffect(() => {
+        if (url !== '') {
+            navigate(url);
+            setUrl('');
+        }
+    }, [url]);
 
     return (
         <Routes>

@@ -5,6 +5,7 @@ import { translate } from '../../common/translate/translate';
 import { MasterOrderStatusEnum } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { OrdersList } from './OrdersList/OrdersList';
+import { useSearchParams } from 'react-router-dom';
 
 type OrdersPageProps = {
     currentUser: UserType;
@@ -12,6 +13,9 @@ type OrdersPageProps = {
 
 export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
     const [status, setStatus] = useState<MasterOrderStatusEnum>(MasterOrderStatusEnum.all);
+    const [searchParams] = useSearchParams();
+
+    const typeOfPage = searchParams.get('type');
 
     const MenuItems = Object.values(MasterOrderStatusEnum).map((status, index) => (
         <MenuItem key={index} value={status}>
@@ -34,8 +38,9 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
         <>
             <Stack gap={2} sx={{ p: 2, position: 'absolute', top: 0, width: '100%' }}>
                 <Typography variant="h4" sx={{ textAlign: 'center' }}>
-                    Заявки
+                    {typeOfPage === 'archive' ? 'Архив' : 'Хронология'}
                 </Typography>
+
                 <FormControl fullWidth>
                     <InputLabel id="status-select"></InputLabel>
                     <Select labelId="status-select" value={status} onChange={handleChangeStatus}>
@@ -43,7 +48,12 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
                     </Select>
                 </FormControl>
             </Stack>
-            <OrdersList page={1} currentUser={currentUser} status={status} />
+            <OrdersList
+                page={1}
+                currentUser={currentUser}
+                status={status}
+                type={typeOfPage as 'archive' | 'chronology'}
+            />
         </>
     );
 };

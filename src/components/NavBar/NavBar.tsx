@@ -2,6 +2,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import GroupIcon from '@mui/icons-material/Group';
 import PaidIcon from '@mui/icons-material/Paid';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import InventoryIcon from '@mui/icons-material/Inventory';
 import WorkIcon from '@mui/icons-material/Work';
 import { BottomNavigation, BottomNavigationAction, Box, Divider } from '@mui/material';
 import { useUnit } from 'effector-react';
@@ -16,9 +17,7 @@ export const NavBar = () => {
     const pageNum = useUnit($navBarStore);
     const navigate = useNavigate();
 
-    const display = Object.keys(currentUser).length !== 0 ? 'flex' : 'none';
-
-    console.log(currentUser);
+    const display = Object.keys(currentUser).length > 0 ? 'flex' : 'none';
 
     useEffect(() => {
         setCurrentUser(JSON.parse(localStorage.getItem('user') || '{}'));
@@ -26,25 +25,28 @@ export const NavBar = () => {
 
     const handleChangePage = (pageNum: number) => {
         setNavBar(pageNum);
-
         switch (pageNum) {
             case 0: {
-                navigate('/');
+                navigate('/?type=chronology');
                 break;
             }
             case 1: {
-                navigate('/paymentOrder');
+                navigate('/?type=archive');
                 break;
             }
             case 2: {
-                currentUser.Role === 'admin' ? navigate('/users') : navigate('/profile');
+                navigate('/paymentOrder');
                 break;
             }
             case 3: {
-                currentUser.Role === 'admin' ? navigate('/company') : navigate('/profile');
+                currentUser.Role === 'admin' ? navigate('/users') : navigate('/profile');
                 break;
             }
             case 4: {
+                currentUser.Role === 'admin' ? navigate('/company') : navigate('/profile');
+                break;
+            }
+            case 5: {
                 navigate('/profile');
                 break;
             }
@@ -57,12 +59,13 @@ export const NavBar = () => {
             <BottomNavigation
                 showLabels
                 value={pageNum}
-                onChange={(event, newValue) => {
+                onChange={(_, newValue) => {
                     handleChangePage(newValue);
                 }}
-                sx={{ display: display }}
+                sx={{ display: display, overflow: 'auto', justifyContent: 'space-between' }}
             >
-                <BottomNavigationAction label="Заявки" icon={<TaskAltIcon />} />
+                <BottomNavigationAction label="Хронология" icon={<TaskAltIcon />} />
+                <BottomNavigationAction label="Архив" icon={<InventoryIcon />} />
                 <BottomNavigationAction label="Сдача" icon={<PaidIcon />} />
                 {currentUser.Role === 'admin' && <BottomNavigationAction label="Пользователи" icon={<GroupIcon />} />}
                 {currentUser.Role === 'admin' && <BottomNavigationAction label="Компании" icon={<WorkIcon />} />}

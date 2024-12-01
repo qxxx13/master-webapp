@@ -7,7 +7,7 @@ export const App = () => {
     useEffect(() => {
         Telegram.WebApp.ready();
         Telegram.WebApp.expand();
-    });
+    }, []);
 
     return (
         <div className="App">

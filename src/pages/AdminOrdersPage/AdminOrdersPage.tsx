@@ -3,7 +3,7 @@ import { Drawer, IconButton, MenuItem, Select, SelectChangeEvent, Stack, Typogra
 import { MainButton } from '@vkruglikov/react-telegram-web-app';
 import { useUnit } from 'effector-react';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { CardLoading } from '../../components/CardLoading/CardLoading';
 import { OrdersSortForm } from '../../components/OrdersSortForm/OrdersSortForm';
@@ -18,6 +18,9 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
         localStorage.getItem('selectedOrdersUserId') || 'all',
     );
     const [openSortMenu, setOpenSortMenu] = useState(false);
+    const [searchParams] = useSearchParams();
+
+    const typeOfPage = searchParams.get('type');
 
     const toggleDrawer = (state: boolean) => () => {
         setOpenSortMenu(state);
@@ -58,7 +61,7 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
                     <OrdersSortForm />
                 </Drawer>
                 <Typography variant="h5" sx={{ textAlign: 'center' }}>
-                    Заявки
+                    {typeOfPage === 'archive' ? 'Архив' : 'Хронология'}
                 </Typography>
                 <Select value={selectedOrdersUserId} onChange={handleChange} sx={{ height: 45 }}>
                     <MenuItem value="all">All</MenuItem>
@@ -66,7 +69,15 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
                 </Select>
                 <MainButton text="Создать заявку" onClick={goToCreateNewOrderPage} />
             </Stack>
-            {!loading ? <OrdersList masterId={selectedOrdersUserId} users={users} /> : <CardLoading height={160} />}
+            {!loading ? (
+                <OrdersList
+                    masterId={selectedOrdersUserId}
+                    users={users}
+                    type={typeOfPage as 'archive' | 'chronology'}
+                />
+            ) : (
+                <CardLoading height={160} />
+            )}
         </>
     );
 };

@@ -17,7 +17,6 @@ import moment from 'moment';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { instance } from '../../config/apiConfig/apiConfig';
 import { deliveredOrder } from '../../pages/OrderDescPage/api/workOrderApi';
 import { setUpdate } from '../../pages/OrderDescPage/model/setUpdateOrderStore';
 import { OrderType } from '../../types/OrderType';
@@ -37,8 +36,6 @@ export const OrderCard: React.FC<{
     const toggleShowDialog = (showDialog: boolean) => () => {
         setShowDialog(showDialog);
     };
-
-    const avatarUrl = user && user.AvatarId ? `${instance.defaults.baseURL}files/${user.AvatarId}` : '';
 
     const goToOrderDescPage = () => navigate(`/${order.Id}`);
 
@@ -77,7 +74,7 @@ export const OrderCard: React.FC<{
             )}
 
             <Dialog open={showDialog} onClose={toggleShowDialog(false)}>
-                <DialogTitle>Закрыть все заявки</DialogTitle>
+                <DialogTitle>Закрыть заявку</DialogTitle>
                 <DialogContent>
                     <DialogContentText>Вы уверены, что хотите закрыть заявку №{order.Id}?</DialogContentText>
                 </DialogContent>
