@@ -1,8 +1,8 @@
 import MenuIcon from '@mui/icons-material/Menu';
-import { Drawer, IconButton, MenuItem, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
+import { Drawer, IconButton, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material';
 import { MainButton } from '@vkruglikov/react-telegram-web-app';
 import { useUnit } from 'effector-react';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { CardLoading } from '../../components/CardLoading/CardLoading';
@@ -10,6 +10,7 @@ import { OrdersSortForm } from '../../components/OrdersSortForm/OrdersSortForm';
 import { RoleEnum, UserType } from '../../types/UserType';
 import { $usersGetStatus, fetchUsersFx } from './model/usersStore';
 import { OrdersList } from './OrdersList/OrdersList';
+import { debounce } from 'lodash';
 
 export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
     );
     const [openSortMenu, setOpenSortMenu] = useState(false);
     const [searchParams] = useSearchParams();
+    const [phoneNumber, setPhoneNumber] = useState('');
 
     const typeOfPage = searchParams.get('type');
 
@@ -43,6 +45,11 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
         localStorage.setItem('selectedOrdersUserId', event.target.value);
     };
 
+    const handleSearchByPhoneNumber = debounce((event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const phoneNumber = event.target.value;
+        setPhoneNumber(phoneNumber);
+    }, 1500);
+
     useEffect(() => {
         Telegram.WebApp.ready();
         fetchUsersFx();
@@ -60,10 +67,13 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
                 <Typography variant="h5" sx={{ textAlign: 'center' }}>
                     {typeOfPage === 'archive' ? 'Архив' : 'Хронология'}
                 </Typography>
-                <Select value={selectedOrdersUserId} onChange={handleChange} sx={{ height: 45 }}>
-                    <MenuItem value="all">All</MenuItem>
-                    {!loading && menuItems}
-                </Select>
+                <Stack gap={1}>
+                    <TextField size="small" label="Номер телефона" onChange={(e) => handleSearchByPhoneNumber(e)} />
+                    <Select value={selectedOrdersUserId} onChange={handleChange} sx={{ height: 45 }}>
+                        <MenuItem value="all">All</MenuItem>
+                        {!loading && menuItems}
+                    </Select>
+                </Stack>
                 <MainButton text="Создать заявку" onClick={goToCreateNewOrderPage} />
             </Stack>
             {!loading ? (
@@ -71,6 +81,7 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
                     masterId={selectedOrdersUserId}
                     users={users}
                     type={typeOfPage as 'archive' | 'chronology'}
+                    phoneNumber={phoneNumber}
                 />
             ) : (
                 <CardLoading height={160} />

@@ -87,24 +87,22 @@ export const OrdersList: React.FC<OrderListProps> = ({ currentUser, page, status
     }
 
     return (
-        <Stack alignItems="center" sx={{ mt: '145px', height: 'calc(100vh - 190px)', overflowY: 'scroll', p: 2 }}>
-            <Stack gap={1} sx={{ width: '100%' }}>
-                <InfiniteScroll
-                    dataLength={data.data.length}
-                    next={fetchMore}
-                    hasMore={hasMore}
-                    loader={<CardLoading height={160} />}
-                    style={{
-                        display: 'flex',
-                        gap: 8,
-                        flexDirection: 'column',
-                        width: 'calc(100vw - 17px)',
-                        padding: '16px',
-                    }}
-                >
-                    {ordersList}
-                </InfiniteScroll>
-            </Stack>
+        <Stack alignItems="center" sx={{ mb: '60px' }}>
+            <InfiniteScroll
+                dataLength={data.data.length}
+                next={fetchMore}
+                hasMore={hasMore}
+                loader={<CardLoading height={160} />}
+                style={{
+                    display: 'flex',
+                    gap: 8,
+                    flexDirection: 'column',
+                    width: 'calc(100vw - 17px)',
+                    padding: '16px',
+                }}
+            >
+                {ordersList}
+            </InfiniteScroll>
         </Stack>
     );
 };

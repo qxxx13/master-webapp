@@ -13,9 +13,10 @@ type OrdersListProps = {
     masterId: string | 'all';
     users: UserType[];
     type: 'archive' | 'chronology';
+    phoneNumber: string;
 };
 
-export const OrdersList: FC<OrdersListProps> = ({ masterId, users, type }) => {
+export const OrdersList: FC<OrdersListProps> = ({ masterId, users, type, phoneNumber = '' }) => {
     const [hasMore, setHasMore] = useState(true);
     const [index, setIndex] = useState(2);
     const { data } = useUnit($allOrdersGetStatus);
@@ -28,7 +29,7 @@ export const OrdersList: FC<OrdersListProps> = ({ masterId, users, type }) => {
 
     const fetchMore = () => {
         index <= data.meta.lastPage &&
-            fetchAllOrdersFx({ page: index, phoneNumber: '', status: 'all', masterId: masterId });
+            fetchAllOrdersFx({ page: index, phoneNumber: phoneNumber, status: 'all', masterId: masterId });
 
         index <= data.meta.lastPage && setIndex((prevIndex) => prevIndex + 1);
         index <= data.meta.lastPage ? setHasMore(true) : setHasMore(false);
@@ -36,8 +37,8 @@ export const OrdersList: FC<OrdersListProps> = ({ masterId, users, type }) => {
 
     useEffect(() => {
         clearOrdersStore();
-        fetchAllOrdersFx({ page: 1, phoneNumber: '', status: 'all', masterId: masterId });
-    }, [masterId]);
+        fetchAllOrdersFx({ page: 1, phoneNumber: phoneNumber, status: 'all', masterId: masterId });
+    }, [masterId, phoneNumber]);
 
     useEffect(() => {
         if (type === 'archive') {
