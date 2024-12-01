@@ -19,10 +19,10 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { CardLoading } from '../../components/CardLoading/CardLoading';
 import { OrdersSortForm } from '../../components/OrdersSortForm/OrdersSortForm';
+import { OrderStatusEnum } from '../../types/OrderType';
 import { RoleEnum, UserType } from '../../types/UserType';
 import { $usersGetStatus, fetchUsersFx } from './model/usersStore';
 import { OrdersList } from './OrdersList/OrdersList';
-import { OrderStatusEnum } from '../../types/OrderType';
 
 export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
