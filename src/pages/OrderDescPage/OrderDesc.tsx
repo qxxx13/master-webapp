@@ -3,13 +3,13 @@ import { useUnit } from 'effector-react';
 import moment from 'moment';
 import { useEffect } from 'react';
 
+import { translate } from '../../common/translate/translate';
 import { StatusChip } from '../../components/StatusChip/StatusChip';
 import { UserChip } from '../../components/UserChip/UserChip';
 import { useRubFormat } from '../../hooks/useRubFormat';
 import { OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { $dispStoreGetStatus, fetchDispByIdFx } from './model/dispStore';
-import { translate } from '../../common/translate/translate';
 
 type OrderDescProps = {
     order: OrderType;

@@ -1,8 +1,8 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import GroupIcon from '@mui/icons-material/Group';
+import InventoryIcon from '@mui/icons-material/Inventory';
 import PaidIcon from '@mui/icons-material/Paid';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
-import InventoryIcon from '@mui/icons-material/Inventory';
 import WorkIcon from '@mui/icons-material/Work';
 import { BottomNavigation, BottomNavigationAction, Box, Divider } from '@mui/material';
 import { useUnit } from 'effector-react';

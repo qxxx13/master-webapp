@@ -5,9 +5,9 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { CardLoading } from '../../../components/CardLoading/CardLoading';
 import { OrderCard } from '../../../components/OrderCard/OrderCard';
+import { OrderStatusEnum, OrderType } from '../../../types/OrderType';
 import { UserType } from '../../../types/UserType';
 import { $allOrdersGetStatus, clearOrdersStore, fetchAllOrdersFx } from '../model/ordersStore';
-import { OrderStatusEnum, OrderType } from '../../../types/OrderType';
 
 type OrdersListProps = {
     masterId: string | 'all';

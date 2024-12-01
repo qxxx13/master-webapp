@@ -1,11 +1,11 @@
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { translate } from '../../common/translate/translate';
 import { MasterOrderStatusEnum } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { OrdersList } from './OrdersList/OrdersList';
-import { useSearchParams } from 'react-router-dom';
 
 type OrdersPageProps = {
     currentUser: UserType;

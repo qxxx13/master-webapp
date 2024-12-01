@@ -2,13 +2,13 @@ import { Stack, Typography } from '@mui/material';
 import { useUnit } from 'effector-react';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { CardLoading } from '../../../components/CardLoading/CardLoading';
 import { OrderCard } from '../../../components/OrderCard/OrderCard';
 import { MasterOrderStatusEnum, OrderStatusEnum, OrderType } from '../../../types/OrderType';
 import { UserType } from '../../../types/UserType';
 import { $ordersGetStatus, clearOrdersStore, fetchOrdersFx } from '../model/OrdersStore';
-import InfiniteScroll from 'react-infinite-scroll-component';
 
 type OrderListProps = {
     currentUser: UserType;
