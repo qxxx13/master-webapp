@@ -1,5 +1,16 @@
 import MenuIcon from '@mui/icons-material/Menu';
-import { Drawer, IconButton, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material';
+import {
+    Drawer,
+    FormControlLabel,
+    IconButton,
+    MenuItem,
+    Select,
+    SelectChangeEvent,
+    Stack,
+    Switch,
+    TextField,
+    Typography,
+} from '@mui/material';
 import { MainButton } from '@vkruglikov/react-telegram-web-app';
 import { useUnit } from 'effector-react';
 import { debounce } from 'lodash';
@@ -11,6 +22,7 @@ import { OrdersSortForm } from '../../components/OrdersSortForm/OrdersSortForm';
 import { RoleEnum, UserType } from '../../types/UserType';
 import { $usersGetStatus, fetchUsersFx } from './model/usersStore';
 import { OrdersList } from './OrdersList/OrdersList';
+import { OrderStatusEnum } from '../../types/OrderType';
 
 export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
@@ -21,6 +33,7 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
     const [openSortMenu, setOpenSortMenu] = useState(false);
     const [searchParams] = useSearchParams();
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [sdStatus, setSDStatus] = useState<OrderStatusEnum | 'all'>('all');
 
     const typeOfPage = searchParams.get('type');
 
@@ -45,6 +58,14 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
         localStorage.setItem('selectedOrdersUserId', event.target.value);
     };
 
+    const handleSDChecked = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target.checked) {
+            setSDStatus(OrderStatusEnum.takeToSD);
+        } else {
+            setSDStatus('all');
+        }
+    };
+
     const handleSearchByPhoneNumber = debounce((event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const phoneNumber = event.target.value;
         setPhoneNumber(phoneNumber);
@@ -61,10 +82,17 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
                 <IconButton sx={{ position: 'absolute', top: 8, left: 8 }} onClick={toggleDrawer(true)}>
                     <MenuIcon />
                 </IconButton>
+                <FormControlLabel
+                    sx={{ position: 'absolute', top: 8, right: 8 }}
+                    control={
+                        <Switch checked={sdStatus !== 'all' ? true : false} onChange={(e) => handleSDChecked(e)} />
+                    }
+                    label="СД"
+                />
                 <Drawer open={openSortMenu} onClose={toggleDrawer(false)} elevation={1}>
                     <OrdersSortForm />
                 </Drawer>
-                <Typography variant="h5" sx={{ textAlign: 'center' }}>
+                <Typography variant="h5" sx={{ textAlign: 'center', mb: 1 }}>
                     {typeOfPage === 'archive' ? 'Архив' : 'Хронология'}
                 </Typography>
                 <Stack gap={1}>
@@ -82,6 +110,7 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
                     users={users}
                     type={typeOfPage as 'archive' | 'chronology'}
                     phoneNumber={phoneNumber}
+                    status={sdStatus}
                 />
             ) : (
                 <CardLoading height={160} />
