@@ -62,8 +62,9 @@ const dictionary: Record<string, string> = {
     //? Статусы заявки
     pending: 'Ожидание', // Ожидает
     fulfilled: 'Закрыта', // Успешно
-    rejectedByClient: 'Отклонена КЛ', // Отказ клиента
+    rejectedByClient: 'Отказ КЛ', // Отказ клиента
     rejectedByMaster: 'Отклонена Мастером', // Отказ мастера
+    cancelByClient: 'Отклонена КЛ',
     atWork: 'В работе', // В работе
     active: 'Активная', //активная заявка
     masterWentForSparePart: 'Мастер отъехал за ЗЧ', // Мастер отъехал за зч

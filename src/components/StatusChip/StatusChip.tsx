@@ -11,6 +11,7 @@ import PaidIcon from '@mui/icons-material/Paid';
 import PhoneDisabledIcon from '@mui/icons-material/PhoneDisabled';
 import TransferWithinAStationIcon from '@mui/icons-material/TransferWithinAStation';
 import { Chip } from '@mui/material';
+import ThumbDownAltOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
 
 import { OrderStatusEnum } from '../../types/OrderType';
 
@@ -47,7 +48,7 @@ export const StatusChip: React.FC<{ status: OrderStatusEnum }> = ({ status }) =>
                         return <Chip icon={<CloseIcon />} label="Отклонена мастером" />;
                     }
                     case 'rejectedByClient': {
-                        return <Chip icon={<CloseIcon />} label="Отклонена клиентом" />;
+                        return <Chip icon={<ThumbDownAltOutlinedIcon />} label="Отказ клиентом" />;
                     }
                     case 'debt': {
                         return <Chip icon={<CurrencyExchangeIcon />} label="Долг" />;
@@ -57,6 +58,9 @@ export const StatusChip: React.FC<{ status: OrderStatusEnum }> = ({ status }) =>
                     }
                     case 'missedCall': {
                         return <Chip icon={<PhoneDisabledIcon />} label="Недозвон" />;
+                    }
+                    case 'cancelByClient': {
+                        return <Chip icon={<CloseIcon />} label="Отмена клиентом" />;
                     }
                 }
             })()}

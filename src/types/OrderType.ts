@@ -12,6 +12,7 @@ export enum OrderStatusEnum {
     distribution = 'distribution', // На распределении
     transfer = 'transfer', // Перенос
     missedCall = 'missedCall', // Недозвон
+    cancelByClient = 'cancelByClient',
 }
 
 export enum MasterOrderStatusEnum {
