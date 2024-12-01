@@ -50,6 +50,7 @@ export const OrdersList: FC<OrdersListProps> = ({ masterId, users, type, phoneNu
                     order.Status !== OrderStatusEnum.awaitingPayment &&
                     order.Status !== OrderStatusEnum.distribution &&
                     order.Status !== OrderStatusEnum.masterWentForSparePart &&
+                    order.Status !== OrderStatusEnum.debt &&
                     order.Status !== OrderStatusEnum.takeToSD,
             );
 
@@ -62,7 +63,6 @@ export const OrdersList: FC<OrdersListProps> = ({ masterId, users, type, phoneNu
                     order.Status !== OrderStatusEnum.fulfilled &&
                     order.Status !== OrderStatusEnum.missedCall &&
                     order.Status !== OrderStatusEnum.rejectedByClient &&
-                    order.Status !== OrderStatusEnum.debt &&
                     order.Status !== OrderStatusEnum.rejectedByMaster,
             );
 

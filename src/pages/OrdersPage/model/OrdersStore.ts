@@ -1,6 +1,6 @@
 import { combine, createEffect, createEvent, createStore, restore } from 'effector';
 
-import { GetOrdersType, MasterOrderStatusEnum } from '../../../types/OrderType';
+import { GetOrdersType, MasterOrderStatusEnum, OrderType } from '../../../types/OrderType';
 import { fetchOrdersByMasterId } from '../api/ordersApi';
 
 export const $ordersStore = createStore<GetOrdersType>({ meta: {} as GetOrdersType['meta'], data: [] });
@@ -12,7 +12,18 @@ export const fetchOrdersFx = createEffect<
 
 fetchOrdersFx.use((params) => fetchOrdersByMasterId(params.page, '', params.userId, params.status));
 
-$ordersStore.on(fetchOrdersFx.doneData, (_, orders) => orders);
+const uniqueOrders = (orders: OrderType[]) => {
+    return orders.reduce((res, cur) => {
+        if (res.find((find) => JSON.stringify(find) === JSON.stringify(cur))) {
+            return res;
+        } else return [...res, cur];
+    }, [] as OrderType[]);
+};
+
+$ordersStore.on(
+    fetchOrdersFx.doneData,
+    (store, newOrders) => (store = { data: uniqueOrders([...store.data, ...newOrders.data]), meta: newOrders.meta }),
+);
 
 export const clearOrdersStore = createEvent();
 
