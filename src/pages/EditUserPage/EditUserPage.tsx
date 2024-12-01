@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { EditUserForm } from '../../components/EditUserForm/EditUserForm';
 import { UserType } from '../../types/UserType';
 import { $editUserStoreGetStatus, fetchUserFx } from './model/editUserStore';
+import { BackButton } from '@vkruglikov/react-telegram-web-app';
 
 export const EditUserPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
@@ -15,10 +16,6 @@ export const EditUserPage: React.FC<{ currentUser: UserType }> = ({ currentUser 
 
     const goBack = () => navigate(-1);
 
-    const BackBTN = Telegram.WebApp.BackButton;
-    BackBTN.show();
-    BackBTN.onClick(goBack);
-
     useEffect(() => {
         Telegram.WebApp.ready();
         fetchUserFx({ userId: String(id) });
@@ -26,6 +23,7 @@ export const EditUserPage: React.FC<{ currentUser: UserType }> = ({ currentUser 
 
     return (
         <>
+            <BackButton onClick={goBack} />
             {!loading ? (
                 <Stack>
                     <Typography variant="h5" sx={{ textAlign: 'center', p: 2 }}>

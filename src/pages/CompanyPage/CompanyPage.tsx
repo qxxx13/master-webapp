@@ -18,7 +18,6 @@ export const CompanyPage: React.FC<{ currentUser: UserType }> = ({ currentUser }
                 Компания
             </Typography>
             <CompanyList />
-            {/* <Button onClick={goToCreateCompanyPage}>Создать</Button> */}
             <MainButton text="Создать компанию" onClick={goToCreateCompanyPage} />
         </Stack>
     );

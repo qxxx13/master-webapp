@@ -1,6 +1,5 @@
 import {
     Button,
-    CircularProgress,
     Dialog,
     DialogActions,
     DialogContent,
@@ -85,9 +84,6 @@ export const AdminPaymentOrderPage: React.FC<{ currentUser: UserType }> = ({ cur
         setUpdate();
         setShowDialog(false);
     };
-
-    const BackBTN = Telegram.WebApp.BackButton;
-    BackBTN.hide();
 
     const OrderList = data.data.map((order, index) => (
         <OrderCard order={order} currentUserRole="admin" key={index} user={selectedUser} />

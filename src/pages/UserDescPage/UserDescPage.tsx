@@ -1,5 +1,5 @@
 import { Box, Button, CircularProgress, Divider, Stack, Typography } from '@mui/material';
-import { MainButton } from '@vkruglikov/react-telegram-web-app';
+import { BackButton, MainButton } from '@vkruglikov/react-telegram-web-app';
 import { useUnit } from 'effector-react';
 import moment from 'moment';
 import { useEffect } from 'react';
@@ -47,10 +47,6 @@ export const UserDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser 
     const firstDay = moment().startOf('month').format('YYYY-MM-DD'); // Отмечаем начало месяца!
     const lastDay = moment().endOf('month').format('YYYY-MM-DD');
 
-    const BackBTN = Telegram.WebApp.BackButton;
-    BackBTN.show();
-    BackBTN.onClick(goBack);
-
     useEffect(() => {
         Telegram.WebApp.ready();
         fetchUserByIdFx({ userId: String(id) });
@@ -60,6 +56,7 @@ export const UserDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser 
 
     return (
         <>
+            <BackButton onClick={goBack} />
             {!loading && !ordersAllTimeLoading ? (
                 <Stack sx={{ p: 2 }}>
                     <Stack flexDirection="row" justifyContent="space-between">

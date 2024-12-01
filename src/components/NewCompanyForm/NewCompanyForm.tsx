@@ -41,7 +41,6 @@ export const NewCompanyForm: FC<NewCompanyFormProps> = ({ isLoading, users }) =>
     const isPrimary = watch('Primary');
 
     useEffect(() => {
-        console.log(control._formState);
         setIsPrimaryCompany(!!isPrimary);
     }, [isPrimary]);
 

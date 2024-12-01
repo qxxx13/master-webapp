@@ -10,6 +10,7 @@ import { CloseOrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { closeOrder, getInterestRate, getMasterId } from './api/CloseOrderApi';
 import { $closeOrderGetStatus, $closeOrderStore } from './model/closeOrderStore';
+import { BackButton } from '@vkruglikov/react-telegram-web-app';
 
 export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
@@ -79,10 +80,6 @@ export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUse
 
     const goBack = () => navigate(-1);
 
-    const BackBTN = Telegram.WebApp.BackButton;
-    BackBTN.show();
-    BackBTN.onClick(goBack);
-
     useEffect(() => {
         Telegram.WebApp.ready();
         getData();
@@ -90,6 +87,7 @@ export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUse
 
     return (
         <Stack>
+            <BackButton onClick={goBack} />
             <Typography variant="h5" sx={{ p: 2, textAlign: 'center' }}>
                 Закрытие заявки №{orderId}
             </Typography>

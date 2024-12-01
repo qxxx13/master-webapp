@@ -37,9 +37,6 @@ export const ProfilePage: React.FC<{ currentUser: UserType }> = ({ currentUser }
     const firstDay = moment().startOf('month').format('YYYY-MM-DD'); // Отмечаем начало месяца!
     const lastDay = moment().endOf('month').format('YYYY-MM-DD');
 
-    const BackBTN = Telegram.WebApp.BackButton;
-    BackBTN.hide();
-
     useEffect(() => {
         fetchUserByIdFx({ userId: currentUser.Id });
         fetchOrdersPerMonthFx({ userId: currentUser.Id, endDate: lastDay, startDate: firstDay });

@@ -26,6 +26,7 @@ import { $updateOrderStore } from './model/setUpdateOrderStore';
 import { $userGetStatus } from './model/userStore';
 import { OrderDesc } from './OrderDesc';
 import { OrderWorksButton } from './OrderWorkButtons';
+import { BackButton } from '@vkruglikov/react-telegram-web-app';
 
 export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
@@ -37,10 +38,6 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
 
     const goBack = () => navigate(-1);
 
-    const BackBTN = Telegram.WebApp.BackButton;
-    BackBTN.show();
-    BackBTN.onClick(goBack);
-
     useEffect(() => {
         Telegram.WebApp.ready();
         fetchOrderByIdFx({ orderId: id });
@@ -48,6 +45,7 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
 
     return (
         <Stack sx={{ mb: '60px' }}>
+            <BackButton onClick={goBack} />
             {!loading && !masterLoading && Object.keys(order).length !== 0 ? (
                 <>
                     <Stack>

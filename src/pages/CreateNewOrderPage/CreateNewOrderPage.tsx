@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { NewOrderForm } from '../../components/NewOrderForm/NewOrderForm';
 import { UserType } from '../../types/UserType';
 import { $usersGetStatus, fetchAllUsersFx } from './model/usersStore';
+import { BackButton } from '@vkruglikov/react-telegram-web-app';
 
 export const CreateNewOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
@@ -15,10 +16,6 @@ export const CreateNewOrderPage: React.FC<{ currentUser: UserType }> = ({ curren
 
     const { data, loading } = useUnit($usersGetStatus);
 
-    const BackBTN = Telegram.WebApp.BackButton;
-    BackBTN.show();
-    BackBTN.onClick(goBack);
-
     useEffect(() => {
         Telegram.WebApp.ready();
         fetchAllUsersFx();
@@ -26,6 +23,7 @@ export const CreateNewOrderPage: React.FC<{ currentUser: UserType }> = ({ curren
 
     return (
         <Stack>
+            <BackButton onClick={goBack} />
             <Typography variant="h5" sx={{ textAlign: 'center', p: 2 }}>
                 Создание новой заявки
             </Typography>

@@ -27,9 +27,6 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
         setStatus(event.target.value as MasterOrderStatusEnum);
     };
 
-    const BackBTN = Telegram.WebApp.BackButton;
-    BackBTN.hide();
-
     useEffect(() => {
         Telegram.WebApp.ready();
     }, []);

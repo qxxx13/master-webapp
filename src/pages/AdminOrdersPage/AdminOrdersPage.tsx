@@ -28,9 +28,6 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
 
     const goToCreateNewOrderPage = () => navigate('/createNewOrder');
 
-    const BackBTN = Telegram.WebApp.BackButton;
-    BackBTN.hide();
-
     const menuItems = users.map((user) => {
         if (user.Role === RoleEnum.master) {
             return (

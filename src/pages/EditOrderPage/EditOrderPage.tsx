@@ -10,6 +10,7 @@ import { OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { $editOrderStoreGetStatus, fetchOrderFx } from './model/editOrderStore';
 import { $editOrderUsersStoreGetStatus, fetchUsersFx } from './model/editOrderUsersStore';
+import { BackButton } from '@vkruglikov/react-telegram-web-app';
 
 export const EditOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
@@ -22,10 +23,6 @@ export const EditOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser
 
     const update = useUnit($updateOrderStore);
 
-    const BackBTN = Telegram.WebApp.BackButton;
-    BackBTN.show();
-    BackBTN.onClick(goBack);
-
     useEffect(() => {
         Telegram.WebApp.ready();
         fetchOrderFx({ orderId: id as string });
@@ -34,6 +31,7 @@ export const EditOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser
 
     return (
         <Stack>
+            <BackButton onClick={goBack} />
             <Typography variant="h6" sx={{ textAlign: 'center', p: 2 }}>
                 Редактирование заявки №{id}
             </Typography>

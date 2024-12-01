@@ -7,7 +7,7 @@ import WorkIcon from '@mui/icons-material/Work';
 import { BottomNavigation, BottomNavigationAction, Box, Divider } from '@mui/material';
 import { useUnit } from 'effector-react';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { UserType } from '../../types/UserType';
 import { $navBarStore, setNavBar } from './model/navBarStore';
@@ -16,6 +16,12 @@ export const NavBar = () => {
     const [currentUser, setCurrentUser] = useState<UserType | Record<string, unknown>>({});
     const pageNum = useUnit($navBarStore);
     const navigate = useNavigate();
+    const location = useLocation();
+    const [searchParams] = useSearchParams();
+    const typeOfPage = searchParams.get('type');
+    const { pathname } = location;
+
+    console.log(pathname);
 
     const display = Object.keys(currentUser).length > 0 ? 'flex' : 'none';
 
@@ -52,6 +58,22 @@ export const NavBar = () => {
             }
         }
     };
+
+    useEffect(() => {
+        if (pathname === '/' && typeOfPage === 'archive') {
+            setNavBar(1);
+        } else if (pathname === '/' && typeOfPage === 'chronology') {
+            setNavBar(0);
+        } else if (pathname === '/paymentOrder') {
+            setNavBar(2);
+        } else if (pathname === '/users') {
+            currentUser.Role === 'admin' && setNavBar(3);
+        } else if (pathname === '/company') {
+            currentUser.Role === 'admin' && setNavBar(4);
+        } else if (pathname === '/profile') {
+            currentUser.Role === 'admin' ? setNavBar(5) : setNavBar(4);
+        }
+    }, [pathname, typeOfPage]);
 
     return (
         <Box sx={{ position: 'fixed', bottom: 0, width: '100%', zIndex: 100 }}>
