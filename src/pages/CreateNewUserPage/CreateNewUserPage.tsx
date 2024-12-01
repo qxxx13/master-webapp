@@ -1,10 +1,10 @@
 import { Stack, Typography } from '@mui/material';
+import { BackButton } from '@vkruglikov/react-telegram-web-app';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { NewUserForm } from '../../components/NewUserForm/NewUserForm';
 import { UserType } from '../../types/UserType';
-import { BackButton } from '@vkruglikov/react-telegram-web-app';
 
 export const CreateNewUserPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

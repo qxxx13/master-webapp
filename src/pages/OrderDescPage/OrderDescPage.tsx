@@ -12,6 +12,7 @@ import {
     Stack,
     Typography,
 } from '@mui/material';
+import { BackButton } from '@vkruglikov/react-telegram-web-app';
 import { useUnit } from 'effector-react';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -26,7 +27,6 @@ import { $updateOrderStore } from './model/setUpdateOrderStore';
 import { $userGetStatus } from './model/userStore';
 import { OrderDesc } from './OrderDesc';
 import { OrderWorksButton } from './OrderWorkButtons';
-import { BackButton } from '@vkruglikov/react-telegram-web-app';
 
 export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

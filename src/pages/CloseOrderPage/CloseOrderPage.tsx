@@ -1,4 +1,5 @@
 import { Button, Dialog, Stack, TextField, Typography } from '@mui/material';
+import { BackButton } from '@vkruglikov/react-telegram-web-app';
 import { useUnit } from 'effector-react';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -10,7 +11,6 @@ import { CloseOrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { closeOrder, getInterestRate, getMasterId } from './api/CloseOrderApi';
 import { $closeOrderGetStatus, $closeOrderStore } from './model/closeOrderStore';
-import { BackButton } from '@vkruglikov/react-telegram-web-app';
 
 export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

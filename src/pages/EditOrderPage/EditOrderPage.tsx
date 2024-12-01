@@ -1,5 +1,6 @@
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { CircularProgress, IconButton, Stack, Typography } from '@mui/material';
+import { BackButton } from '@vkruglikov/react-telegram-web-app';
 import { useUnit } from 'effector-react';
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -10,7 +11,6 @@ import { OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { $editOrderStoreGetStatus, fetchOrderFx } from './model/editOrderStore';
 import { $editOrderUsersStoreGetStatus, fetchUsersFx } from './model/editOrderUsersStore';
-import { BackButton } from '@vkruglikov/react-telegram-web-app';
 
 export const EditOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();

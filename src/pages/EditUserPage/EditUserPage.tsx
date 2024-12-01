@@ -1,4 +1,5 @@
 import { CircularProgress, Stack, Typography } from '@mui/material';
+import { BackButton } from '@vkruglikov/react-telegram-web-app';
 import { useUnit } from 'effector-react';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -6,7 +7,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { EditUserForm } from '../../components/EditUserForm/EditUserForm';
 import { UserType } from '../../types/UserType';
 import { $editUserStoreGetStatus, fetchUserFx } from './model/editUserStore';
-import { BackButton } from '@vkruglikov/react-telegram-web-app';
 
 export const EditUserPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
