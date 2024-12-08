@@ -18,20 +18,17 @@ export const EditOrderForm: React.FC<{ users: UserType[]; order: OrderType }> = 
     });
 
     const handleSave: SubmitHandler<OrderType> = (data) => {
-        editOrderFx(data);
-        setUpdateOrderStore();
+        editOrderFx(data).finally(() => setUpdateOrderStore());
     };
 
     const handleSendToMaster: SubmitHandler<OrderType> = (data) => {
         data.Status = OrderStatusEnum.pending;
-        sendToMaster(data);
-        setUpdateOrderStore();
+        sendToMaster(data).finally(() => setUpdateOrderStore());
     };
 
     const handleTransfer: SubmitHandler<OrderType> = (data) => {
         data.Status = OrderStatusEnum.transfer;
-        transferOrder(data);
-        setUpdateOrderStore();
+        transferOrder(data).finally(() => setUpdateOrderStore());
     };
 
     const textFields = TextFields(control, initialValues(order));
