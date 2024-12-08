@@ -15,19 +15,16 @@ export const OrderWorksButton: React.FC<{
     const navigate = useNavigate();
 
     const handleTake = async () => {
-        await takeOrder(chatId, messageId, orderId);
-        await setUpdate();
+        await takeOrder(chatId, messageId, orderId).then(() => setUpdate());
     };
 
     const handleCancel = async () => {
-        await rejectOrder(chatId, messageId, orderId);
-        await setUpdate();
+        await rejectOrder(chatId, messageId, orderId).then(() => setUpdate());
         navigate('/');
     };
 
     const handleAtWork = async () => {
-        await atWorkOrder(chatId, messageId, orderId);
-        await setUpdate();
+        await atWorkOrder(chatId, messageId, orderId).then(() => setUpdate());
     };
 
     const handleWent = async () => {
@@ -36,7 +33,7 @@ export const OrderWorksButton: React.FC<{
     };
 
     const handleSD = async () => {
-        await takeToSDOrder(chatId, messageId, orderId);
+        await takeToSDOrder(chatId, messageId, orderId).then(() => setUpdate());
         navigate(`/`);
     };
 
@@ -45,8 +42,7 @@ export const OrderWorksButton: React.FC<{
     };
 
     const handleReturn = async () => {
-        await returnToOrder(chatId, messageId, orderId);
-        await setUpdate();
+        await returnToOrder(chatId, messageId, orderId).then(() => setUpdate());
     };
 
     switch (status) {

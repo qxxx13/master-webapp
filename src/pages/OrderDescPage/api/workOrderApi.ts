@@ -8,38 +8,40 @@ export const getOrderById = async (orderId: string) => {
 
 export const takeOrder = async (chatId: string, messageId: string, orderId: string) => {
     await instance.patch(`orders/isWorking?id=${orderId}&isWorking=isWorking`).then((res) => res.data);
-    await instance
+    return await instance
         .patch(`/bot/take?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`)
         .then((res) => res.data);
 };
 
 export const rejectOrder = async (chatId: string, messageId: string, orderId: string) => {
     await instance.patch(`orders/isWorking?id=${orderId}&isWorking=close`).then((res) => res.data);
-    await instance
+    return await instance
         .patch(`/bot/rejectMaster?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`)
         .then((res) => res.data);
 };
 
 export const atWorkOrder = async (chatId: string, messageId: string, orderId: string) => {
-    await instance
+    return await instance
         .patch(`/bot/atWork?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`)
         .then((res) => res.data);
 };
 
 export const wentOrder = async (chatId: string, messageId: string, orderId: string) => {
-    await instance.patch(`/bot/went?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`);
+    return await instance.patch(`/bot/went?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`);
 };
 
 export const takeToSDOrder = async (chatId: string, messageId: string, orderId: string) => {
     await instance.patch(`/orders/isWorking?id=${orderId}&isWorking=close`);
-    await instance.patch(`/bot/sd?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`);
+    return await instance.patch(`/bot/sd?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`);
 };
 
 export const returnToOrder = async (chatId: string, messageId: string, orderId: string) => {
-    instance.patch(`/bot/atWork?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`).then((res) => res.data);
+    return instance
+        .patch(`/bot/atWork?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`)
+        .then((res) => res.data);
 };
 
 export const deliveredOrder = async (chatId: string, messageId: string, orderId: string) => {
     instance.patch(`/orders/status?id=${orderId}&status=fulfilled`);
-    instance.patch(`/bot/close?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`);
+    return instance.patch(`/bot/close?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`);
 };
