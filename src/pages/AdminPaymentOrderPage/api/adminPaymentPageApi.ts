@@ -20,11 +20,16 @@ export const fetchAllOrders = async (masterId: string, ordersDate: string | unde
         endDate = moment(temp).format('YYYY-MM-DD');
     }
 
-    const orders = await instance
-        .get(
-            `orders?page=1&perPage=150&status=awaitingPayment&masterId=${masterId}&startDate=${startDate}&endDate=${endDate}`,
-        )
-        .then((res) => res.data);
+    const orders =
+        masterId !== 'all'
+            ? await instance
+                  .get(
+                      `orders?page=1&perPage=150&status=awaitingPayment&masterId=${masterId}&startDate=${startDate}&endDate=${endDate}`,
+                  )
+                  .then((res) => res.data)
+            : await instance
+                  .get(`orders?page=1&perPage=150&status=awaitingPayment&startDate=${startDate}&endDate=${endDate}`)
+                  .then((res) => res.data);
 
     return orders;
 };

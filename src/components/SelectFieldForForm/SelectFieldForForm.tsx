@@ -29,7 +29,7 @@ export const SelectFieldForForm = <T extends Control<any, unknown>, U extends st
                 <FormControl fullWidth>
                     <InputLabel id="select-label">{translate(name)}</InputLabel>
                     <Select
-                        value={value}
+                        value={value || null}
                         onChange={(event) => onChange(event.target.value)}
                         error={!!error}
                         disabled={isLoading}

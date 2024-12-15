@@ -1,4 +1,4 @@
-import { CircularProgress, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import { useUnit } from 'effector-react';
 import { FC, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';

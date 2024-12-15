@@ -2,6 +2,7 @@ import './index.css';
 
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { WebAppProvider } from '@vkruglikov/react-telegram-web-app';
+import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
@@ -21,8 +22,10 @@ root.render(
                         smoothButtonsTransition: true,
                     }}
                 >
-                    <CssBaseline />
-                    <App />
+                    <SnackbarProvider autoHideDuration={1500}>
+                        <CssBaseline />
+                        <App />
+                    </SnackbarProvider>
                 </WebAppProvider>
             </ThemeProvider>
         </BrowserRouter>

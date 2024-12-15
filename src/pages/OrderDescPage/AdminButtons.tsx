@@ -33,7 +33,7 @@ export const AdminButtons: React.FC<{
                 Редактировать
             </Button>
             <Button variant="contained" onClick={handleClose} color="success">
-                Закрыть
+                Перезакрыть заявку
             </Button>
         </Stack>
     );

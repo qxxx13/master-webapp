@@ -6,9 +6,9 @@ import { fetchAllOrders } from '../api/adminPaymentPageApi';
 
 export const $ordersPaymentStore = createStore<GetOrdersType>({ meta: {} as GetOrdersType['meta'], data: [] });
 
-export const fetchOrdersFx = createEffect<{ userId: number; ordersDate: Dayjs | null }, GetOrdersType>();
+export const fetchOrdersFx = createEffect<{ userId: string; ordersDate: Dayjs | null }, GetOrdersType>();
 
-fetchOrdersFx.use((params) => fetchAllOrders(String(params.userId), params.ordersDate?.format('YYYY-MM-DD')));
+fetchOrdersFx.use((params) => fetchAllOrders(params.userId, params.ordersDate?.format('YYYY-MM-DD')));
 
 $ordersPaymentStore.on(fetchOrdersFx.doneData, (_, orders) => orders);
 

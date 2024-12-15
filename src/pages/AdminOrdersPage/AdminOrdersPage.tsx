@@ -1,5 +1,6 @@
 import MenuIcon from '@mui/icons-material/Menu';
 import {
+    Button,
     Drawer,
     FormControlLabel,
     IconButton,
@@ -67,8 +68,23 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
     };
 
     const handleSearchByPhoneNumber = debounce((event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const phoneNumber = event.target.value;
-        setPhoneNumber(phoneNumber);
+        const phoneNumber = event.target.value.replace(/[\s\-()]/g, '');
+        let correctPhoneNumber = phoneNumber;
+
+        if (correctPhoneNumber[0] === '+') {
+            console.log('here');
+            correctPhoneNumber = correctPhoneNumber.replace(/(\+7)(\d{3})(\d{3})(\d{2})(\d{2})/, '+7-$2-$3-$4-$5');
+        } else if (correctPhoneNumber[0] === '8') {
+            correctPhoneNumber = '+7' + correctPhoneNumber.substring(1);
+            correctPhoneNumber = correctPhoneNumber.replace(/(\+7)(\d{3})(\d{3})(\d{2})(\d{2})/, '+7-$2-$3-$4-$5');
+        } else if (correctPhoneNumber[0] === '7') {
+            correctPhoneNumber = '+' + correctPhoneNumber;
+            correctPhoneNumber = correctPhoneNumber.replace(/(\+7)(\d{3})(\d{3})(\d{2})(\d{2})/, '+7-$2-$3-$4-$5');
+        }
+
+        console.log(correctPhoneNumber);
+
+        setPhoneNumber(correctPhoneNumber);
     }, 1500);
 
     useEffect(() => {
@@ -103,6 +119,7 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
                     </Select>
                 </Stack>
                 <MainButton text="Создать заявку" onClick={goToCreateNewOrderPage} />
+                <Button onClick={goToCreateNewOrderPage}>Создать заявку</Button>
             </Stack>
             {!loading ? (
                 <OrdersList

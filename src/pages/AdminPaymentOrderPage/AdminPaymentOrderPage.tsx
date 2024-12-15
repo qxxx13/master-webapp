@@ -18,6 +18,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { MainButton } from '@vkruglikov/react-telegram-web-app';
 import { Dayjs } from 'dayjs';
 import { useUnit } from 'effector-react';
+import { enqueueSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 
 import { CardLoading } from '../../components/CardLoading/CardLoading';
@@ -78,10 +79,20 @@ export const AdminPaymentOrderPage: React.FC<{ currentUser: UserType }> = ({ cur
     const selectedUser = users.find((user) => user.Id === +selectedUserId);
 
     const closeAllOrders = async () => {
+        const length = data.data.length;
         await data.data.map((order, index) => {
-            deliveredOrder(selectedUser?.TelegramChatId as string, String(order.MessageId), String(order.Id));
+            deliveredOrder(selectedUser?.TelegramChatId as string, String(order.MessageId), String(order.Id))
+                .then(() => {
+                    enqueueSnackbar(`Заявка №${order.Id} успешно закрыта`, { variant: 'success' });
+                    if (index === length - 1) {
+                        setUpdate();
+                    }
+                })
+                .catch((e: Error) => {
+                    enqueueSnackbar(`Заявка №${order.Id} не закрыта, ${e.message}`, { variant: 'error' });
+                });
         });
-        setUpdate();
+
         setShowDialog(false);
     };
 
@@ -90,7 +101,12 @@ export const AdminPaymentOrderPage: React.FC<{ currentUser: UserType }> = ({ cur
     ));
 
     useEffect(() => {
-        fetchOrdersFx({ userId: +selectedUserId, ordersDate: ordersDate });
+        if (selectedUserId !== 'all') {
+            fetchOrdersFx({ userId: selectedUserId, ordersDate: ordersDate });
+        } else {
+            fetchOrdersFx({ userId: 'all', ordersDate: ordersDate });
+        }
+
         fetchAllUsersFx();
         Telegram.WebApp.ready();
     }, [update, selectedUserId, ordersDate]);
@@ -113,6 +129,7 @@ export const AdminPaymentOrderPage: React.FC<{ currentUser: UserType }> = ({ cur
             <MainButton text="Закрыть все заявки" onClick={handleShowDialog} />
 
             <Select value={selectedUserId} onChange={handleChange} sx={{ height: 45 }}>
+                <MenuItem value="all">Все</MenuItem>
                 {menuItems}
             </Select>
             <Stack flexDirection="row" alignItems="center" justifyContent="space-between">

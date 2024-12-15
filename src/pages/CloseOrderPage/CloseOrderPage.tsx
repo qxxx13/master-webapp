@@ -1,16 +1,18 @@
 import { Button, Dialog, Stack, TextField, Typography } from '@mui/material';
 import { BackButton } from '@vkruglikov/react-telegram-web-app';
 import { useUnit } from 'effector-react';
+import { enqueueSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { CardLoading } from '../../components/CardLoading/CardLoading';
 import { ClosingAtZeroDialog } from '../../components/ClosingAtZeroDialog/ClosingAtZeroDialog';
 import { instance } from '../../config/apiConfig/apiConfig';
-import { CloseOrderType } from '../../types/OrderType';
+import { CloseOrderType, OrderStatusEnum } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { closeOrder, getInterestRate, getMasterId } from './api/CloseOrderApi';
-import { $closeOrderGetStatus, $closeOrderStore } from './model/closeOrderStore';
+import { $closeOrderGetStatus, $closeOrderStore, fetchOrderFx } from './model/closeOrderStore';
 
 export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
@@ -41,6 +43,8 @@ export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUse
         const price = +data.TotalPrice - +data.Expenses;
         const masterSalary = price * (interestRate / 100);
 
+        const debt = Number(data.Debt);
+
         const companyShare = price - masterSalary;
 
         if (+data.TotalPrice === 0) {
@@ -60,13 +64,20 @@ export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUse
                 chatId,
                 messageId,
                 String(currentUser.Id),
-            ).then(() => {
-                instance
-                    .patch(`/company/addMoneyToCompany?companyId=${companyId}&sum=${companyShare}`)
-                    .catch((e) => console.log(e));
-            });
-
-            navigate('/');
+                debt !== 0 ? OrderStatusEnum.debt : OrderStatusEnum.awaitingPayment,
+            )
+                .then(() => {
+                    if (companyId) {
+                        instance
+                            .patch(`/company/addMoneyToCompany?companyId=${companyId}&sum=${companyShare}`)
+                            .catch((e) => console.log(e));
+                    }
+                    enqueueSnackbar('Заявка закрыта, ожидает сдачи', { variant: 'success' });
+                    navigate('/');
+                })
+                .catch((e: Error) => {
+                    enqueueSnackbar(`Заявка не закрыта, ${e.message}`, { variant: 'error' });
+                });
         }
     };
 
@@ -74,6 +85,7 @@ export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUse
         const masterId = await getMasterId(orderId);
         const interestRate = await getInterestRate(masterId);
 
+        fetchOrderFx({ orderId: orderId });
         setMasterId(String(masterId));
         setInterestRate(interestRate);
     };
@@ -100,40 +112,44 @@ export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUse
                 />
             </Dialog>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <Stack gap={1} sx={{ p: 2 }}>
-                    <TextField
-                        {...register('TotalPrice', { required: true })}
-                        placeholder="Забрал"
-                        color={errors.TotalPrice ? 'error' : 'primary'}
-                        type="number"
-                        defaultValue={order.Total as number}
-                    />
-                    <TextField
-                        {...register('Expenses')}
-                        placeholder="Расход"
-                        type="number"
-                        color="primary"
-                        defaultValue={order.Expenses as number}
-                    />
-                    <TextField
-                        {...register('Debt')}
-                        placeholder="Долг"
-                        defaultValue={order.Debt as number}
-                        type="number"
-                        color="primary"
-                    />
-                    <TextField
-                        {...register('Comments')}
-                        placeholder="Комментарии"
-                        defaultValue={order.Comments as string}
-                        type="text"
-                        color="primary"
-                    />
+                {!loading ? (
+                    <Stack gap={1} sx={{ p: 2 }}>
+                        <TextField
+                            {...register('TotalPrice', { required: true })}
+                            placeholder="Забрал"
+                            color={errors.TotalPrice ? 'error' : 'primary'}
+                            type="number"
+                            defaultValue={(order.Total as number) || null}
+                        />
+                        <TextField
+                            {...register('Expenses')}
+                            placeholder="Расход"
+                            type="number"
+                            color="primary"
+                            defaultValue={(order.Expenses as number) || null}
+                        />
+                        <TextField
+                            {...register('Debt')}
+                            placeholder="Долг"
+                            defaultValue={(order.Debt as number) || null}
+                            type="number"
+                            color="primary"
+                        />
+                        <TextField
+                            {...register('Comments')}
+                            placeholder="Комментарии"
+                            defaultValue={(order.Comments as string) || null}
+                            type="text"
+                            color="primary"
+                        />
 
-                    <Button variant="contained" type="submit" color="success">
-                        Закрыть
-                    </Button>
-                </Stack>
+                        <Button variant="contained" type="submit" color="success">
+                            Закрыть
+                        </Button>
+                    </Stack>
+                ) : (
+                    <CardLoading height={140} />
+                )}
             </form>
         </Stack>
     );

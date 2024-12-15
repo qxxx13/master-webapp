@@ -10,6 +10,7 @@ import {
     SelectChangeEvent,
     Stack,
 } from '@mui/material';
+import { enqueueSnackbar } from 'notistack';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -26,7 +27,6 @@ type ClosingAtZeroDialogProps = {
 
 export const ClosingAtZeroDialog: React.FC<ClosingAtZeroDialogProps> = ({ chatId, closerId, messageId, orderId }) => {
     const [reason, setReason] = useState('missedCall');
-    /* const [image, setImage] = useState<File | null>(null); */
     const navigate = useNavigate();
 
     const handleChangeSelect = (event: SelectChangeEvent) => {
@@ -34,9 +34,12 @@ export const ClosingAtZeroDialog: React.FC<ClosingAtZeroDialogProps> = ({ chatId
     };
 
     const handleCloseOrder = () => {
-        closeOrder(orderId, chatId, messageId, closerId, reason as OrderStatusEnum);
-
-        navigate('/');
+        closeOrder(orderId, chatId, messageId, closerId, reason as OrderStatusEnum)
+            .then(() => {
+                enqueueSnackbar('Заявка закрыта, ожидает сдачи', { variant: 'success' });
+                navigate('/');
+            })
+            .catch((e: Error) => enqueueSnackbar(`Заявка не закрыта, ${e.message}`, { variant: 'error' }));
     };
 
     return (
@@ -51,7 +54,6 @@ export const ClosingAtZeroDialog: React.FC<ClosingAtZeroDialogProps> = ({ chatId
                             <MenuItem value={'missedCall'}>{translate('missedCall')}</MenuItem>
                             <MenuItem value={'cancelByClient'}>{translate('cancelByClient')}</MenuItem>
                         </Select>
-                        {/* <input type="file" accept="image/png, image/jpeg" onChange={(e) => handleSetImage(e)} /> */}
                         <Button variant="contained" onClick={handleCloseOrder}>
                             Отправить
                         </Button>
