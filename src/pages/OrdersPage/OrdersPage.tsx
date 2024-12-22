@@ -13,9 +13,10 @@ type OrdersPageProps = {
 
 export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
     const [status, setStatus] = useState<MasterOrderStatusEnum>(MasterOrderStatusEnum.all);
-    const [searchParams] = useSearchParams();
+    const [typeOfPage, setTypeOfPage] = useState('archive');
+    /* const [searchParams] = useSearchParams(); */
 
-    const typeOfPage = searchParams.get('type');
+    /* const typeOfPage = searchParams.get('type'); */
 
     const MenuItems = Object.values(MasterOrderStatusEnum).map((status, index) => (
         <MenuItem key={index} value={status}>
@@ -25,6 +26,10 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
 
     const handleChangeStatus = (event: SelectChangeEvent) => {
         setStatus(event.target.value as MasterOrderStatusEnum);
+    };
+
+    const handleChangeTypeOfPage = (event: SelectChangeEvent) => {
+        setTypeOfPage(event.target.value);
     };
 
     useEffect(() => {
@@ -42,6 +47,19 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
                     <InputLabel id="status-select"></InputLabel>
                     <Select labelId="status-select" value={status} onChange={handleChangeStatus}>
                         {MenuItems}
+                    </Select>
+                </FormControl>
+                <FormControl>
+                    <InputLabel id="typeSelect">Тип</InputLabel>
+                    <Select
+                        labelId="typeSelect"
+                        value={typeOfPage}
+                        onChange={handleChangeTypeOfPage}
+                        sx={{ height: 45 }}
+                        label="Тип"
+                    >
+                        <MenuItem value="chronology">Хронология</MenuItem>
+                        <MenuItem value="archive">Архив</MenuItem>
                     </Select>
                 </FormControl>
             </Stack>
