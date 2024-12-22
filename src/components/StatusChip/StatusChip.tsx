@@ -21,46 +21,54 @@ export const StatusChip: React.FC<{ status: OrderStatusEnum }> = ({ status }) =>
             {(() => {
                 switch (status) {
                     case 'pending': {
-                        return <Chip icon={<AccessTimeIcon />} label="Ожидает" />;
+                        return <Chip color="warning" icon={<AccessTimeIcon color="action" />} label="Ожидает" />;
                     }
                     case 'fulfilled': {
-                        return <Chip icon={<DoneIcon />} label="Закрыта" />;
+                        return <Chip color="success" icon={<DoneIcon color="action" />} label="Закрыта" />;
                     }
                     case 'takeToSD': {
-                        return <Chip icon={<BuildIcon />} label="Забрал на СД" />;
+                        return <Chip color="secondary" icon={<BuildIcon color="action" />} label="Забрал на СД" />;
                     }
                     case 'active': {
-                        return <Chip icon={<AssignmentIcon />} label="Активна" />;
+                        return <Chip color="primary" icon={<AssignmentIcon color="action" />} label="Активна" />;
                     }
                     case 'atWork': {
-                        return <Chip icon={<EngineeringIcon />} label="В работе" />;
+                        return <Chip color="primary" icon={<EngineeringIcon color="action" />} label="В работе" />;
                     }
                     case 'masterWentForSparePart': {
-                        return <Chip icon={<ElectricCarIcon />} label="Уехал за ЗЧ" />;
+                        return <Chip color="secondary" icon={<ElectricCarIcon color="action" />} label="Уехал за ЗЧ" />;
                     }
                     case 'awaitingPayment': {
-                        return <Chip icon={<PaidIcon />} label="Ожидает сдачи" />;
+                        return <Chip color="success" icon={<PaidIcon color="action" />} label="Ожидает сдачи" />;
                     }
                     case 'distribution': {
-                        return <Chip icon={<HelpOutlineIcon />} label="На распределении" />;
+                        return <Chip icon={<HelpOutlineIcon color="action" />} label="На распределении" />;
                     }
                     case 'rejectedByMaster': {
-                        return <Chip icon={<CloseIcon />} label="Отклонена мастером" />;
+                        return <Chip color="error" icon={<CloseIcon color="action" />} label="Отклонена мастером" />;
                     }
                     case 'rejectedByClient': {
-                        return <Chip icon={<ThumbDownAltOutlinedIcon />} label="Отказ клиентом" />;
+                        return (
+                            <Chip
+                                color="error"
+                                icon={<ThumbDownAltOutlinedIcon color="action" />}
+                                label="Отказ клиентом"
+                            />
+                        );
                     }
                     case 'debt': {
-                        return <Chip icon={<CurrencyExchangeIcon />} label="Долг" />;
+                        return <Chip color="warning" icon={<CurrencyExchangeIcon color="action" />} label="Долг" />;
                     }
                     case 'transfer': {
-                        return <Chip icon={<TransferWithinAStationIcon />} label="Перенос" />;
+                        return (
+                            <Chip color="info" icon={<TransferWithinAStationIcon color="action" />} label="Перенос" />
+                        );
                     }
                     case 'missedCall': {
-                        return <Chip icon={<PhoneDisabledIcon />} label="Недозвон" />;
+                        return <Chip color="error" icon={<PhoneDisabledIcon color="action" />} label="Недозвон" />;
                     }
                     case 'cancelByClient': {
-                        return <Chip icon={<CloseIcon />} label="Отмена клиентом" />;
+                        return <Chip color="error" icon={<CloseIcon color="action" />} label="Отмена клиентом" />;
                     }
                 }
             })()}

@@ -39,8 +39,6 @@ export const OrderCard: React.FC<{
 
     const goToOrderDescPage = () => navigate(`/${order.Id}`);
 
-    const bgColor = bgHandler(order.Status);
-
     const handleDelivered = () => {
         deliveredOrder(user!.TelegramChatId, String(order.MessageId), String(order.Id));
         setUpdate();
@@ -48,9 +46,9 @@ export const OrderCard: React.FC<{
     };
 
     return (
-        <Card sx={{ width: '100%', borderRadius: 2 }}>
+        <Card sx={{ width: '100%', borderRadius: 2, border: '1px solid white' }}>
             <CardActionArea onClick={goToOrderDescPage}>
-                <CardContent sx={{ backgroundColor: bgColor }}>
+                <CardContent>
                     <Stack justifyContent="space-between" flexDirection="row">
                         <Stack alignItems="flex-start">
                             <Typography variant="body1">Заявка №{order.Id}</Typography>
@@ -60,11 +58,15 @@ export const OrderCard: React.FC<{
                         </Stack>
                         <Stack alignItems="flex-end" gap={1}>
                             <StatusChip status={order.Status} />
-                            <Typography variant="body1">{order.Time}</Typography>
+                            <Typography variant="body1" textAlign={'right'}>
+                                {order.Time}
+                            </Typography>
                             {user && <UserChip user={user} />}
                         </Stack>
                     </Stack>
-                    <Typography variant="body1">{order.Description}</Typography>
+                    <Typography variant="body1" textAlign={'left'}>
+                        {order.Description}
+                    </Typography>
                 </CardContent>
             </CardActionArea>
             {currentUserRole === 'admin' && (
@@ -90,11 +92,3 @@ export const OrderCard: React.FC<{
         </Card>
     );
 };
-
-/* 
-#9a5ad6
-#8774e1
-#128a92
-#b38f2e
-#058d32
-*/

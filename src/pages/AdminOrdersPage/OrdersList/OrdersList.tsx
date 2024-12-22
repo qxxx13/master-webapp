@@ -1,4 +1,4 @@
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { useUnit } from 'effector-react';
 import { FC, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -64,6 +64,8 @@ export const OrdersList: FC<OrdersListProps> = ({ masterId, users, type, phoneNu
                     order.Status !== OrderStatusEnum.fulfilled &&
                     order.Status !== OrderStatusEnum.missedCall &&
                     order.Status !== OrderStatusEnum.rejectedByClient &&
+                    order.Status !== OrderStatusEnum.cancelByClient &&
+                    order.Status !== OrderStatusEnum.debt &&
                     order.Status !== OrderStatusEnum.rejectedByMaster,
             );
 
@@ -82,7 +84,7 @@ export const OrdersList: FC<OrdersListProps> = ({ masterId, users, type, phoneNu
                     display: 'flex',
                     gap: 8,
                     flexDirection: 'column',
-                    width: 'calc(100vw - 17px)',
+                    width: '100vw',
                     padding: '16px',
                 }}
             >

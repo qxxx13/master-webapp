@@ -8,6 +8,14 @@ export const handleTotalSalary = (orders: OrderType[]) => {
     return temp;
 };
 
+export const handleTotalExpenses = (orders: OrderType[]) => {
+    let temp = 0;
+
+    orders.map((order) => (temp += order.Expenses || 0));
+
+    return temp;
+};
+
 export const handleTotal = (orders: OrderType[]) => {
     let temp = 0;
 

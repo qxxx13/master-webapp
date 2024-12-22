@@ -17,11 +17,9 @@ export const NavBar = () => {
     const pageNum = useUnit($navBarStore);
     const navigate = useNavigate();
     const location = useLocation();
-    const [searchParams] = useSearchParams();
-    const typeOfPage = searchParams.get('type');
+    /* const [searchParams] = useSearchParams(); */
+    /* const typeOfPage = searchParams.get('type'); */
     const { pathname } = location;
-
-    console.log(pathname);
 
     const display = Object.keys(currentUser).length > 0 ? 'flex' : 'none';
 
@@ -33,26 +31,22 @@ export const NavBar = () => {
         setNavBar(pageNum);
         switch (pageNum) {
             case 0: {
-                navigate('/?type=chronology');
+                navigate('/');
                 break;
             }
             case 1: {
-                navigate('/?type=archive');
-                break;
-            }
-            case 2: {
                 navigate('/paymentOrder');
                 break;
             }
-            case 3: {
+            case 2: {
                 currentUser.Role === 'admin' ? navigate('/users') : navigate('/profile');
                 break;
             }
-            case 4: {
+            case 3: {
                 currentUser.Role === 'admin' ? navigate('/company') : navigate('/profile');
                 break;
             }
-            case 5: {
+            case 4: {
                 navigate('/profile');
                 break;
             }
@@ -60,20 +54,18 @@ export const NavBar = () => {
     };
 
     useEffect(() => {
-        if (pathname === '/' && typeOfPage === 'archive') {
-            setNavBar(1);
-        } else if (pathname === '/' && typeOfPage === 'chronology') {
+        if (pathname === '/') {
             setNavBar(0);
         } else if (pathname === '/paymentOrder') {
-            setNavBar(2);
+            setNavBar(1);
         } else if (pathname === '/users') {
-            currentUser.Role === 'admin' && setNavBar(3);
+            currentUser.Role === 'admin' && setNavBar(2);
         } else if (pathname === '/company') {
-            currentUser.Role === 'admin' && setNavBar(4);
+            currentUser.Role === 'admin' && setNavBar(3);
         } else if (pathname === '/profile') {
-            currentUser.Role === 'admin' ? setNavBar(5) : setNavBar(4);
+            currentUser.Role === 'admin' ? setNavBar(4) : setNavBar(3);
         }
-    }, [pathname, typeOfPage]);
+    }, [pathname]);
 
     return (
         <Box sx={{ position: 'fixed', bottom: 0, width: '100%', zIndex: 100 }}>
@@ -86,8 +78,7 @@ export const NavBar = () => {
                 }}
                 sx={{ display: display, overflow: 'auto', justifyContent: 'space-between' }}
             >
-                <BottomNavigationAction label="Хронология" icon={<TaskAltIcon />} />
-                <BottomNavigationAction label="Архив" icon={<InventoryIcon />} />
+                <BottomNavigationAction label="Заявки" icon={<TaskAltIcon />} />
                 <BottomNavigationAction label="Сдача" icon={<PaidIcon />} />
                 {currentUser.Role === 'admin' && <BottomNavigationAction label="Пользователи" icon={<GroupIcon />} />}
                 {currentUser.Role === 'admin' && <BottomNavigationAction label="Компании" icon={<WorkIcon />} />}
