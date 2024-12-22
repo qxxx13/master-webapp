@@ -14,6 +14,7 @@ import {
     Typography,
 } from '@mui/material';
 import moment from 'moment';
+import { enqueueSnackbar } from 'notistack';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,7 +24,6 @@ import { OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { StatusChip } from '../StatusChip/StatusChip';
 import { UserChip } from '../UserChip/UserChip';
-import { bgHandler } from './bgHandler';
 
 export const OrderCard: React.FC<{
     order: OrderType;
@@ -40,9 +40,13 @@ export const OrderCard: React.FC<{
     const goToOrderDescPage = () => navigate(`/${order.Id}`);
 
     const handleDelivered = () => {
-        deliveredOrder(user!.TelegramChatId, String(order.MessageId), String(order.Id));
-        setUpdate();
-        toggleShowDialog(false);
+        deliveredOrder(user!.TelegramChatId, String(order.MessageId), String(order.Id))
+            .then(() => {
+                enqueueSnackbar(`Заявка №${order.Id} успешно закрыта`, { variant: 'success' });
+                toggleShowDialog(false);
+                setUpdate();
+            })
+            .catch((e: Error) => enqueueSnackbar(`Произошла ошибка ${e.message}`, { variant: 'error' }));
     };
 
     return (

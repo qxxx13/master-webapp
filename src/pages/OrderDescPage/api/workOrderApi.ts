@@ -1,3 +1,5 @@
+import { AxiosResponse } from 'axios';
+
 import { instance } from '../../../config/apiConfig/apiConfig';
 
 export const getOrderById = async (orderId: string) => {
@@ -41,7 +43,11 @@ export const returnToOrder = async (chatId: string, messageId: string, orderId: 
         .then((res) => res.data);
 };
 
-export const deliveredOrder = async (chatId: string, messageId: string, orderId: string) => {
-    instance.patch(`/orders/status?id=${orderId}&status=fulfilled`);
+export const deliveredOrder = async (
+    chatId: string,
+    messageId: string,
+    orderId: string,
+): Promise<AxiosResponse<any, any>> => {
+    await instance.patch(`/orders/status?id=${orderId}&status=fulfilled`);
     return instance.patch(`/bot/close?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`);
 };
