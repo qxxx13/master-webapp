@@ -48,7 +48,7 @@ export const AppRouter = () => {
                 path="/"
                 element={
                     <ProtectedRoute>
-                        {currentUser.Role === 'admin' ? (
+                        {currentUser.Role === 'admin' || currentUser.Role === 'disp' ? (
                             <AdminOrdersPage currentUser={currentUser as UserType} />
                         ) : (
                             <OrdersPage currentUser={currentUser as UserType} />
@@ -92,7 +92,7 @@ export const AppRouter = () => {
                 path="/paymentOrder"
                 element={
                     <ProtectedRoute>
-                        {currentUser.Role === 'admin' ? (
+                        {currentUser.Role === 'admin' || currentUser.Role === 'disp' ? (
                             <AdminPaymentOrderPage currentUser={currentUser as UserType} />
                         ) : (
                             <PaymentOrderPage currentUser={currentUser as UserType} />

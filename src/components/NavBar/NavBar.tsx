@@ -1,13 +1,12 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import GroupIcon from '@mui/icons-material/Group';
-import InventoryIcon from '@mui/icons-material/Inventory';
 import PaidIcon from '@mui/icons-material/Paid';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import WorkIcon from '@mui/icons-material/Work';
 import { BottomNavigation, BottomNavigationAction, Box, Divider } from '@mui/material';
 import { useUnit } from 'effector-react';
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { UserType } from '../../types/UserType';
 import { $navBarStore, setNavBar } from './model/navBarStore';
@@ -17,8 +16,7 @@ export const NavBar = () => {
     const pageNum = useUnit($navBarStore);
     const navigate = useNavigate();
     const location = useLocation();
-    /* const [searchParams] = useSearchParams(); */
-    /* const typeOfPage = searchParams.get('type'); */
+
     const { pathname } = location;
 
     const display = Object.keys(currentUser).length > 0 ? 'flex' : 'none';
