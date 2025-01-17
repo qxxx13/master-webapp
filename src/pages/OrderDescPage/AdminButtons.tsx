@@ -11,7 +11,8 @@ export const AdminButtons: React.FC<{
     orderId: string;
     status: OrderStatusEnum;
     companyId: string;
-}> = ({ chatId, messageId, orderId, status, companyId }) => {
+    userRole?: string;
+}> = ({ chatId, messageId, orderId, status, companyId, userRole }) => {
     const navigate = useNavigate();
 
     const handleEditOrder = () => {
@@ -32,9 +33,11 @@ export const AdminButtons: React.FC<{
             <Button variant="contained" onClick={handleEditOrder}>
                 Редактировать
             </Button>
-            <Button variant="contained" onClick={handleClose} color="success">
-                Перезакрыть заявку
-            </Button>
+            {userRole === 'admin' && (
+                <Button variant="contained" onClick={handleClose} color="success">
+                    Перезакрыть заявку
+                </Button>
+            )}
         </Stack>
     );
 };

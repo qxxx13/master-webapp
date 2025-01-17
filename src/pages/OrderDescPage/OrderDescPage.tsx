@@ -50,7 +50,7 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
                 <>
                     <Stack>
                         <OrderDesc order={order as OrderType} master={master as UserType} />
-                        {currentUser.Role === 'admin' && (
+                        {currentUser.Role === 'admin' || currentUser.Role === 'disp' ? (
                             <Accordion>
                                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                                     <Typography>ADMIN tools</Typography>
@@ -62,10 +62,11 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
                                         orderId={String(order.Id)}
                                         status={order.Status as OrderStatusEnum}
                                         companyId={String(master.CompanyId)}
+                                        userRole={currentUser.Role}
                                     />
                                 </AccordionDetails>
                             </Accordion>
-                        )}
+                        ) : null}
                     </Stack>
                     <OrderWorksButton
                         chatId={String(master.TelegramChatId)}
