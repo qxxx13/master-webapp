@@ -98,7 +98,7 @@ export const PercentageGridByIdSetting: FC<PercentageGridSettingsPageProps> = ({
     const onNameChange = useMemo(
         () =>
             debounce((event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-                editPercentageGrid(event.target.value, data?.GridId as number)
+                editPercentageGrid(event.target.value, +String(id))
                     .then(() => enqueueSnackbar('Имя сетки процентов изменено', { variant: 'success' }))
                     .catch((e) => enqueueSnackbar(`Имя сетки не изменено ${e.message}`, { variant: 'error' }));
             }, 900),
