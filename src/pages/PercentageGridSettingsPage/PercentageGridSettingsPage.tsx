@@ -12,7 +12,7 @@ type PercentageGridSettingsPageProps = {
     currentUser: UserType;
 };
 
-export const PercentageGridSettingsPage: FC<PercentageGridSettingsPageProps> = ({ currentUser }) => {
+export const PercentageGridSettingsPage: FC<PercentageGridSettingsPageProps> = () => {
     const { data, error, loading } = useUnit($percentageGridListGetStatus);
 
     const navigate = useNavigate();
@@ -29,13 +29,9 @@ export const PercentageGridSettingsPage: FC<PercentageGridSettingsPageProps> = (
         fetchAllPercentageGridFx();
     }, []);
 
-    if (error) {
-        return <Typography>{error.message}</Typography>;
-    }
-
-    if (loading) {
+    /* if (loading) {
         return [1, 2, 3, 4, 5].map((item) => <Skeleton key={item} />);
-    }
+    } */
 
     return (
         <Stack sx={{ p: 2 }} gap={1}>
