@@ -9,6 +9,7 @@ type Props<T, U> = {
     option: JSX.Element[];
     required?: boolean;
     isLoading?: boolean;
+    disabled?: boolean;
 };
 
 export const SelectFieldForForm = <T extends Control<any, unknown>, U extends string>({
@@ -17,6 +18,7 @@ export const SelectFieldForForm = <T extends Control<any, unknown>, U extends st
     option,
     required,
     isLoading,
+    disabled = false,
 }: Props<T, U>) => {
     const isRequired = required !== undefined ? required : true;
 
@@ -32,7 +34,7 @@ export const SelectFieldForForm = <T extends Control<any, unknown>, U extends st
                         value={value || null}
                         onChange={(event) => onChange(event.target.value)}
                         error={!!error}
-                        disabled={isLoading}
+                        disabled={isLoading || disabled}
                     >
                         {option}
                     </Select>

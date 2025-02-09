@@ -68,5 +68,11 @@ export const OrderTypeSelectField = (control: Control<NewOrderType, unknown>) =>
 );
 
 export const ReferralSelectField = (control: Control<NewOrderType, unknown>, users: UserType[]) => (
-    <SelectFieldForForm control={control} name="ReferralId" option={ReferralOptions(users)} required={false} />
+    <SelectFieldForForm
+        control={control}
+        name="ReferralId"
+        option={ReferralOptions(users)}
+        required={false}
+        disabled={true}
+    />
 );
