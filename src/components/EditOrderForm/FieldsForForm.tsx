@@ -3,7 +3,7 @@ import { Control } from 'react-hook-form';
 
 import { translate } from '../../common/translate/translate';
 import { OrderType, OrderTypeEnum, OrderVisitEnum } from '../../types/OrderType';
-import { UserType } from '../../types/UserType';
+import { RoleEnum, UserType } from '../../types/UserType';
 import { SelectFieldForForm } from '../SelectFieldForForm/SelectFieldForForm';
 import { TextFieldForForm } from '../TextFieldForForm/TextFieldForForm';
 
@@ -48,12 +48,14 @@ export const TypeOptions = Object.values(OrderTypeEnum).map((value, index) => (
     </MenuItem>
 ));
 
-export const MasterOptions = (users: UserType[]) =>
-    users.map((user, index) => (
+export const MasterOptions = (users: UserType[]) => {
+    const masters = [...users].filter((user) => user.Role === RoleEnum.master);
+    return masters.map((user, index) => (
         <MenuItem value={user.Id} key={index}>
             {user.UserName} ({user.Region})
         </MenuItem>
     ));
+};
 
 export const VisitSelectField = (control: Control<OrderType, unknown>) => (
     <SelectFieldForForm control={control} name="Visit" option={VisitOptions} />
