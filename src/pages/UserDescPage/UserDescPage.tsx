@@ -1,8 +1,22 @@
-import { Box, Button, CircularProgress, Divider, Stack, Typography } from '@mui/material';
+import {
+    Box,
+    Button,
+    Chip,
+    CircularProgress,
+    Dialog,
+    DialogContent,
+    Divider,
+    MenuItem,
+    Select,
+    SelectChangeEvent,
+    Stack,
+    Typography,
+} from '@mui/material';
 import { BackButton, MainButton } from '@vkruglikov/react-telegram-web-app';
 import { useUnit } from 'effector-react';
 import moment from 'moment';
-import { useEffect } from 'react';
+import { enqueueSnackbar } from 'notistack';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { DescLoading } from '../../components/CardLoading/DescLoading';
@@ -10,6 +24,12 @@ import { handleTotal, handleTotalExpenses, handleTotalSalary } from '../../compo
 import { StatusChip } from '../../components/StatusChip/StatusChip';
 import { OrderStatusEnum } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
+import { editUser } from './api/userDescPageApi';
+import {
+    $percentageGridList,
+    $percentageGridListGetStatus,
+    fetchAllPercentageGridFx,
+} from './model/percentageGridListStore';
 import { $userAllOrdersStoreGetStatus, fetchAllUserOrdersFx } from './model/userAllOrdersStore';
 import { $userDescPageStoreGetStatus, fetchUserByIdFx } from './model/userDescPageStore';
 import { $userOrdersPerMonthStoreGetStatus, fetchUserOrdersPerMonthFx } from './model/userOrdersPerMonthStore';
@@ -18,9 +38,14 @@ export const UserDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser 
     const navigate = useNavigate();
     const id = useParams().id;
 
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
     const { data, loading } = useUnit($userDescPageStoreGetStatus);
     const { data: ordersAllTime, loading: ordersAllTimeLoading } = useUnit($userAllOrdersStoreGetStatus);
     const { data: ordersPerMonth } = useUnit($userOrdersPerMonthStoreGetStatus);
+    const { data: percentageGridList } = useUnit($percentageGridListGetStatus);
+
+    const [selectedPercentage, setSelectedPercentage] = useState('');
 
     const salaryForMonth = handleTotalSalary(ordersPerMonth.data);
     const salaryForAllTime = handleTotalSalary(ordersAllTime.data);
@@ -69,12 +94,36 @@ export const UserDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser 
     const firstDay = moment().startOf('month').format('YYYY-MM-DD'); // Отмечаем начало месяца!
     const lastDay = moment().endOf('month').format('YYYY-MM-DD');
 
+    const handleDialogOpen = () => {
+        setIsDialogOpen(true);
+    };
+
+    const handleCloseDialog = () => {
+        setIsDialogOpen(false);
+    };
+
+    const onGridChange = (event: SelectChangeEvent) => {
+        setSelectedPercentage(event.target.value as string);
+        editUser(data as UserType, +event.target.value).then(() =>
+            enqueueSnackbar(`Изменение процентной сетки для пользователя №${data.Id}`, { variant: 'success' }),
+        );
+    };
+
     useEffect(() => {
         Telegram.WebApp.ready();
         fetchUserByIdFx({ userId: String(id) });
         fetchAllUserOrdersFx({ userId: +String(id) });
         fetchUserOrdersPerMonthFx({ userId: +String(id), startDate: firstDay, endDate: lastDay });
+        fetchAllPercentageGridFx();
     }, []);
+
+    useEffect(() => {
+        if (data.PercentageGridId !== null) {
+            setSelectedPercentage(String(data.PercentageGridId));
+        } else {
+            setSelectedPercentage('');
+        }
+    }, [data.PercentageGridId]);
 
     return (
         <>
@@ -88,6 +137,13 @@ export const UserDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser 
                         <Typography variant="h5">Id: {data.Id as string}</Typography>
                     </Stack>
                     <StatusChip status={data.Status as OrderStatusEnum} />
+                    <Chip
+                        label={
+                            data.PercentageGridId ? `Процентная сетка №${data.PercentageGridId}` : 'Сетка не выбрана'
+                        }
+                        onClick={handleDialogOpen}
+                        sx={{ mt: 1 }}
+                    />
                     <Typography variant="h6" sx={{ mt: 1 }}>
                         Роль: {data.Role as string}
                     </Typography>
@@ -123,6 +179,18 @@ export const UserDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser 
 
                     {/* <Button onClick={goToEditUser}>Редактировать</Button> */}
                     <MainButton text="Редактировать" onClick={goToEditUser} />
+
+                    <Dialog open={isDialogOpen} onClose={handleCloseDialog} fullWidth>
+                        <DialogContent>
+                            <Select value={selectedPercentage} onChange={onGridChange} fullWidth>
+                                {percentageGridList.map((grid) => (
+                                    <MenuItem value={grid.Id} key={grid.Id}>
+                                        {grid.Name}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </DialogContent>
+                    </Dialog>
                 </Stack>
             ) : (
                 <DescLoading />

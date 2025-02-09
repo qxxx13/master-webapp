@@ -13,6 +13,7 @@ import { CloseOrderType, OrderStatusEnum } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { closeOrder, getInterestRate, getMasterId } from './api/CloseOrderApi';
 import { $closeOrderGetStatus, $closeOrderStore, fetchOrderFx } from './model/closeOrderStore';
+import { $percentageGridGetStatus, fetchPercentageGridFx } from './model/percentageGridItemsStore';
 
 export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) => {
     const navigate = useNavigate();
@@ -21,6 +22,7 @@ export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUse
     const [interestRate, setInterestRate] = useState(0);
     const [openDialog, setOpenDialog] = useState(false);
     const { data: order, loading } = useUnit($closeOrderGetStatus);
+    const { data: percentageGrid, loading: percentageGridLoading } = useUnit($percentageGridGetStatus);
 
     const chatId = params.chatId as string;
     const messageId = params.messageId as string;
@@ -41,7 +43,20 @@ export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUse
 
     const calcOrderPrice = async (data: CloseOrderType) => {
         const price = +data.TotalPrice - +data.Expenses;
-        const masterSalary = price * (interestRate / 100);
+
+        let masterSalary = 0;
+
+        const foundItem = percentageGrid?.Items.find((item) => {
+            const from = parseFloat(item.From); // Преобразуем From в число
+            const to = parseFloat(item.To); // Преобразуем To в число
+            return price >= from && price <= to;
+        });
+
+        if (foundItem) {
+            masterSalary = price * (+foundItem.CheckAmount / 100);
+        } else {
+            masterSalary = price * (interestRate / 100);
+        }
 
         const debt = Number(data.Debt);
 
@@ -85,6 +100,7 @@ export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUse
         const masterId = await getMasterId(orderId);
         const interestRate = await getInterestRate(masterId);
 
+        fetchPercentageGridFx({ masterId: String(masterId) });
         fetchOrderFx({ orderId: orderId });
         setMasterId(String(masterId));
         setInterestRate(interestRate);
@@ -109,10 +125,11 @@ export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUse
                     closerId={String(currentUser.Id)}
                     messageId={messageId}
                     orderId={orderId}
+                    masterRole={currentUser.Role}
                 />
             </Dialog>
             <form onSubmit={handleSubmit(onSubmit)}>
-                {!loading ? (
+                {!loading && !percentageGridLoading ? (
                     <Stack gap={1} sx={{ p: 2 }}>
                         <TextField
                             {...register('TotalPrice', { required: true })}

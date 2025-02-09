@@ -31,6 +31,7 @@ export type UserType = {
     AvatarUrl?: string;
     CompanyInterest?: number;
     CompanyId?: number;
+    PercentageGridId?: number;
 };
 
 export type LoginedUserType = {

@@ -65,6 +65,7 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
     const handleSDChecked = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.checked) {
             setSDStatus(OrderStatusEnum.takeToSD);
+            setTypeOfPage('chronology');
         } else {
             setSDStatus('all');
         }

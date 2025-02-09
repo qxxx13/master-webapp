@@ -16,6 +16,8 @@ import { LoginPage } from '../pages/LoginPage/LoginPage';
 import { OrderDescPage } from '../pages/OrderDescPage/OrderDescPage';
 import { OrdersPage } from '../pages/OrdersPage/OrdersPage';
 import { PaymentOrderPage } from '../pages/PaymentOrderPage/PaymentOrderPage';
+import { PercentageGridByIdSetting } from '../pages/PercentageGridSettingsPage/[id]/PercentageGridByIdSetting';
+import { PercentageGridSettingsPage } from '../pages/PercentageGridSettingsPage/PercentageGridSettingsPage';
 import { ProfilePage } from '../pages/ProfilePage/ProfilePage';
 import { UserDescPage } from '../pages/UserDescPage/UserDescPage';
 import { UsersPage } from '../pages/UsersPage/UsersPage';
@@ -169,6 +171,22 @@ export const AppRouter = () => {
                 element={
                     <ProtectedRoute>
                         <AddNewWorkersPage currentUser={currentUser as UserType} />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/percentageGridSettings"
+                element={
+                    <ProtectedRoute>
+                        <PercentageGridSettingsPage currentUser={currentUser as UserType} />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/percentageGridSettings/:id"
+                element={
+                    <ProtectedRoute>
+                        <PercentageGridByIdSetting currentUser={currentUser as UserType} />
                     </ProtectedRoute>
                 }
             />

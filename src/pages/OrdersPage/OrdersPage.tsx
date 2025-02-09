@@ -12,13 +12,13 @@ type OrdersPageProps = {
 };
 
 export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
-    const [status, setStatus] = useState<MasterOrderStatusEnum>(MasterOrderStatusEnum.all);
-    const [typeOfPage, setTypeOfPage] = useState('archive');
+    /* const [status, setStatus] = useState<MasterOrderStatusEnum>(MasterOrderStatusEnum.all); */
+    /* const [typeOfPage, setTypeOfPage] = useState('archive'); */
     /* const [searchParams] = useSearchParams(); */
 
     /* const typeOfPage = searchParams.get('type'); */
 
-    const MenuItems = Object.values(MasterOrderStatusEnum).map((status, index) => (
+    /* const MenuItems = Object.values(MasterOrderStatusEnum).map((status, index) => (
         <MenuItem key={index} value={status}>
             {translate(status)}
         </MenuItem>
@@ -31,7 +31,7 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
     const handleChangeTypeOfPage = (event: SelectChangeEvent) => {
         setTypeOfPage(event.target.value);
     };
-
+ */
     useEffect(() => {
         Telegram.WebApp.ready();
     }, []);
@@ -40,10 +40,10 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
         <>
             <Stack gap={2} sx={{ p: 2 }}>
                 <Typography variant="h4" sx={{ textAlign: 'center' }}>
-                    {typeOfPage === 'archive' ? 'Архив' : 'Хронология'}
+                    Хронология
                 </Typography>
 
-                <FormControl fullWidth>
+                {/* <FormControl fullWidth>
                     <InputLabel id="status-select"></InputLabel>
                     <Select labelId="status-select" value={status} onChange={handleChangeStatus}>
                         {MenuItems}
@@ -61,14 +61,9 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ currentUser }) => {
                         <MenuItem value="chronology">Хронология</MenuItem>
                         <MenuItem value="archive">Архив</MenuItem>
                     </Select>
-                </FormControl>
+                </FormControl> */}
             </Stack>
-            <OrdersList
-                page={1}
-                currentUser={currentUser}
-                status={status}
-                type={typeOfPage as 'archive' | 'chronology'}
-            />
+            <OrdersList page={1} currentUser={currentUser} status={MasterOrderStatusEnum.all} type={'chronology'} />
         </>
     );
 };

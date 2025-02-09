@@ -1,4 +1,5 @@
-import { Button, CircularProgress, Stack, Typography } from '@mui/material';
+import SettingsAccessibilityIcon from '@mui/icons-material/SettingsAccessibility';
+import { IconButton, Stack, Typography } from '@mui/material';
 import { MainButton } from '@vkruglikov/react-telegram-web-app';
 import { useUnit } from 'effector-react';
 import { useEffect } from 'react';
@@ -17,6 +18,10 @@ export const UsersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) 
         navigate('/createNewUser');
     };
 
+    const goToPercentageGridSettings = () => {
+        navigate('/percentageGridSettings');
+    };
+
     useEffect(() => {
         fetchAllUsersFx();
         Telegram.WebApp.ready();
@@ -27,6 +32,9 @@ export const UsersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) 
             <Typography sx={{ paddingTop: 2 }} variant="h5" textAlign="center">
                 Пользователи
             </Typography>
+            <IconButton sx={{ position: 'absolute', top: 8, right: 16 }} onClick={goToPercentageGridSettings}>
+                <SettingsAccessibilityIcon fontSize="large" />
+            </IconButton>
             <MainButton text="Создать пользователя" onClick={goToCreateNewUser} />
             {!loading ? <UsersList users={data} /> : <CardLoading height={80} />}
         </Stack>

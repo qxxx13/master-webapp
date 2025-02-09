@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { translate } from '../../common/translate/translate';
 import { OrderStatusEnum } from '../../types/OrderType';
+import { RoleEnum } from '../../types/UserType';
 import { closeOrder } from './api/closingAtZeroDialogApi';
 
 type ClosingAtZeroDialogProps = {
@@ -23,10 +24,17 @@ type ClosingAtZeroDialogProps = {
     chatId: string;
     messageId: string;
     closerId: string;
+    masterRole: RoleEnum;
 };
 
-export const ClosingAtZeroDialog: React.FC<ClosingAtZeroDialogProps> = ({ chatId, closerId, messageId, orderId }) => {
-    const [reason, setReason] = useState('missedCall');
+export const ClosingAtZeroDialog: React.FC<ClosingAtZeroDialogProps> = ({
+    chatId,
+    closerId,
+    messageId,
+    orderId,
+    masterRole,
+}) => {
+    const [reason, setReason] = useState('rejectedByClient');
     const navigate = useNavigate();
 
     const handleChangeSelect = (event: SelectChangeEvent) => {
@@ -50,9 +58,13 @@ export const ClosingAtZeroDialog: React.FC<ClosingAtZeroDialogProps> = ({ chatId
                 <DialogActions>
                     <Stack sx={{ width: '100%' }} gap={1}>
                         <Select value={reason} onChange={handleChangeSelect}>
+                            {(masterRole === RoleEnum.admin || masterRole === RoleEnum.disp) && (
+                                <MenuItem value={'missedCall'}>{translate('missedCall')}</MenuItem>
+                            )}
                             <MenuItem value={'rejectedByClient'}>{translate('rejectedByClient')}</MenuItem>
-                            <MenuItem value={'missedCall'}>{translate('missedCall')}</MenuItem>
-                            <MenuItem value={'cancelByClient'}>{translate('cancelByClient')}</MenuItem>
+                            {(masterRole === RoleEnum.admin || masterRole === RoleEnum.disp) && (
+                                <MenuItem value={'cancelByClient'}>{translate('cancelByClient')}</MenuItem>
+                            )}
                         </Select>
                         <Button variant="contained" onClick={handleCloseOrder}>
                             Отправить
