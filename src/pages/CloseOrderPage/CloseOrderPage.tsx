@@ -46,7 +46,7 @@ export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUse
 
         let masterSalary = 0;
 
-        const foundItem = percentageGrid?.Items.find((item) => {
+        const foundItem = percentageGrid?.Items?.find((item) => {
             const from = parseFloat(item.From); // Преобразуем From в число
             const to = parseFloat(item.To); // Преобразуем To в число
             return price >= from && price <= to;
