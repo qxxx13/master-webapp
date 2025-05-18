@@ -52,9 +52,9 @@ export const OrderWorksButton: React.FC<{
                     <Button onClick={handleTake} variant="contained">
                         Принять
                     </Button>
-                    <Button onClick={handleCancel} color="error" variant="contained">
+                    {/* <Button onClick={handleCancel} color="error" variant="contained">
                         Отказаться
-                    </Button>
+                    </Button> */}
                 </Stack>
             );
         case 'atWork':

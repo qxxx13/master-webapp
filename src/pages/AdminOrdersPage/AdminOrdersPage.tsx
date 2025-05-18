@@ -35,7 +35,7 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
     const [openSortMenu, setOpenSortMenu] = useState(false);
     const [phoneNumber, setPhoneNumber] = useState('');
     const [sdStatus, setSDStatus] = useState<OrderStatusEnum | 'all'>('all');
-    const [typeOfPage, setTypeOfPage] = useState('archive');
+    const [typeOfPage, setTypeOfPage] = useState('chronology');
 
     const toggleDrawer = (state: boolean) => () => {
         setOpenSortMenu(state);
