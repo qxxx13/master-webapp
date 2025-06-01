@@ -1,4 +1,6 @@
 import { Button, Stack } from '@mui/material';
+import { MainButton } from '@vkruglikov/react-telegram-web-app';
+import { enqueueSnackbar } from 'notistack';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { NewUserType } from '../../types/UserType';
@@ -13,7 +15,9 @@ export const NewUserForm = () => {
 
     const handleCreateNewUser: SubmitHandler<NewUserType> = (data) => {
         data.InterestRate = +data.InterestRate;
-        addNewUserFx(data);
+        addNewUserFx(data)
+            .then(() => enqueueSnackbar('Создание пользователя завершено', { variant: 'success' }))
+            .catch((e) => () => enqueueSnackbar(`Произошла ошибка ${e.message}`, { variant: 'error' }));
         reset();
     };
 
@@ -22,9 +26,10 @@ export const NewUserForm = () => {
             <Stack sx={{ p: 2, gap: 1, mb: '56px' }}>
                 {TextFields(control)}
                 {RoleSelectField(control)}
-                <Button variant="outlined" onClick={handleSubmit((newUser) => handleCreateNewUser(newUser))}>
+                <MainButton text="Создать" onClick={handleSubmit((newUser) => handleCreateNewUser(newUser))} />
+                {/* <Button variant="outlined" onClick={handleSubmit((newUser) => handleCreateNewUser(newUser))}>
                     Создать
-                </Button>
+                </Button> */}
             </Stack>
         </form>
     );

@@ -157,6 +157,8 @@ export const CloseOrderPage: React.FC<{ currentUser: UserType }> = ({ currentUse
                             placeholder="Комментарии"
                             defaultValue={(order.Comments as string) || null}
                             type="text"
+                            multiline
+                            rows={4}
                             color="primary"
                         />
 

@@ -1,4 +1,4 @@
-import { NewOrderType, OrderStatusEnum, OrderTypeEnum, VisitEnum } from '../../../types/OrderType';
+import { NewOrderType, OrderSourceEnum, OrderStatusEnum, OrderTypeEnum, VisitEnum } from '../../../types/OrderType';
 
 export const initialValues: NewOrderType = {
     Date: new Date(),
@@ -20,4 +20,6 @@ export const initialValues: NewOrderType = {
     Debt: 0,
     MasterSalary: 0,
     ReferralId: 14,
+    HiddenDescription: '',
+    Source: OrderSourceEnum.Newspaper,
 };

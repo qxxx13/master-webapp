@@ -88,7 +88,15 @@ export type OrderType = {
     ReferralId?: number;
     OrderCloserId?: number;
     DispId?: number;
+    HiddenDescription?: string;
+    Source?: OrderSourceEnum;
 };
+
+export enum OrderSourceEnum {
+    PaperAdvertising = 'PaperAdvertising',
+    Newspaper = 'Newspaper',
+    Avito = 'Avito',
+}
 
 export type GetOrdersType = {
     meta: {

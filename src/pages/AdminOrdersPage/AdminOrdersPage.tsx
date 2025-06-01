@@ -1,5 +1,6 @@
 import MenuIcon from '@mui/icons-material/Menu';
 import {
+    Button,
     Drawer,
     FormControl,
     FormControlLabel,
@@ -142,6 +143,7 @@ export const AdminOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUs
                     </FormControl>
                 </Stack>
                 <MainButton text="Создать заявку" onClick={goToCreateNewOrderPage} />
+                {/* <Button onClick={goToCreateNewOrderPage}>Создать заявку</Button> */}
             </Stack>
             {!loading ? (
                 <OrdersList

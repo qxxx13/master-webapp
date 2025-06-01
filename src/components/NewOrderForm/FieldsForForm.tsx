@@ -2,7 +2,7 @@ import { MenuItem } from '@mui/material';
 import { Control } from 'react-hook-form';
 
 import { translate } from '../../common/translate/translate';
-import { NewOrderType, OrderTypeEnum, OrderVisitEnum } from '../../types/OrderType';
+import { NewOrderType, OrderSourceEnum, OrderTypeEnum, OrderVisitEnum } from '../../types/OrderType';
 import { RoleEnum, UserType } from '../../types/UserType';
 import { SelectFieldForForm } from '../SelectFieldForForm/SelectFieldForForm';
 import { TextFieldForForm } from '../TextFieldForForm/TextFieldForForm';
@@ -21,6 +21,7 @@ export const {
     Debt,
     MasterSalary,
     ReferralId,
+    Source,
     ...textFields
 } = initialValues;
 
@@ -57,6 +58,12 @@ export const ReferralOptions = (users: UserType[]) =>
         </MenuItem>
     ));
 
+export const SourceOptions = Object.values(OrderSourceEnum).map((value, index) => (
+    <MenuItem value={value} key={index}>
+        {translate(value)}
+    </MenuItem>
+));
+
 export const VisitSelectField = (control: Control<NewOrderType, unknown>) => (
     <SelectFieldForForm control={control} name="Visit" option={VisitOptions} />
 );
@@ -76,3 +83,7 @@ export const ReferralSelectField = (control: Control<NewOrderType, unknown>, use
         disabled={true}
     />
 );
+
+export const OrderSourceSelectField = (control: Control<NewOrderType, unknown>) => {
+    return <SelectFieldForForm control={control} name="Source" option={SourceOptions} />;
+};

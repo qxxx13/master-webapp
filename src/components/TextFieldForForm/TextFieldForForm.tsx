@@ -22,6 +22,8 @@ export const TextFieldForForm = <T extends Control<any, unknown>, U extends stri
             render={({ field: { onChange, value }, fieldState: { error } }) => (
                 <TextField
                     value={value}
+                    multiline
+                    rows={name === 'Description' || name === 'HiddenDescription' ? 4 : 1}
                     onChange={(event) => onChange(event.target.value)}
                     placeholder={translate(name)}
                     type={typeof value}

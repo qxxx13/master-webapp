@@ -26,6 +26,8 @@ export const initialValues = (order: OrderType): OrderType => {
         DistributionOrderMessageId: order.DistributionOrderMessageId,
         ActiveOrderMessageId: order.ActiveOrderMessageId,
         AllOrdersMessageId: order.AllOrdersMessageId,
+        HiddenDescription: order.HiddenDescription,
+        Source: order.Source,
     };
 
     return initialOrder;

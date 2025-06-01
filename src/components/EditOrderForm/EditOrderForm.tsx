@@ -7,7 +7,13 @@ import { OrderStatusEnum, OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { sendToMaster, transferOrder } from './api/editOrderFormApi';
 import { EditOrderDatePickerForForm } from './EditOrderDatePickerForForm/EditOrderDatePickerForForm';
-import { MasterSelectField, OrderTypeSelectField, TextFields, VisitSelectField } from './FieldsForForm';
+import {
+    MasterSelectField,
+    OrderSourceSelectField,
+    OrderTypeSelectField,
+    TextFields,
+    VisitSelectField,
+} from './FieldsForForm';
 import { editOrderFx } from './model/editOrderFormStore';
 import { initialValues } from './model/initialValues';
 import { setUpdateOrderStore } from './model/setUpdateOrderStore';
@@ -57,6 +63,7 @@ export const EditOrderForm: React.FC<{ users: UserType[]; order: OrderType }> = 
                 {textFields}
                 {VisitSelectField(control)}
                 {OrderTypeSelectField(control)}
+                {OrderSourceSelectField(control)}
                 {MasterSelectField(control, users)}
 
                 <Button variant="contained" onClick={handleSubmit((editedOrder) => handleSave(editedOrder))}>

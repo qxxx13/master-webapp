@@ -13,6 +13,7 @@ export const initialValues = (user: UserType): UserType => {
         TelegramId: user.TelegramId,
         CompanyId: user.CompanyId,
         CompanyInterest: user.CompanyInterest,
+        ContestStars: user.ContestStars,
     };
 
     return initialUser;

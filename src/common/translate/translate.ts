@@ -99,6 +99,14 @@ const dictionary: Record<string, string> = {
     Friday: 'Пятница',
     Saturday: 'Суббота',
     Sunday: 'Воскресенье',
+
+    PaperAdvertising: 'Листовка',
+    Newspaper: 'Газета',
+    Avito: 'Авито',
+    HiddenDescription: 'Скрытое описание',
+    Source: 'Источник',
+
+    ContestStars: 'Количество звёзд',
 };
 
 export const translate = (key: string) => {

@@ -67,7 +67,7 @@ export const LoginPage = () => {
                     {isLoginByUsername ? 'Вход по telegramId' : 'Вход по логину'}
                 </Button>
                 <MainButton text="Войти" onClick={loginHandler} />
-                <Button onClick={loginHandler}>123</Button>
+                {/* <Button onClick={loginHandler}>123</Button> */}
             </Stack>
         </form>
     );

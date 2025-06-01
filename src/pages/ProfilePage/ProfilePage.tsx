@@ -8,7 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import { SalaryCharts } from '../../components/SalaryCharts/SalaryCharts';
 import { UserType } from '../../types/UserType';
 import { postAvatar } from './api/profileApi';
-import { $ordersPerMonthGetStatus, fetchOrdersPerMonthFx } from './model/orderPerMonthStore';
+import {
+    $ordersPerMonthGetStatus,
+    $ordersPerSeasonGetStatus,
+    fetchOrdersPerMonthFx,
+    fetchOrdersPerSeasonFx,
+} from './model/orderPerMonthStore';
 import { $updateProfilePageStore, setUpdateProfilePage } from './model/updateProfilePageStore';
 import { $userStoreGetStatus, fetchUserByIdFx } from './model/userStore';
 
@@ -16,6 +21,7 @@ export const ProfilePage: React.FC<{ currentUser: UserType }> = ({ currentUser }
     const navigate = useNavigate();
     const { data, loading, error } = useUnit($ordersPerMonthGetStatus);
     const { data: user, loading: userLoading } = useUnit($userStoreGetStatus);
+    const { data: seasonOrders, loading: seasonLoading } = useUnit($ordersPerSeasonGetStatus);
     const update = useUnit($updateProfilePageStore);
 
     const inputAvatarRef = useRef<HTMLInputElement>(null);
@@ -37,15 +43,19 @@ export const ProfilePage: React.FC<{ currentUser: UserType }> = ({ currentUser }
     const firstDay = moment().startOf('month').format('YYYY-MM-DD'); // Отмечаем начало месяца!
     const lastDay = moment().endOf('month').format('YYYY-MM-DD');
 
+    const startSeason = moment().month(5).date(1).format('YYYY-MM-DD');
+    const endSeason = moment().month(7).date(31).format('YYYY-MM-DD');
+
     useEffect(() => {
         fetchUserByIdFx({ userId: currentUser.Id });
         fetchOrdersPerMonthFx({ userId: currentUser.Id, endDate: lastDay, startDate: firstDay });
+        fetchOrdersPerSeasonFx({ userId: currentUser.Id, endDate: endSeason, startDate: startSeason });
         Telegram.WebApp.ready();
     }, [update]);
 
     return (
         <>
-            <Stack sx={{ p: 2, textAlign: 'center', alignItems: 'center', mt: 2 }} gap={1}>
+            <Stack sx={{ p: 2, textAlign: 'center', alignItems: 'center', mt: 2, mb: '56px' }} gap={1}>
                 <input
                     type="file"
                     accept="image/png, image/jpeg"
@@ -71,7 +81,16 @@ export const ProfilePage: React.FC<{ currentUser: UserType }> = ({ currentUser }
             >
                 Выход
             </Button>
-            {!loading ? <SalaryCharts orders={data.data} /> : <CircularProgress />}
+            {!loading ? (
+                <SalaryCharts
+                    orders={data.data}
+                    userId={currentUser.Id}
+                    userStars={+String(user.ContestStars) || 0}
+                    seasonOrders={seasonOrders.data}
+                />
+            ) : (
+                <CircularProgress />
+            )}
         </>
     );
 };

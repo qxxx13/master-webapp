@@ -32,6 +32,7 @@ export type UserType = {
     CompanyInterest?: number;
     CompanyId?: number;
     PercentageGridId?: number;
+    ContestStars?: number;
 };
 
 export type LoginedUserType = {

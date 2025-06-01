@@ -2,7 +2,7 @@ import { MenuItem } from '@mui/material';
 import { Control } from 'react-hook-form';
 
 import { translate } from '../../common/translate/translate';
-import { OrderType, OrderTypeEnum, OrderVisitEnum } from '../../types/OrderType';
+import { OrderSourceEnum, OrderType, OrderTypeEnum, OrderVisitEnum } from '../../types/OrderType';
 import { RoleEnum, UserType } from '../../types/UserType';
 import { SelectFieldForForm } from '../SelectFieldForForm/SelectFieldForForm';
 import { TextFieldForForm } from '../TextFieldForForm/TextFieldForForm';
@@ -28,6 +28,7 @@ export const TextFields = (control: Control<OrderType, unknown>, initialValues: 
         MasterSalary,
         Debt,
         Expenses,
+        Source,
         ...textFields
     } = initialValues;
 
@@ -43,6 +44,12 @@ export const VisitOptions = Object.values(OrderVisitEnum).map((value, index) => 
 ));
 
 export const TypeOptions = Object.values(OrderTypeEnum).map((value, index) => (
+    <MenuItem value={value} key={index}>
+        {translate(value)}
+    </MenuItem>
+));
+
+export const SourceOptions = Object.values(OrderSourceEnum).map((value, index) => (
     <MenuItem value={value} key={index}>
         {translate(value)}
     </MenuItem>
@@ -66,3 +73,7 @@ export const MasterSelectField = (control: Control<OrderType, unknown>, users: U
 export const OrderTypeSelectField = (control: Control<OrderType, unknown>) => (
     <SelectFieldForForm control={control} name="Type" option={TypeOptions} />
 );
+
+export const OrderSourceSelectField = (control: Control<OrderType, unknown>) => {
+    return <SelectFieldForForm control={control} name="Source" option={SourceOptions} />;
+};

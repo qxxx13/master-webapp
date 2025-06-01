@@ -1,17 +1,5 @@
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import SendIcon from '@mui/icons-material/Send';
-import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Button,
-    CircularProgress,
-    IconButton,
-    Link,
-    Stack,
-    Typography,
-} from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Stack, Typography } from '@mui/material';
 import { BackButton } from '@vkruglikov/react-telegram-web-app';
 import { useUnit } from 'effector-react';
 import { useEffect } from 'react';
@@ -21,7 +9,6 @@ import { DescLoading } from '../../components/CardLoading/DescLoading';
 import { OrderStatusEnum, OrderType } from '../../types/OrderType';
 import { UserType } from '../../types/UserType';
 import { AdminButtons } from './AdminButtons';
-import { $dispStoreGetStatus, fetchDispByIdFx } from './model/dispStore';
 import { $ordersGetStatus, fetchOrderByIdFx } from './model/orderDescStore';
 import { $updateOrderStore } from './model/setUpdateOrderStore';
 import { $userGetStatus } from './model/userStore';
@@ -49,7 +36,11 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
             {!loading && !masterLoading && Object.keys(order).length !== 0 ? (
                 <>
                     <Stack>
-                        <OrderDesc order={order as OrderType} master={master as UserType} />
+                        <OrderDesc
+                            order={order as OrderType}
+                            master={master as UserType}
+                            isAdmin={currentUser.Role === 'admin' || currentUser.Role === 'disp'}
+                        />
                         {currentUser.Role === 'admin' || currentUser.Role === 'disp' ? (
                             <Accordion>
                                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>

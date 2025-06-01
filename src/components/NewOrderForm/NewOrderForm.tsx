@@ -10,6 +10,7 @@ import { UserType } from '../../types/UserType';
 import { DatePickerForForm } from './DatePickerForForm/DatePickerForForm';
 import {
     MasterSelectField,
+    OrderSourceSelectField,
     OrderTypeSelectField,
     ReferralSelectField,
     TextFields,
@@ -95,6 +96,7 @@ export const NewOrderForm: FC<{ users: UserType[]; currentUser: UserType }> = ({
                 {TextFields(control)}
                 {VisitSelectField(control)}
                 {OrderTypeSelectField(control)}
+                {OrderSourceSelectField(control)}
                 {MasterSelectField(control, users)}
                 {ReferralSelectField(control, users)}
                 <DatePickerForForm control={control} />

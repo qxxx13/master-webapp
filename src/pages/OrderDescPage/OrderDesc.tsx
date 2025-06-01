@@ -14,9 +14,10 @@ import { $dispStoreGetStatus, fetchDispByIdFx } from './model/dispStore';
 type OrderDescProps = {
     order: OrderType;
     master: UserType;
+    isAdmin?: boolean;
 };
 
-export const OrderDesc: React.FC<OrderDescProps> = ({ order, master }) => {
+export const OrderDesc: React.FC<OrderDescProps> = ({ order, master, isAdmin }) => {
     const { data, loading } = useUnit($dispStoreGetStatus);
 
     const totalFormat = useRubFormat(order.Total).format;
@@ -73,10 +74,23 @@ export const OrderDesc: React.FC<OrderDescProps> = ({ order, master }) => {
             <Divider />
             <Typography variant="h6">Озвучка: {order.AnnouncedPrice}</Typography>
             <Divider />
+            <Typography variant="h6">Источник: {translate((order?.Source || 'PaperAdvertising') as string)}</Typography>
+            <Divider />
             <Typography variant="h6">Описание:</Typography>
             <Typography variant="h6" sx={{ wordWrap: 'break-word' }}>
                 {order.Description}
             </Typography>
+            {isAdmin ? (
+                <>
+                    <Divider />
+                    <Typography variant="h6" color={'text.secondary'}>
+                        Скрытое описание:
+                    </Typography>
+                    <Typography variant="h6" sx={{ wordWrap: 'break-word' }} color={'text.secondary'}>
+                        {order.HiddenDescription}
+                    </Typography>{' '}
+                </>
+            ) : null}
 
             {order.CompanyShare !== 0 && (
                 <>

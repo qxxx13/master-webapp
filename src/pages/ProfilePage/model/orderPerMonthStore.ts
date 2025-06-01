@@ -21,3 +21,22 @@ export const $ordersPerMonthGetStatus = combine({
     error: $fetchError,
     data: $ordersPerMonthStore,
 });
+
+export const $ordersPerSeasonStore = createStore<GetOrdersType>({ meta: {} as GetOrdersType['meta'], data: [] });
+
+export const fetchOrdersPerSeasonFx = createEffect<
+    { userId: number; startDate: string; endDate: string },
+    GetOrdersType
+>();
+
+fetchOrdersPerMonthFx.use((params) => fetchAllOrdersPerMonth(params.userId, params.startDate, params.endDate));
+
+$ordersPerMonthStore.on(fetchOrdersPerMonthFx.doneData, (_, orders) => orders);
+
+export const $fetchSeasonError = restore<Error>(fetchOrdersPerMonthFx.failData, null);
+
+export const $ordersPerSeasonGetStatus = combine({
+    loading: fetchOrdersPerMonthFx.pending,
+    error: $fetchError,
+    data: $ordersPerMonthStore,
+});
