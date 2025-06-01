@@ -18,7 +18,7 @@ export const TextFieldForForm = <T extends Control<any, unknown>, U extends stri
         <Controller
             control={control}
             name={name}
-            rules={{ required: true }}
+            rules={{ required: name !== 'HiddenDescription' ? true : false }}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
                 <TextField
                     value={value}
