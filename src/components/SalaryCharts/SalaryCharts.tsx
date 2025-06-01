@@ -62,7 +62,7 @@ export const SalaryCharts: React.FC<SalaryChartsProps> = ({ orders, userId, user
 
     return (
         <>
-            <Stack sx={{ p: 2 }} gap={1}>
+            <Stack sx={{ p: 2, mb: '56px' }} gap={1}>
                 <Typography variant="h6">ЗП за месяц: {totalSalaryPerMonthFormat}</Typography>
                 <Divider />
                 <Typography variant="h6">Отработано заявок: {orders.length}</Typography>
