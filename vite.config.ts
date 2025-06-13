@@ -1,11 +1,11 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
-// https://vitejs.dev/config/
 export default defineConfig({
     plugins: [react()],
+    base: '/', // Явно указываем базовый путь
     build: {
-        chunkSizeWarningLimit: 2000, // Увеличить лимит до 1000 КБ
+        chunkSizeWarningLimit: 2000,
         rollupOptions: {
             output: {
                 manualChunks: {
