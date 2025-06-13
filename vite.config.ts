@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
     plugins: [react()],
-    base: '/', // Явно указываем базовый путь
+    base: '/',
     build: {
         chunkSizeWarningLimit: 2000,
         rollupOptions: {
