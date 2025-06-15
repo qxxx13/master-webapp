@@ -26,12 +26,14 @@ export const PrimaryCompanySwitch = (control: Control<NewCompanyType, unknown>, 
 };
 
 export const MasterOptions = (users: UserType[]) => {
-    const masters = [...users].filter((user) => user.Role !== RoleEnum.fired);
-    return masters.map((user, index) => (
-        <MenuItem value={user.Id} key={index}>
-            {user.UserName} ({user.Region})
-        </MenuItem>
-    ));
+    const masters = [...users].filter((user) => user.Role === RoleEnum.master);
+    return masters
+        .sort((a, b) => a.UserName.localeCompare(b.UserName)) // Alphabetical sort
+        .map((user, index) => (
+            <MenuItem value={user.Id} key={index}>
+                {user.UserName} ({user.Region})
+            </MenuItem>
+        ));
 };
 
 export const OwnerSelect = (control: Control<NewCompanyType, unknown>, users: UserType[], isLoading: boolean) => {

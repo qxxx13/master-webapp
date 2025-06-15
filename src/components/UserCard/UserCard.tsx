@@ -21,6 +21,9 @@ export const UserCard: React.FC<{ user: UserType }> = ({ user }) => {
                             <Typography variant="body1" color="text.secondary">
                                 Роль: {user.Role}
                             </Typography>
+                            <Typography variant="body1" color="gold">
+                                Звезды: {user?.ContestStars || 0}
+                            </Typography>
                         </Box>
                         <Box sx={{ textAlign: 'right' }}>
                             <Typography variant="body1">Процент: {user.InterestRate}%</Typography>

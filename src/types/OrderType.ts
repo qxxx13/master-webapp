@@ -42,6 +42,7 @@ export enum VisitEnum {
     primary = 'primary', // Первичный
     repeated = 'repeated', // Повторный
     guarantee = 'guarantee', //Гарантия
+    primaryUrgent = 'primaryUrgent', // Первичный срочный
 }
 
 export enum RoleEnum {
@@ -124,6 +125,7 @@ export enum OrderVisitEnum {
     primary = 'primary',
     repeated = 'repeated',
     guarantee = 'guarantee',
+    primaryUrgent = 'primaryUrgent',
 }
 
 type OmitType = {

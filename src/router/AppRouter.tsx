@@ -19,6 +19,7 @@ import { PaymentOrderPage } from '../pages/PaymentOrderPage/PaymentOrderPage';
 import { PercentageGridByIdSetting } from '../pages/PercentageGridSettingsPage/[id]/PercentageGridByIdSetting';
 import { PercentageGridSettingsPage } from '../pages/PercentageGridSettingsPage/PercentageGridSettingsPage';
 import { ProfilePage } from '../pages/ProfilePage/ProfilePage';
+import { StatOrderPage } from '../pages/StatOrdersPage/StatOrderPage';
 import { UserDescPage } from '../pages/UserDescPage/UserDescPage';
 import { UsersPage } from '../pages/UsersPage/UsersPage';
 import { UserType } from '../types/UserType';
@@ -187,6 +188,14 @@ export const AppRouter = () => {
                 element={
                     <ProtectedRoute>
                         <PercentageGridByIdSetting currentUser={currentUser as UserType} />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/ordersStats"
+                element={
+                    <ProtectedRoute>
+                        <StatOrderPage />
                     </ProtectedRoute>
                 }
             />

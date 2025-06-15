@@ -42,7 +42,7 @@ export const OrderDescPage: React.FC<{ currentUser: UserType }> = ({ currentUser
                             isAdmin={currentUser.Role === 'admin' || currentUser.Role === 'disp'}
                         />
                         {currentUser.Role === 'admin' || currentUser.Role === 'disp' ? (
-                            <Accordion>
+                            <Accordion defaultExpanded={true}>
                                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                                     <Typography>ADMIN tools</Typography>
                                 </AccordionSummary>

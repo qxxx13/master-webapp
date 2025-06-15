@@ -1,3 +1,4 @@
+import EqualizerIcon from '@mui/icons-material/Equalizer';
 import SettingsAccessibilityIcon from '@mui/icons-material/SettingsAccessibility';
 import { IconButton, Stack, Typography } from '@mui/material';
 import { MainButton } from '@vkruglikov/react-telegram-web-app';
@@ -22,6 +23,10 @@ export const UsersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) 
         navigate('/percentageGridSettings');
     };
 
+    const goToPercentageOrderStats = () => {
+        navigate('/ordersStats');
+    };
+
     useEffect(() => {
         fetchAllUsersFx();
         Telegram.WebApp.ready();
@@ -32,6 +37,9 @@ export const UsersPage: React.FC<{ currentUser: UserType }> = ({ currentUser }) 
             <Typography sx={{ paddingTop: 2 }} variant="h5" textAlign="center">
                 Пользователи
             </Typography>
+            <IconButton sx={{ position: 'absolute', top: 8, left: 16 }} onClick={goToPercentageOrderStats}>
+                <EqualizerIcon fontSize="large" />
+            </IconButton>
             <IconButton sx={{ position: 'absolute', top: 8, right: 16 }} onClick={goToPercentageGridSettings}>
                 <SettingsAccessibilityIcon fontSize="large" />
             </IconButton>

@@ -1,16 +1,17 @@
-import { FormControl, InputLabel, Select } from '@mui/material';
+import { FormControl, InputLabel, Select, SelectProps } from '@mui/material';
 import { Control, Controller, ValidationValueMessage } from 'react-hook-form';
 
 import { translate } from '../../common/translate/translate';
 
-type Props<T, U> = {
+interface Props<T extends Control<any, unknown>, U extends string> {
     control: T;
     name: U;
-    option: JSX.Element[];
+    option: React.ReactNode;
     required?: boolean;
     isLoading?: boolean;
     disabled?: boolean;
-};
+    selectProps?: SelectProps;
+}
 
 export const SelectFieldForForm = <T extends Control<any, unknown>, U extends string>({
     control,
@@ -19,6 +20,7 @@ export const SelectFieldForForm = <T extends Control<any, unknown>, U extends st
     required,
     isLoading,
     disabled = false,
+    selectProps = {},
 }: Props<T, U>) => {
     const isRequired = required !== undefined ? required : true;
 
@@ -29,12 +31,24 @@ export const SelectFieldForForm = <T extends Control<any, unknown>, U extends st
             rules={{ required: isRequired }}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
                 <FormControl fullWidth>
-                    <InputLabel id="select-label">{translate(name)}</InputLabel>
+                    <InputLabel id={`${name}-label`}>{translate(name)}</InputLabel>
                     <Select
-                        value={value || null}
-                        onChange={(event) => onChange(event.target.value)}
+                        labelId={`${name}-label`}
+                        value={value || ''}
+                        onChange={onChange}
                         error={!!error}
                         disabled={isLoading || disabled}
+                        MenuProps={{
+                            PaperProps: {
+                                sx: {
+                                    '& .MuiMenuItem-root': {
+                                        margin: 0.5,
+                                        borderRadius: 1,
+                                    },
+                                },
+                            },
+                        }}
+                        {...selectProps}
                     >
                         {option}
                     </Select>

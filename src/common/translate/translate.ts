@@ -82,6 +82,7 @@ const dictionary: Record<string, string> = {
     primary: 'Первичный',
     repeated: 'Повторный',
     guarantee: 'Гарантия',
+    primaryUrgent: 'Первичный срочный',
 
     //? Пользователь
     UserName: 'Логин',
