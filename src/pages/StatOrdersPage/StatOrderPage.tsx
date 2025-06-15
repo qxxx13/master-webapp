@@ -13,11 +13,11 @@ import {
     TextField,
     Typography,
 } from '@mui/material';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import dayjs, { Dayjs } from 'dayjs';
 import { useUnit } from 'effector-react';
-import moment from 'moment';
 import { FC, useEffect } from 'react';
 
 import {
@@ -47,7 +47,7 @@ export const StatOrderPage: FC = () => {
         });
     }, [filters]);
 
-    const handleDateChange = (type: 'start' | 'end', value: moment.Moment | null) => {
+    const handleDateChange = (type: 'start' | 'end', value: Dayjs | null) => {
         const dateStr = value ? value.format('YYYY-MM-DD') : null;
         if (type === 'start') {
             setDateRange({ startDate: dateStr, endDate: filters.endDate });
@@ -79,7 +79,7 @@ export const StatOrderPage: FC = () => {
     }, []);
 
     return (
-        <LocalizationProvider dateAdapter={AdapterMoment}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Box sx={{ p: 3, mb: '53px' }}>
                 <Typography variant="h4" gutterBottom>
                     Статистика заявок
@@ -90,17 +90,15 @@ export const StatOrderPage: FC = () => {
                         <Grid item xs={12} md={6}>
                             <DatePicker
                                 label="Начальная дата"
-                                value={filters.startDate ? moment(filters.startDate) : null}
+                                value={filters.startDate ? dayjs(filters.startDate) : null}
                                 onChange={(value) => handleDateChange('start', value)}
-                                /* renderInput={(params) => <TextField {...params} fullWidth />} */
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <DatePicker
                                 label="Конечная дата"
-                                value={filters.endDate ? moment(filters.endDate) : null}
+                                value={filters.endDate ? dayjs(filters.endDate) : null}
                                 onChange={(value) => handleDateChange('end', value)}
-                                /* renderInput={(params) => <TextField {...params} fullWidth />} */
                             />
                         </Grid>
                         <Grid item xs={12} md={4}>
